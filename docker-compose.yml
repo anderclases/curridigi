@@ -1,0 +1,15 @@
+services:
+  apache-server:
+    image: httpd:latest
+    container_name: apache
+    ports:
+      - "9015:80"
+    volumes:
+      - ./public:/usr/local/apache2/htdocs/
+    restart: unless-stopped
+    networks:
+      - backend
+
+networks:
+  backend:
+    external: true
