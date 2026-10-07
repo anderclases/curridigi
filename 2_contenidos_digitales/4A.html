@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4.A Evaluación Previa</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        /* Estilos adicionales para el desplegable y la corrección en tiempo real */
+        .quiz-question {
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 18px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            transition: border-color 0.3s ease;
+        }
+
+        .quiz-question.answered-correct {
+            border-left: 6px solid #28a745;
+        }
+
+        .quiz-question.answered-incorrect {
+            border-left: 6px solid #dc3545;
+        }
+
+        .quiz-question h4 {
+            margin-top: 0;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+        }
+
+        .options-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            padding: 10px 14px;
+            border: 1px solid #dcdcdc;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s, border-color 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .option-label:hover {
+            background-color: #f0f7f6;
+            border-color: var(--accent-teal);
+        }
+
+        .option-label input[type="radio"] {
+            margin-right: 12px;
+            accent-color: var(--accent-teal);
+        }
+
+        /* Feedback instantáneo */
+        .feedback {
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 0.88rem;
+            display: none;
+            line-height: 1.4;
+        }
+
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        /* Panel de progreso y puntuación en vivo */
+        #score-board {
+            background-color: var(--accent-teal);
+            color: #ffffff;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        #score-board p {
+            color: #ffffff;
+            margin: 5px 0 0 0;
+            font-size: 0.9rem;
+            font-weight: normal;
+        }
+
+        .start-container {
+            text-align: center;
+            padding: 30px 10px;
+        }
+
+        #quiz-wrapper {
+            display: none; /* Oculto hasta pulsar 'Iniciar Formulario' */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <h1>4.A Evaluación Previa</h1>
+        <div class="nav-links">
+            <a href="../index.html" class="btn btn-outline">← Volver al Menú</a>
+            <a href="2A.html" class="btn">Contenidos Básicos 2.A →</a>
+        </div>
+    </div>
+
+    <div class="content-container">
+
+        <!-- CONTEXTO DEL RETO -->
+        <div class="card">
+            <h2>Contexto del Reto y Proyecto</h2>
+            <p><strong>Módulo / Asignatura:</strong> Sistemas Microinformáticos y Redes - Montaje y Mantenimiento de Equipos.</p>
+            <p><strong>Descripción del Reto:</strong> Los alumnos deben equipar el aula ETHAZI de un instituto con nuevos ordenadores. Para ello, respetando los requerimientos técnicos necesarios para la clase, deberán presupuestar 25 ordenadores completos. Para lograrlo, tienen que identificar todos los componentes de un ordenador y conocer las características clave de cada elemento (procesador, placa base, memoria RAM, disco duro, fuente de alimentación, tarjeta gráfica, etc.).</p>
+        </div>
+
+        <!-- CUESTIONARIO INTERACTIVO CON DESPLIEGUE E CORRECCIÓN INSTANTÁNEA -->
+        <div class="card">
+            <h2>Cuestionario Diagnóstico Inicial</h2>
+            <p>Haz clic en el siguiente botón para desplegar la evaluación de 10 preguntas. Las respuestas se corregirán automáticamente en tiempo real al seleccionar cada opción.</p>
+
+            <!-- BOTÓN PARA DESPLEGAR EL FORMULARIO -->
+            <div id="start-container" class="start-container">
+                <button type="button" id="start-btn" class="btn btn-secondary" onclick="startQuiz()" style="font-size: 1.1rem; padding: 12px 28px;">
+                    ▶ Iniciar Formulario
+                </button>
+            </div>
+
+            <!-- CONTENEDOR DESPLEGABLE DEL FORMULARIO -->
+            <div id="quiz-wrapper">
+                <!-- Marcador de puntuación e indicador en vivo -->
+                <div id="score-board">
+                    Respondidas: <span id="answered-count">0</span> / 10 | Aciertos: <span id="correct-count">0</span>
+                    <p id="score-status">Selecciona una opción en cada pregunta para ver la corrección inmediata.</p>
+                </div>
+
+                <form id="hardware-quiz-form">
+                    <div id="quiz-container"></div>
+
+                    <div style="text-align: center; margin-top: 25px;">
+                        <button type="button" class="btn btn-outline" onclick="resetQuiz()">Reiniciar Cuestionario</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-nav">
+            <a href="../index.html" class="btn btn-outline">← Menú Principal</a>
+            <a href="2A.html" class="btn btn-secondary">Ir a 2.A Contenidos Básicos →</a>
+        </div>
+
+    </div>
+
+    <!-- SCRIPT EN JAVASCRIPT -->
+    <script>
+        const questionsData = [
+            {
+                id: 1,
+                question: "1. ¿Qué es la CPU y cuál es su función principal en un ordenador?",
+                options: [
+                    "Es el dispositivo de almacenamiento permanente donde se guardan los archivos.",
+                    "Es la Unidad Central de Procesamiento ('cerebro') que ejecuta las instrucciones y realiza los cálculos.",
+                    "Es el componente encargado de suministrar electricidad a la placa base."
+                ],
+                correct: 1,
+                explanation: "La CPU (Procesador) procesa las instrucciones y coordina todos los componentes del sistema."
+            },
+            {
+                id: 2,
+                question: "2. ¿Cuál es la diferencia entre la memoria RAM y la memoria de almacenamiento (SSD / Disco Duro)?",
+                options: [
+                    "La RAM es una memoria de trabajo volátil e ultrarrápida; el SSD/HDD guarda los datos de forma permanente.",
+                    "La RAM guarda los archivos cuando apagamos el equipo y el SSD borra todo.",
+                    "No hay diferencia, ambas sirven exclusivamente para guardar fotos y vídeos."
+                ],
+                correct: 0,
+                explanation: "La RAM pierde sus datos al apagar el equipo (volátil), mientras que el SSD/HDD conserva la información."
+            },
+            {
+                id: 3,
+                question: "3. ¿Qué función cumple la tarjeta madre (placa base) en un ordenador?",
+                options: [
+                    "Aumentar la velocidad de conexión a Internet.",
+                    "Convertir la corriente alterna de la pared en corriente continua.",
+                    "Interconectar todos los componentes del ordenador para que se comuniquen entre sí."
+                ],
+                correct: 2,
+                explanation: "La placa base es la tarjeta principal que conecta el procesador, la memoria, las tarjetas y los discos."
+            },
+            {
+                id: 4,
+                question: "4. ¿Qué es una tarjeta gráfica (GPU) y para qué se utiliza?",
+                options: [
+                    "Es un componente especializado en el procesamiento de imágenes, gráficos e interfaz visual.",
+                    "Es la memoria donde se guarda el sistema operativo.",
+                    "Un chip que controla únicamente el teclado y el ratón."
+                ],
+                correct: 0,
+                explanation: "La GPU procesa los gráficos para renderizar la imagen en el monitor."
+            },
+            {
+                id: 5,
+                question: "5. ¿Qué función tiene la fuente de alimentación en un ordenador?",
+                options: [
+                    "Mantener baja la temperatura del procesador.",
+                    "Transformar la corriente de la red eléctrica a los voltajes continuos que necesitan los componentes.",
+                    "Administrar la velocidad de descarga de archivos."
+                ],
+                correct: 1,
+                explanation: "Adapta y distribuye la energía eléctrica segura a cada componente del ordenador."
+            },
+            {
+                id: 6,
+                question: "6. ¿Cuál es la función del Sistema Operativo en un equipo?",
+                options: [
+                    "Es un componente físico que se conecta a la placa base.",
+                    "Es el software básico que gestiona el hardware del ordenador y permite ejecutar las aplicaciones.",
+                    "Servir únicamente para navegar por Internet."
+                ],
+                correct: 1,
+                explanation: "El sistema operativo (Windows, Linux, macOS) actúa como intermediario entre el usuario/aplicaciones y el hardware."
+            },
+            {
+                id: 7,
+                question: "7. ¿Qué es la BIOS/UEFI y qué papel desempeña en el arranque del equipo?",
+                options: [
+                    "Un programa de diseño gráfico integrado en la tarjeta de vídeo.",
+                    "Un firmware en la placa base que realiza el chequeo inicial (POST) y carga el sistema operativo.",
+                    "La memoria de acceso aleatorio donde se alojan las ventanas abiertas."
+                ],
+                correct: 1,
+                explanation: "La BIOS/UEFI comprueba que el hardware esencial funcione antes de ceder el control al sistema operativo."
+            },
+            {
+                id: 8,
+                question: "8. ¿Cuál es la principal diferencia entre un procesador de 32 bits y uno de 64 bits?",
+                options: [
+                    "El de 64 bits puede direccionar mucha más memoria RAM y procesar datos en bloques más grandes.",
+                    "El de 32 bits es el doble de rápido que el de 64 bits.",
+                    "Los procesadores de 64 bits solo funcionan sin conexión a Internet."
+                ],
+                correct: 0,
+                explanation: "La arquitectura de 64 bits supera el límite de 4 GB de RAM de los sistemas de 32 bits y mejora el rendimiento."
+            },
+            {
+                id: 9,
+                question: "9. ¿Qué son los puertos de Entrada/Salida (E/S)?",
+                options: [
+                    "Las ranuras internas exclusivas para instalar la memoria RAM.",
+                    "Conectores externos e internos (USB, HDMI, RJ45) para conectar periféricos y dispositivos.",
+                    "Los cables que conectan el botón de encendido con la fuente."
+                ],
+                correct: 1,
+                explanation: "Permiten la comunicación con periféricos como monitores, teclados, ratones o redes."
+            },
+            {
+                id: 10,
+                question: "10. ¿Qué es la memoria caché y por qué es importante?",
+                options: [
+                    "Una memoria ultrarrápida integrada en el procesador que almacena los datos más frecuentes.",
+                    "El espacio libre del disco duro que se usa cuando la RAM se llena.",
+                    "Un lector de tarjetas de memoria externo."
+                ],
+                correct: 0,
+                explanation: "La caché (L1, L2, L3) reduce los tiempos de espera del procesador al acceder a datos repetitivos."
+            }
+        ];
+
+        // Estado del usuario
+        let userAnswers = {};
+
+        // Función para desplegar el formulario al pulsar 'Iniciar Formulario'
+        function startQuiz() {
+            document.getElementById('start-container').style.display = 'none';
+            const wrapper = document.getElementById('quiz-wrapper');
+            wrapper.style.display = 'block';
+            renderQuiz();
+            wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Renderiza la lista de preguntas
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            container.innerHTML = '';
+
+            questionsData.forEach(q => {
+                const questionBlock = document.createElement('div');
+                questionBlock.className = 'quiz-question';
+                questionBlock.id = `q-block-${q.id}`;
+
+                let optionsHTML = '';
+                q.options.forEach((opt, optIdx) => {
+                    optionsHTML += `
+                        <label class="option-label" id="label-${q.id}-${optIdx}">
+                            <input type="radio" name="question-${q.id}" value="${optIdx}" onchange="checkAnswerInstant(${q.id}, ${optIdx})">
+                            ${opt}
+                        </label>
+                    `;
+                });
+
+                questionBlock.innerHTML = `
+                    <h4>${q.question}</h4>
+                    <div class="options-group">
+                        ${optionsHTML}
+                    </div>
+                    <div class="feedback" id="feedback-${q.id}"></div>
+                `;
+
+                container.appendChild(questionBlock);
+            });
+        }
+
+        // Corrección instantánea al seleccionar una opción
+        function checkAnswerInstant(questionId, selectedOpt) {
+            const questionObj = questionsData.find(q => q.id === questionId);
+            const feedbackDiv = document.getElementById(`feedback-${questionId}`);
+            const questionBlock = document.getElementById(`q-block-${questionId}`);
+
+            userAnswers[questionId] = (selectedOpt === questionObj.correct);
+
+            if (selectedOpt === questionObj.correct) {
+                feedbackDiv.className = 'feedback correct';
+                feedbackDiv.innerHTML = `<strong>¡Correcto!</strong> ${questionObj.explanation}`;
+                questionBlock.className = 'quiz-question answered-correct';
+            } else {
+                feedbackDiv.className = 'feedback incorrect';
+                feedbackDiv.innerHTML = `<strong>Incorrecto.</strong> ${questionObj.explanation}`;
+                questionBlock.className = 'quiz-question answered-incorrect';
+            }
+
+            updateScoreBoard();
+        }
+
+        // Actualiza el marcador superior en tiempo real
+        function updateScoreBoard() {
+            const answeredIds = Object.keys(userAnswers);
+            const answeredCount = answeredIds.length;
+            const correctCount = Object.values(userAnswers).filter(val => val === true).length;
+
+            document.getElementById('answered-count').innerText = answeredCount;
+            document.getElementById('correct-count').innerText = correctCount;
+
+            const statusText = document.getElementById('score-status');
+            if (answeredCount === questionsData.length) {
+                const percentage = Math.round((correctCount / questionsData.length) * 100);
+                statusText.innerHTML = `<strong>Cuestionario Completado:</strong> ${percentage}% de aciertos. ${correctCount >= 6 ? '¡Excelente nivel para comenzar con el reto!' : 'Revisa los contenidos de la sección 2.A para reforzar la teoría.'}`;
+            } else {
+                statusText.innerText = `Llevas ${answeredCount} de 10 preguntas respondidas.`;
+            }
+        }
+
+        // Reiniciar cuestionario
+        function resetQuiz() {
+            userAnswers = {};
+            document.getElementById('hardware-quiz-form').reset();
+            
+            questionsData.forEach(q => {
+                const feedbackDiv = document.getElementById(`feedback-${q.id}`);
+                const questionBlock = document.getElementById(`q-block-${q.id}`);
+                feedbackDiv.className = 'feedback';
+                feedbackDiv.style.display = 'none';
+                questionBlock.className = 'quiz-question';
+            });
+
+            document.getElementById('answered-count').innerText = '0';
+            document.getElementById('correct-count').innerText = '0';
+            document.getElementById('score-status').innerText = 'Selecciona una opción en cada pregunta para ver la corrección inmediata.';
+
+            document.getElementById('quiz-wrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    </script>
+
+</body>
+</html>

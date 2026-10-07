@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.B Contenidos de Profundización</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="header-container">
+        <h1>2.B Contenidos de Profundización en Hardware</h1>
+        <div class="nav-links">
+            <a href="2A.html" class="btn btn-outline">← Anterior: 2.A</a>
+            <a href="../index.html" class="btn btn-outline">Menú Principal</a>
+        </div>
+    </div>
+
+    <div class="content-container">
+
+        <div class="card">
+            <h2>Análisis Técnico Avanzado de Componentes</h2>
+            <p>Esta sección amplía los conceptos básicos y proporciona documentación técnica, enlaces a Wikipedia y fuentes de información especializadas para seleccionar los componentes adecuados en el presupuesto.</p>
+
+            <!-- 1. PROCESADOR -->
+            <h3>1. Procesador (CPU) – Núcleos, Hilos y Arquitectura</h3>
+            <p>El rendimiento de una CPU no depende únicamente de su frecuencia de reloj (GHz), sino de la cantidad de núcleos físicos, hilos de ejecución mediante multithreading (Hyper-Threading / SMT) y el tamaño y velocidad de la memoria caché (L1, L2 y L3). Al presupuestar ordenadores, es crucial evaluar la compatibilidad del zócalo (socket) con la placa base y el conjunto de instrucciones de la arquitectura x86_64.</p>
+            
+            <div class="img-container">
+                <img src="./img/imagen1.png" alt="Procesador CPU y arquitectura interna">
+            </div>
+
+            <p><strong>Fuentes de información y documentación:</strong></p>
+            <ul>
+                <li><a href="https://es.wikipedia.org/wiki/Unidad_central_de_procesamiento" target="_blank">Wikipedia: Unidad Central de Procesamiento (CPU)</a></li>
+                <li><a href="https://www.intel.es/content/www/es/es/architecture-and-technology/cpu-architecture.html" target="_blank">Intel: Arquitectura y tecnología de procesadores</a></li>
+                <li><a href="https://www.amd.com/es/technologies/zen-architecture" target="_blank">AMD: Arquitectura de procesadores Zen</a></li>
+            </ul>
+
+            <!-- 2. PLACA BASE -->
+            <h3>2. Placa Base – Chipset, Factores de Forma y Buses</h3>
+            <p>La placa base centraliza la comunicación entre los componentes. Su chipset (por ejemplo, familias B-Series o Z-Series) determina las posibilidades de overclocking, número de carriles PCIe y puertos de expansión. Además, define el factor de forma (ATX, Micro-ATX, Mini-ITX) que condicionará el chasis o caja a elegir, así como la cantidad de conectores M.2 NVMe y puertos E/S traseros.</p>
+
+            <div class="img-container">
+                <img src="./img/imagen2.png" alt="Placa base con zócalo, ranuras RAM y buses PCIe">
+            </div>
+
+            <p><strong>Fuentes de información y documentación:</strong></p>
+            <ul>
+                <li><a href="https://es.wikipedia.org/wiki/Placa_base" target="_blank">Wikipedia: Placa Base (Tarjeta Madre)</a></li>
+                <li><a href="https://www.tomshardware.com/topics/motherboards" target="_blank">Tom's Hardware: Guías y análisis de placas base</a></li>
+            </ul>
+
+            <!-- 3. MEMORIA RAM -->
+            <h3>3. Memoria RAM – DDR4 vs DDR5, Frecuencias y Latencia (CL)</h3>
+            <p>La velocidad de transferencia de la memoria RAM depende de la generación tecnológica (DDR4 vs DDR5), la frecuencia de trabajo (medida en MHz o MT/s) y la latencia CAS (CL). Configurar los módulos en arquitectura <em>Dual-Channel</em> dobla el ancho de banda efectivo del bus de datos frente a un único módulo de memoria.</p>
+
+            <div class="img-container">
+                <img src="./img/imagen3.png" alt="Módulos de memoria RAM DDR4 y DDR5">
+            </div>
+
+            <p><strong>Fuentes de información y documentación:</strong></p>
+            <ul>
+                <li><a href="https://es.wikipedia.org/wiki/Memoria_de_acceso_aleatorio" target="_blank">Wikipedia: Memoria de Acceso Aleatorio (RAM)</a></li>
+                <li><a href="https://www.kingston.com/es/memory/ddr5" target="_blank">Kingston: Información técnica sobre tecnología DDR5</a></li>
+            </ul>
+
+            <!-- 4. DISCO DURO / SSD -->
+            <h3>4. Almacenamiento – SSD NVMe PCIe vs SATA y HDD</h3>
+            <p>Mientras que los discos duros mecánicos (HDD) transfieren datos a velocidades cercanas a 150 MB/s, las unidades de estado sólido (SSD) con interfaz SATA alcanzan hasta 550 MB/s. Las unidades M.2 NVMe sobre bus PCIe 4.0/5.0 pueden superar los 7000 MB/s gracias a la eliminación del cuello de botella de los protocolos heredados de almacenamiento.</p>
+
+            <div class="img-container">
+                <img src="./img/imagen4.png" alt="Unidades de almacenamiento SSD M.2 NVMe y HDD">
+            </div>
+
+            <p><strong>Fuentes de información y documentación:</strong></p>
+            <ul>
+                <li><a href="https://es.wikipedia.org/wiki/Unidad_de_estado_s%C3%B3lido" target="_blank">Wikipedia: Unidad de Estado Sólido (SSD)</a></li>
+                <li><a href="https://www.crucial.es/articles/about-ssd" target="_blank">Crucial: Guías y artículos sobre tecnología SSD y NVMe</a></li>
+            </ul>
+
+            <!-- 5. FUENTE DE ALIMENTACIÓN -->
+            <h3>5. Fuente de Alimentación – Eficiencia 80 PLUS y Raíles de +12V</h3>
+            <p>Para asegurar la estabilidad de 25 equipos en el aula, la fuente de alimentación debe ofrecer una eficiencia energética certificada (80 PLUS Bronze, Silver, Gold o Platinum) que minimice el desperdicio en forma de calor. Asimismo, debe incorporar sistemas de protección eléctrica (OVP, OPP, SCP) y entregar amperaje suficiente en el raíl de +12V para alimentar la CPU y la tarjeta gráfica.</p>
+
+            <div class="img-container">
+                <img src="./img/imagen5.png" alt="Fuente de alimentación con certificación de eficiencia">
+            </div>
+
+            <p><strong>Fuentes de información y documentación:</strong></p>
+            <ul>
+                <li><a href="https://es.wikipedia.org/wiki/Fuente_de_alimentaci%C3%B3n" target="_blank">Wikipedia: Fuente de Alimentación</a></li>
+                <li><a href="https://www.outervision.com/" target="_blank">Outervision: Herramienta de cálculo de potencia energética</a></li>
+            </ul>
+
+            <!-- 6. TARJETA GRÁFICA -->
+            <h3>6. Tarjeta Gráfica (GPU) – VRAM, CUDA Cores / Stream Processors</h3>
+            <p>La GPU procesa gráficos en paralelo. Cuenta con su propia memoria VRAM dedicada (GDDR6/GDDR6X) de alto ancho de banda para alojar texturas y geometrías. Al elegir GPUs para un aula técnica, es indispensable evaluar la presencia de núcleos dedicados para procesamiento de IA, renderizado o aceleración gráfica 3D.</p>
+
+            <div class="img-container">
+                <img src="./img/imagen6.png" alt="Tarjeta gráfica dedicada con VRAM y disipación">
+            </div>
+
+            <p><strong>Fuentes de información y documentación:</strong></p>
+            <ul>
+                <li><a href="https://es.wikipedia.org/wiki/Tarjeta_gr%C3%A1fica" target="_blank">Wikipedia: Tarjeta Gráfica (GPU)</a></li>
+                <li><a href="https://www.techpowerup.com/gpu-specs/" target="_blank">TechPowerUp: Base de datos y especificaciones técnicas de GPUs</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-nav">
+            <a href="2A.html" class="btn btn-secondary">← Volver a 2.A Contenidos Básicos</a>
+            <a href="../index.html" class="btn">Volver al Menú Principal</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

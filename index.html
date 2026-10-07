@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contexto Colaborativo del Equipo Docente</title>
+    <style>
+        :root {
+            --bg-main: #ffffff;
+            --orange-header: #e07a5f;
+            --blue-area: #2a9d8f;
+            --purple-area: #b5179e;
+            --teal-area: #2a9d8f;
+            --dark-blue: #3a86ff;
+            --card-bg: #1e1e1e;
+            --text-light: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-main);
+            color: #333333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #d97757;
+        }
+
+        .main-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Sidebar izquierdo (Áreas 1-6) */
+        .left-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 250px;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 10px 12px;
+            gap: 12px;
+            border-left: 5px solid #e07a5f;
+            color: #ffffff;
+        }
+
+        .sidebar-item .number {
+            background: #e76f51;
+            color: white;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .sidebar-item .text {
+            font-size: 0.85rem;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Empuja el texto a la izquierda y el enlace al extremo derecho */
+            gap: 10px;
+        }
+
+        /* Enlace interactivo para el botón play */
+        .play-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto; /* Asegura posición fija a la derecha */
+            text-decoration: none;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .play-link:hover {
+            transform: scale(1.15); /* Efecto de aumento al pasar el cursor */
+            opacity: 0.85;
+        }
+
+        .play-icon {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        /* Contenedor Central / Diagrama */
+        .diagram-container {
+            background-color: #f4a261;
+            border-radius: 15px;
+            padding: 20px;
+            flex-grow: 1;
+            max-width: 700px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            color: #fff;
+        }
+
+        .top-header-box {
+            background-color: #d97757;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .top-sub-badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 5px;
+            flex-wrap: wrap;
+        }
+
+        /* Estilos para badges interactivos */
+        .badge {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            color: #ffffff;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .badge:hover {
+            background-color: rgba(0, 0, 0, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .section-box {
+            background-color: #264653;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .flow-box {
+            background-color: #2a9d8f;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 8px 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .decision-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .decision-node {
+            background-color: #457b9d;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            font-size: 0.85rem;
+            flex: 1;
+            min-width: 140px;
+        }
+
+        .content-nodes {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 2;
+        }
+
+        .sub-content {
+            background-color: #2a9d8f;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .pink-section {
+            background-color: #9b2226;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .pink-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .pink-badge {
+            background-color: #ae2012;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #ffffff;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .pink-badge:hover {
+            background-color: #c92a1d;
+            transform: translateY(-1px);
+        }
+
+        /* Sidebar derecho (Leyenda de recursos) */
+        .right-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 180px;
+            font-size: 0.8rem;
+            justify-content: center;
+        }
+
+        .legend-item {
+            background: var(--card-bg);
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+        }
+
+        @media (max-width: 900px) {
+            .main-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .left-sidebar, .right-sidebar {
+                width: 100%;
+                max-width: 700px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Contexto Colaborativo del Equipo Docente e Itinerario de Aprendizaje</h1>
+
+    <div class="main-container">
+        
+        <!-- BARRA LATERAL IZQUIERDA: Áreas -->
+        <div class="left-sidebar">
+            <div class="sidebar-item">
+                <div class="number">1</div>
+                <div class="text">
+                    <span>Compromiso profesional</span>
+                    <a href="./1_compromiso/1A.html" class="play-link" title="Ir a Compromiso Profesional">
+                        <img src="./img/play.png" alt="play" class="play-icon">
+                    </a>
+                </div>
+            </div>
+            <div class="sidebar-item">
+                <div class="number">2</div>
+                <div class="text">
+                    <span>Contenidos digitales</span>
+                    <a href="#" class="play-link" title="Ir a Contenidos Digitales">
+                        <img src="./img/play.png" alt="play" class="play-icon">
+                    </a>
+                </div>
+            </div>
+            <div class="sidebar-item">
+                <div class="number">3</div>
+                <div class="text">
+                    <span>Enseñanza y aprendizaje</span>
+                    <a href="#" class="play-link" title="Ir a Enseñanza y Aprendizaje">
+                        <img src="./img/play.png" alt="play" class="play-icon">
+                    </a>
+                </div>
+            </div>
+            <div class="sidebar-item">
+                <div class="number">4</div>
+                <div class="text">
+                    <span>Evaluación y retroalimentación</span>
+                    <a href="#" class="play-link" title="Ir a Evaluación y Retroalimentación">
+                        <img src="./img/play.png" alt="play" class="play-icon">
+                    </a>
+                </div>
+            </div>
+            <div class="sidebar-item">
+                <div class="number">5</div>
+                <div class="text">
+                    <span>Empoderamiento del alumnado</span>
+                    <a href="#" class="play-link" title="Ir a Empoderamiento del Alumnado">
+                        <img src="./img/play.png" alt="play" class="play-icon">
+                    </a>
+                </div>
+            </div>
+            <div class="sidebar-item">
+                <div class="number">6</div>
+                <div class="text">
+                    <span>Desarrollo de la competencia digital del alumnado</span>
+                    <a href="#" class="play-link" title="Ir a Competencia Digital">
+                        <img src="./img/play.png" alt="play" class="play-icon">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTENEDOR CENTRAL / DIAGRAMA -->
+        <div class="diagram-container">
+            
+            <!-- Cabecera -->
+            <div class="top-header-box">
+                Contexto colaborativo del equipo docente
+                <div class="top-sub-badges">
+                    <a href="./1_compromiso/1A.html" class="badge">1.A Comunicación</a>
+                    <a href="./1_compromiso/1B.html" class="badge">1.B Trabajo en equipo</a>
+                    <a href="./1_compromiso/1C.html" class="badge">1.C Netiqueta</a>
+                </div>
+            </div>
+
+            <!-- Bloque Enseñanza y Aprendizaje -->
+            <div class="section-box">
+                <div class="section-title">Enseñanza y aprendizaje</div>
+                <div class="top-sub-badges" style="margin-bottom: 10px;">
+                    <a href="#" class="badge">3.A Contexto colab. del alumnado</a>
+                    <a href="#" class="badge">3.B Recursos</a>
+                </div>
+                
+                <div class="flow-box">
+                    Evaluación previa sobre un tema <a href="./2_contenidos_digitales/4A.html" class="badge">4.A Evaluación</a>
+                </div>
+
+                <div class="decision-container" style="margin-top: 10px;">
+                    <div class="decision-node">
+                        ¿Tiene el conocimiento básico?
+                    </div>
+                    <div class="content-nodes">
+                        <div class="sub-content">
+                            <span>Contenido de conocimiento básico</span>
+                            <div>
+                                <a href="./2_contenidos_digitales/2A.html" class="badge">2.A Básico</a>
+                                <a href="#" class="badge">5.A Accesibilidad</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sub-content" style="margin-top: 8px; background-color: #2a9d8f;">
+                    <span>Contenido de profundización</span>
+                    <div>
+                        <a href="./2_contenidos_digitales/2B.html" class="badge">2.B Profundización</a>
+                        <a href="#" class="badge">5.A Accesibilidad</a>
+                        <a href="#" class="badge">5.B Personalización</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloque Contexto Colaborativo del Alumnado -->
+            <div class="pink-section">
+                <div class="section-title">Contexto colaborativo del alumnado</div>
+                <div class="pink-grid">
+                    <a href="#" class="pink-badge">6.A Búsquedas</a>
+                    <a href="#" class="pink-badge">6.B Normas de conducta</a>
+                    <a href="#" class="pink-badge">6.C Contenidos digitales</a>
+                    <a href="#" class="pink-badge" style="grid-column: span 1.5;">6.D Uso responsable</a>
+                    <a href="#" class="pink-badge" style="grid-column: span 1.5;">6.E Resolución de problemas</a>
+                </div>
+            </div>
+
+            <!-- Bloque Inferior Evaluación y Retroalimentación -->
+            <div class="section-box" style="padding: 10px;">
+                <div class="section-title" style="margin-bottom: 5px;">Evaluación y retroalimentación</div>
+                <div class="top-sub-badges">
+                    <a href="#" class="badge">4.B Formativa</a>
+                    <a href="#" class="badge">4.C Retroalimentación</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BARRA LATERAL DERECHA: Leyenda -->
+        <div class="right-sidebar">
+            <div class="legend-item"><span>Pantallazo + texto</span> 📱</div>
+            <div class="legend-item"><span>Documento</span> 📖</div>
+            <div class="legend-item"><span>Infografía</span> 📊</div>
+            <div class="legend-item"><span>Audio</span> 📢</div>
+            <div class="legend-item"><span>Contenido</span> ✏️</div>
+            <div class="legend-item"><span>Vídeo</span> ▶️</div>
+        </div>
+
+    </div>
+
+</body>
+</html>
