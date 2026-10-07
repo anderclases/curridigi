@@ -1,7 +1,7 @@
 services:
-  apache-server:
+  curridigi:
     image: httpd:latest
-    container_name: apache
+    container_name: curridigi
     ports:
       - "9015:80"
     volumes:
