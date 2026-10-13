@@ -1,0 +1,114 @@
+/* ==========================================================
+   ESTILOS DE ACCESIBILIDAD Y LECTOR DE VOZ (COHERENTES CON MAIN.CSS)
+   ================================================---------- */
+
+body {
+    /* Añade espacio en la parte superior según lo que mida tu barra flotante (ej. entre 60px y 80px) */
+    padding-top: 70px;
+}
+
+/* Efecto de resaltado dinámico para la lectura por voz (usa tonos cálidos acordes al diseño) */
+.highlight-reading {
+    background-color: #fff3cd !important;
+    border-left: 6px solid var(--primary-orange, #d97757);
+    padding-left: 12px;
+}
+
+strong {
+    font-weight: bold;
+    color: var(--text-dark, #2b2d42);
+}
+
+figure {
+    margin: 15px 0;
+    text-align: center;
+}
+
+figcaption {
+    font-size: 0.95rem;
+    color: var(--text-muted, #555555);
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/* Barra de accesibilidad superior fija */
+.accessibility-bar {
+    background-color: var(--card-bg, #ffffff);
+    padding: 10px 20px;
+    text-align: right;
+    border-bottom: 2px solid #e0e0e0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Botones del lector adaptados a la paleta corporativa */
+.btn-audio {
+    background-color: var(--primary-orange, #d97757);
+    color: #ffffff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border: none;
+    border-radius: var(--border-radius, 12px);
+    font-size: 0.95rem;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-audio:hover {
+    background-color: #b55d3f;
+    transform: translateY(-1px);
+}
+
+.btn-stop {
+    background-color: #d9534f;
+}
+
+.btn-stop:hover {
+    background-color: #c9302c;
+}
+
+.options-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.options-list li a {
+    display: block;
+    background-color: var(--primary-orange, #d97757);
+    color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.options-list li a:hover {
+    background-color: #b55d3f;
+    transform: translateY(-1px);
+}
+
+.options-list li a.btn-accessible {
+    background-color: var(--accent-teal, #2a9d8f);
+}
+
+.options-list li a.btn-accessible:hover {
+    background-color: #1f7a6f;
+}

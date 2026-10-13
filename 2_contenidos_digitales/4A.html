@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,7 @@
             border-radius: 8px;
             padding: 18px;
             margin-bottom: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
             transition: border-color 0.3s ease;
         }
 
@@ -93,7 +94,7 @@
             margin-bottom: 20px;
             font-size: 1.1rem;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
         }
 
         #score-board p {
@@ -109,10 +110,12 @@
         }
 
         #quiz-wrapper {
-            display: none; /* Oculto hasta pulsar 'Iniciar Formulario' */
+            display: none;
+            /* Oculto hasta pulsar 'Iniciar Formulario' */
         }
     </style>
 </head>
+
 <body>
 
     <div class="header-container">
@@ -127,19 +130,50 @@
 
         <!-- CONTEXTO DEL RETO -->
         <div class="card">
+
+            <!-- CAJA DE ENUNCIADO DE TRABAJO EN EQUIPO Y EVALUACIÓN PREVIA -->
+            <div class="enunciado-ejercicio">
+                <h3>📌 Enunciado del Ejercicio: Trabajo en Equipo y Evaluación Previa</h3>
+                <p>Tienes que poner al alumnado a trabajar en equipo en relación a un tema de tu especialidad (un tema
+                    que ya trabajas, que trabajarías o que forma parte de un reto).</p>
+                <p>Para ello, debes realizar una evaluación previa mediante herramientas digitales para medir el nivel
+                    de conocimientos del alumnado en esta materia.</p>
+
+                <p>Por lo que deberás trabajar dos elementos en el portfolio:</p>
+                <ol>
+                    <li><strong>Evidencia explicativa</strong> del tema que deberá trabajar el alumnado.</li>
+                    <li><strong>Evidencia de la evaluación</strong> que vas a realizar utilizando tecnologías digitales
+                        para medir los conocimientos previos del alumnado sobre el tema planteado.</li>
+                </ol>
+
+                <p><strong>¿Cómo evidenciar?</strong></p>
+                <ul>
+                    <li>Escribe en el portfolio la explicación del tema. Ten en cuenta que este tema servirá de base
+                        para los elementos que se trabajarán a lo largo de todo el itinerario de aprendizaje.</li>
+                </ul>
+            </div>
+            <!-- FIN DEL ENUNCIADO -->
+
             <h2>Contexto del Reto y Proyecto</h2>
-            <p><strong>Módulo / Asignatura:</strong> Sistemas Microinformáticos y Redes - Montaje y Mantenimiento de Equipos.</p>
-            <p><strong>Descripción del Reto:</strong> Los alumnos deben equipar el aula ETHAZI de un instituto con nuevos ordenadores. Para ello, respetando los requerimientos técnicos necesarios para la clase, deberán presupuestar 25 ordenadores completos. Para lograrlo, tienen que identificar todos los componentes de un ordenador y conocer las características clave de cada elemento (procesador, placa base, memoria RAM, disco duro, fuente de alimentación, tarjeta gráfica, etc.).</p>
+            <p><strong>Módulo / Asignatura:</strong> Sistemas Microinformáticos y Redes - Montaje y Mantenimiento de
+                Equipos.</p>
+            <p><strong>Descripción del Reto:</strong> Los alumnos deben equipar el aula ETHAZI de un instituto con
+                nuevos ordenadores. Para ello, respetando los requerimientos técnicos necesarios para la clase, deberán
+                presupuestar 25 ordenadores completos. Para lograrlo, tienen que identificar todos los componentes de un
+                ordenador y conocer las características clave de cada elemento (procesador, placa base, memoria RAM,
+                disco duro, fuente de alimentación, tarjeta gráfica, etc.).</p>
         </div>
 
         <!-- CUESTIONARIO INTERACTIVO CON DESPLIEGUE E CORRECCIÓN INSTANTÁNEA -->
         <div class="card">
             <h2>Cuestionario Diagnóstico Inicial</h2>
-            <p>Haz clic en el siguiente botón para desplegar la evaluación de 10 preguntas. Las respuestas se corregirán automáticamente en tiempo real al seleccionar cada opción.</p>
+            <p>Haz clic en el siguiente botón para desplegar la evaluación de 10 preguntas. Las respuestas se corregirán
+                automáticamente en tiempo real al seleccionar cada opción.</p>
 
             <!-- BOTÓN PARA DESPLEGAR EL FORMULARIO -->
             <div id="start-container" class="start-container">
-                <button type="button" id="start-btn" class="btn btn-secondary" onclick="startQuiz()" style="font-size: 1.1rem; padding: 12px 28px;">
+                <button type="button" id="start-btn" class="btn btn-secondary" onclick="startQuiz()"
+                    style="font-size: 1.1rem; padding: 12px 28px;">
                     ▶ Iniciar Formulario
                 </button>
             </div>
@@ -156,7 +190,8 @@
                     <div id="quiz-container"></div>
 
                     <div style="text-align: center; margin-top: 25px;">
-                        <button type="button" class="btn btn-outline" onclick="resetQuiz()">Reiniciar Cuestionario</button>
+                        <button type="button" class="btn btn-outline" onclick="resetQuiz()">Reiniciar
+                            Cuestionario</button>
                     </div>
                 </form>
             </div>
@@ -371,7 +406,7 @@
         function resetQuiz() {
             userAnswers = {};
             document.getElementById('hardware-quiz-form').reset();
-            
+
             questionsData.forEach(q => {
                 const feedbackDiv = document.getElementById(`feedback-${q.id}`);
                 const questionBlock = document.getElementById(`q-block-${q.id}`);
@@ -389,4 +424,5 @@
     </script>
 
 </body>
+
 </html>

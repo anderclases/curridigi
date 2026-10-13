@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.A Contenidos Básicos (Accesible)</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="./lector.css">
+</head>
+<body>
+
+    <!-- Acceso directo a lector de texto / audio con resaltado -->
+    <div class="accessibility-bar">
+        <button id="audioBtn" class="btn-audio" onclick="toggleSpeech()">
+            🔊 Escuchar Contenido
+        </button>
+        <button id="stopBtn" class="btn-audio btn-stop" onclick="stopSpeech()" style="display: none;">
+            ⏹️ Detener
+        </button>
+    </div>
+
+    <div class="header-container">
+        <h1>2.A Contenidos Básicos de Hardware (Accesible)</h1>
+        <div class="nav-links">
+            <a href="./5A.html" class="btn btn-outline">← Anterior: 4.A</a>
+            <a href="../index.html" class="btn btn-outline">Menú Principal</a>
+            <a href="./2B_accesibilidad.html" class="btn">Profundización 2.B →</a>
+        </div>
+    </div>
+
+    <div class="content-container">
+
+        <!-- CAJA DE ENUNCIADO DE ACCESIBILIDAD -->
+        <div class="enunciado-ejercicio">
+            <h3>📌 Enunciado del Ejercicio: Accesibilidad en los Contenidos</h3>
+            <p>Debes garantizar la accesibilidad de los contenidos de conocimientos básicos y de profundización creados para tratar el tema propuesto.</p>
+            
+            <p class="nota-enunciado"><strong>NOTA:</strong> Hay dos contenidos digitales, por lo que hay que completar dos apartados 5.A en el portfolio.</p>
+            
+            <p><strong>¿Cómo evidenciar?</strong></p>
+            <ul>
+                <li>Añade y/o crea algún elemento de accesibilidad para los contenidos digitales generados en los apartados 2A y 2B y sube el nuevo contenido al portfolio, en el apartado correspondiente dependiendo de si es contenido básico o de profundización.</li>
+            </ul>
+            
+            <p class="nota-enunciado"><em>Nota: si creas un contenido digital de audio y/o vídeo, para evitar problemas de autoría, es necesario que consten tu locución y/o tu propia imagen.</em></p>
+
+            <div class="indicadores-logro">
+                <p><strong>Indicadores de logro:</strong></p>
+                <ul>
+                    <li>En todos los contenidos presentados se ha incluido algún elemento para garantizar la accesibilidad.</li>
+                </ul>
+            </div>
+        </div>
+        <!-- FIN DEL ENUNCIADO -->
+
+        <div class="card">
+            <h2>Componentes Principales de un Ordenador (Explicación Simplificada)</h2>
+            <p>Para abordar el presupuesto de los 25 ordenadores del aula, es indispensable conocer las funciones básicas de los <strong>seis componentes esenciales</strong> de cualquier equipo informático:</p>
+
+            <!-- 1. PROCESADOR -->
+            <h3>1. Procesador (CPU)</h3>
+            <p>Es el <strong>"cerebro"</strong> del ordenador. Se encarga de procesar las instrucciones de las aplicaciones, realizar los cálculos matemáticos y coordinar el trabajo de los demás componentes.</p>
+            <figure class="img-container">
+                <img src="../2_contenidos_digitales/img/CPU.png" alt="Procesador CPU">
+                <figcaption>Figura 1: Vista general de un procesador CPU, el núcleo principal de cálculo.</figcaption>
+            </figure>
+
+            <!-- 2. PLACA BASE -->
+            <h3>2. Placa Base (Tarjeta Madre)</h3>
+            <p>Es la gran placa de <strong>circuito impreso</strong> a la que se conectan directamente todos los demás elementos del ordenador (CPU, RAM, discos, tarjeta gráfica). Su función es hacer que todos los componentes se comuniquen entre sí.</p>
+            <figure class="img-container">
+                <img src="../2_contenidos_digitales/img/placa_base.png" alt="Placa Base">
+                <figcaption>Figura 2: Placa base que interconecta todos los componentes del sistema.</figcaption>
+            </figure>
+
+            <!-- 3. MEMORIA RAM -->
+            <h3>3. Memoria RAM</h3>
+            <p>Es la memoria de trabajo <strong>temporal y ultrarrápida</strong> del ordenador. Almacena los datos de los programas que estás utilizando en el momento actual. Cuando apagas el ordenador, todo su contenido se borra.</p>
+            <figure class="img-container">
+                <img src="../2_contenidos_digitales/img/RAM.png" alt="Memoria RAM">
+                <figcaption>Figura 3: Módulos de memoria RAM de acceso temporal.</figcaption>
+            </figure>
+
+            <!-- 4. DISCO DURO / SSD -->
+            <h3>4. Disco Duro / SSD</h3>
+            <p>Es el sistema de <strong>almacenamiento permanente</strong>. Guarda el sistema operativo, los programas instalados y tus archivos personales (documentos, imágenes, etc.). A diferencia de la RAM, los datos no se pierden al apagar el equipo.</p>
+            <figure class="img-container">
+                <img src="../2_contenidos_digitales/img/HDD-vs-SDD.png" alt="Disco Duro / SSD">
+                <figcaption>Figura 4: Unidades de almacenamiento para guardar datos de forma permanente.</figcaption>
+            </figure>
+
+            <!-- 5. FUENTE DE ALIMENTACIÓN -->
+            <h3>5. Fuente de Alimentación</h3>
+            <p>Es la encargada de recibir la <strong>corriente eléctrica</strong> de la pared (corriente alterna) y transformarla en los voltajes continuos que necesitan los componentes internos para funcionar de manera segura.</p>
+            <figure class="img-container">
+                <img src="../2_contenidos_digitales/img/PSU.png" alt="Fuente de Alimentación">
+                <figcaption>Figura 5: Fuente de alimentación encargada de suministrar energía eléctrica segura.</figcaption>
+            </figure>
+
+            <!-- 6. TARJETA GRÁFICA -->
+            <h3>6. Tarjeta Gráfica (GPU)</h3>
+            <p>Es el componente especializado en procesar <strong>imágenes, vídeos, gráficos</strong> e interfaces visuales para enviarlos a la pantalla o monitor.</p>
+            <figure class="img-container">
+                <img src="../2_contenidos_digitales/img/GPU.png" alt="Tarjeta Gráfica GPU">
+                <figcaption>Figura 6: Tarjeta gráfica dedicada al procesamiento visual e interfaz gráfica.</figcaption>
+            </figure>
+        </div>
+
+        <div class="footer-nav">
+            <a href="4A.html" class="btn btn-secondary">← Volver a 4.A Evaluación</a>
+            <a href="2B.html" class="btn btn-secondary">Ir a 2.B Profundización →</a>
+        </div>
+
+    </div>
+
+    <!-- Importación del script de accesibilidad compartido -->
+    <script src="accessibility.js"></script>
+</body>
+</html>

@@ -1,24 +1,3 @@
-<style>
-    /* Reemplaza la regla body con la opción elegida */
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: #f4f6f8;
-        background-image: 
-            linear-gradient(to right, rgba(42, 157, 143, 0.07) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(42, 157, 143, 0.07) 1px, transparent 1px);
-        background-size: 24px 24px;
-        background-attachment: fixed;
-    }
-    
-    /* Resto de estilos... */
-</style>
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -39,7 +18,12 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-main);
+            background-color: #f4f6f8;
+            background-image: 
+                linear-gradient(to right, rgba(42, 157, 143, 0.07) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(42, 157, 143, 0.07) 1px, transparent 1px);
+            background-size: 24px 24px;
+            background-attachment: fixed;
             color: #333333;
             margin: 0;
             padding: 20px;
@@ -101,22 +85,21 @@
             flex-grow: 1;
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Empuja el texto a la izquierda y el enlace al extremo derecho */
+            justify-content: space-between;
             gap: 10px;
         }
 
-        /* Enlace interactivo para el botón play */
         .play-link {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-left: auto; /* Asegura posición fija a la derecha */
+            margin-left: auto;
             text-decoration: none;
             transition: transform 0.2s ease, opacity 0.2s ease;
         }
 
         .play-link:hover {
-            transform: scale(1.15); /* Efecto de aumento al pasar el cursor */
+            transform: scale(1.15);
             opacity: 0.85;
         }
 
@@ -166,7 +149,7 @@
             color: #ffffff;
             text-decoration: none;
             display: inline-block;
-            transition: background-color 0.2s ease, transform 0.1s ease;
+            transition: all 0.3s ease;
         }
 
         .badge:hover {
@@ -257,7 +240,7 @@
             color: #ffffff;
             text-decoration: none;
             display: block;
-            transition: background-color 0.2s ease, transform 0.1s ease;
+            transition: all 0.3s ease;
         }
 
         .pink-badge:hover {
@@ -265,24 +248,59 @@
             transform: translateY(-1px);
         }
 
-        /* Sidebar derecho (Leyenda de recursos) */
+        /* Sidebar derecho (Indicador Entregas) */
         .right-sidebar {
             display: flex;
             flex-direction: column;
             gap: 8px;
             width: 180px;
-            font-size: 0.8rem;
-            justify-content: center;
+            font-size: 0.85rem;
         }
 
-        .legend-item {
+        .sidebar-title {
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+
+        .delivery-btn {
             background: var(--card-bg);
-            padding: 8px 12px;
-            border-radius: 6px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             color: #ffffff;
+            border: 2px solid transparent;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+
+        .delivery-btn:hover {
+            background: #2c2c2c;
+            border-color: #e07a5f;
+        }
+
+        .delivery-btn.active {
+            background: #e07a5f;
+            color: #ffffff;
+            border-color: #ffffff;
+            box-shadow: 0 0 10px rgba(224, 122, 95, 0.5);
+        }
+
+        /* Clases de resaltado para los enlaces */
+        .highlighted {
+            background-color: #ffb703 !important;
+            color: #000000 !important;
+            font-weight: bold;
+            transform: scale(1.08);
+            box-shadow: 0 0 12px rgba(255, 183, 3, 0.9);
+            z-index: 10;
+        }
+
+        .dimmed {
+            opacity: 0.3;
         }
 
         @media (max-width: 900px) {
@@ -303,7 +321,7 @@
 
     <div class="main-container">
         
-        <!-- BARRA LATERAL IZQUIERDA: Áreas -->
+        <!-- BARRA LATERAL IZQUIERDA -->
         <div class="left-sidebar">
             <div class="sidebar-item">
                 <div class="number">1</div>
@@ -368,9 +386,10 @@
             <div class="top-header-box">
                 Contexto colaborativo del equipo docente
                 <div class="top-sub-badges">
-                    <a href="./1_compromiso/1A.html" class="badge">1.A Comunicación</a>
-                    <a href="./1_compromiso/1B.html" class="badge">1.B Trabajo en equipo</a>
-                    <a href="./1_compromiso/1C.html" class="badge">1.C Netiqueta</a>
+                    <!-- Ejemplo: 1A, 1B, 1C vinculados a la Entrega 1 -->
+                    <a href="./1_colab_docente/1A.html" class="badge" data-entrega="1">1.A Comunicación</a>
+                    <a href="./1_colab_docente/1B.html" class="badge" data-entrega="1">1.B Trabajo en equipo</a>
+                    <a href="./1_colab_docente/1C.html" class="badge" data-entrega="1">1.C Netiqueta</a>
                 </div>
             </div>
 
@@ -378,12 +397,15 @@
             <div class="section-box">
                 <div class="section-title">Enseñanza y aprendizaje</div>
                 <div class="top-sub-badges" style="margin-bottom: 10px;">
-                    <a href="#" class="badge">3.A Contexto colab. del alumnado</a>
-                    <a href="#" class="badge">3.B Recursos</a>
+                    <!-- Ajusta aquí el número de entrega exacto (ej. Entrega 3) -->
+                    <a href="./4_colab_alumnado/3A.html" class="badge" data-entrega="4">3.A Contexto colab. del alumnado</a>
+                    <a href="./4_colab_alumnado/3B.html" class="badge" data-entrega="4">3.B Recursos</a>
                 </div>
                 
                 <div class="flow-box">
-                    Evaluación previa sobre un tema <a href="./2_contenidos_digitales/4A.html" class="badge">4.A Evaluación</a>
+                    Evaluación previa sobre un tema 
+                    <!-- 4.A está asignado explícitamente a la Entrega 2 -->
+                    <a href="./2_contenidos_digitales/4A.html" class="badge" data-entrega="2">4.A Evaluación</a>
                 </div>
 
                 <div class="decision-container" style="margin-top: 10px;">
@@ -394,8 +416,9 @@
                         <div class="sub-content">
                             <span>Contenido de conocimiento básico</span>
                             <div>
-                                <a href="./2_contenidos_digitales/2A.html" class="badge">2.A Básico</a>
-                                <a href="#" class="badge">5.A Accesibilidad</a>
+                                <a href="./2_contenidos_digitales/2A.html" class="badge" data-entrega="2">2.A Básico</a>
+                                <!-- 5.A asignado a la Entrega 3 -->
+                                <a href="./3_accesibilidad/5A.html" class="badge" data-entrega="3">5.A Accesibilidad</a>
                             </div>
                         </div>
                     </div>
@@ -404,9 +427,10 @@
                 <div class="sub-content" style="margin-top: 8px; background-color: #2a9d8f;">
                     <span>Contenido de profundización</span>
                     <div>
-                        <a href="./2_contenidos_digitales/2B.html" class="badge">2.B Profundización</a>
-                        <a href="#" class="badge">5.A Accesibilidad</a>
-                        <a href="#" class="badge">5.B Personalización</a>
+                        <a href="./2_contenidos_digitales/2B.html" class="badge" data-entrega="2">2.B Profundización</a>
+                        <!-- 5.A y 5.B asignados a la Entrega 3 -->
+                        <a href="./3_accesibilidad/5A.html" class="badge" data-entrega="3">5.A Accesibilidad</a>
+                        <a href="./3_accesibilidad/5B.html" class="badge" data-entrega="3">5.B Personalización</a>
                     </div>
                 </div>
             </div>
@@ -415,11 +439,12 @@
             <div class="pink-section">
                 <div class="section-title">Contexto colaborativo del alumnado</div>
                 <div class="pink-grid">
-                    <a href="#" class="pink-badge">6.A Búsquedas</a>
-                    <a href="#" class="pink-badge">6.B Normas de conducta</a>
-                    <a href="#" class="pink-badge">6.C Contenidos digitales</a>
-                    <a href="#" class="pink-badge" style="grid-column: span 1.5;">6.D Uso responsable</a>
-                    <a href="#" class="pink-badge" style="grid-column: span 1.5;">6.E Resolución de problemas</a>
+                    <!-- Ajusta aquí según la entrega a la que pertenezcan (ej. Entrega 6) -->
+                    <a href="./5_evidencia_alumnado/6A.html" class="pink-badge" data-entrega="5">6.A Búsquedas</a>
+                    <a href="./5_evidencia_alumnado/6B.html" class="pink-badge" data-entrega="5">6.B Normas de conducta</a>
+                    <a href="./5_evidencia_alumnado/6C.html" class="pink-badge" data-entrega="5">6.C Contenidos digitales</a>
+                    <a href="./5_evidencia_alumnado/6D.html" class="pink-badge" data-entrega="5" style="grid-column: span 1.5;">6.D Uso responsable</a>
+                    <a href="./5_evidencia_alumnado/6E.html" class="pink-badge" data-entrega="5" style="grid-column: span 1.5;">6.E Resolución de problemas</a>
                 </div>
             </div>
 
@@ -427,24 +452,55 @@
             <div class="section-box" style="padding: 10px;">
                 <div class="section-title" style="margin-bottom: 5px;">Evaluación y retroalimentación</div>
                 <div class="top-sub-badges">
-                    <a href="#" class="badge">4.B Formativa</a>
-                    <a href="#" class="badge">4.C Retroalimentación</a>
+                    <!-- Ajusta aquí el número de entrega exacto (ej. Entrega 4) -->
+                    <a href="./6_evidencia_evaluacion/4C.html" class="badge" data-entrega="6">4.B Formativa</a>
+                    <a href="./6_evidencia_evaluacion/4C.html" class="badge" data-entrega="6">4.C Retroalimentación</a>
                 </div>
             </div>
 
         </div>
 
-        <!-- BARRA LATERAL DERECHA: Leyenda -->
+        <!-- BARRA LATERAL DERECHA: Indicador entregas -->
         <div class="right-sidebar">
-            <div class="legend-item"><span>Pantallazo + texto</span> 📱</div>
-            <div class="legend-item"><span>Documento</span> 📖</div>
-            <div class="legend-item"><span>Infografía</span> 📊</div>
-            <div class="legend-item"><span>Audio</span> 📢</div>
-            <div class="legend-item"><span>Contenido</span> ✏️</div>
-            <div class="legend-item"><span>Vídeo</span> ▶️</div>
+            <div class="sidebar-title">Indicador entregas</div>
+            <button class="delivery-btn" onclick="highlightDelivery(1)">Entrega 1</button>
+            <button class="delivery-btn" onclick="highlightDelivery(2)">Entrega 2</button>
+            <button class="delivery-btn" onclick="highlightDelivery(3)">Entrega 3</button>
+            <button class="delivery-btn" onclick="highlightDelivery(4)">Entrega 4</button>
+            <button class="delivery-btn" onclick="highlightDelivery(5)">Entrega 5</button>
+            <button class="delivery-btn" onclick="highlightDelivery(6)">Entrega 6</button>
         </div>
 
     </div>
+
+    <script>
+        function highlightDelivery(deliveryNum) {
+            const buttons = document.querySelectorAll('.delivery-btn');
+            const allBadges = document.querySelectorAll('[data-entrega]');
+
+            const clickedBtn = buttons[deliveryNum - 1];
+            const isAlreadyActive = clickedBtn.classList.contains('active');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            allBadges.forEach(badge => {
+                badge.classList.remove('highlighted', 'dimmed');
+            });
+
+            if (!isAlreadyActive) {
+                clickedBtn.classList.add('active');
+
+                allBadges.forEach(badge => {
+                    // Soporta múltiples entregas separadas por coma si un elemento pertenece a varias (ej: data-entrega="2,3")
+                    const entregas = badge.getAttribute('data-entrega').split(',').map(e => e.trim());
+                    if (entregas.includes(deliveryNum.toString())) {
+                        badge.classList.add('highlighted');
+                    } else {
+                        badge.classList.add('dimmed');
+                    }
+                });
+            }
+        }
+    </script>
 
 </body>
 </html>

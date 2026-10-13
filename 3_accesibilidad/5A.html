@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.A Accesibilidad en los Contenidos</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="accesible.css">
+    <style>
+        /* Estilos específicos para la rejilla de navegación a las páginas de accesibilidad */
+        .accesibilidad-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        .accesibilidad-card {
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .accesibilidad-card h4 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .accesibilidad-card p {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-container">
+        <h1>5.A Accesibilidad y Adaptación de Contenidos</h1>
+        <div class="nav-links">
+            <a href="../index.html" class="btn btn-outline">Menú Principal</a>
+        </div>
+    </div>
+
+    <div class="content-container">
+
+        <div class="card">
+            <h2>Mejoras de Accesibilidad Implementadas en 2.A y 2.B</h2>
+            <p>Con el objetivo de garantizar una educación inclusiva y adaptada a todos los estudiantes, se han modificado los contenidos de las secciones de hardware <strong>2.A (Contenidos Básicos)</strong> y <strong>2.B (Contenidos de Profundización)</strong>, incorporando importantes mejoras de accesibilidad estructural, visual y auditiva.</p>
+
+            <!-- Botones de navegación hacia las páginas específicas de accesibilidad -->
+            <div class="accesibilidad-grid">
+                <div class="accesibilidad-card">
+                    <div>
+                        <h4>Accesibilidad en 2.A</h4>
+                        <p>Ver el informe detallado y adaptaciones aplicadas en los contenidos básicos.</p>
+                    </div>
+                    <div>
+                        <a href="2A_accesibilidad.html" class="btn">Ver 2.A Accesibilidad</a>
+                    </div>
+                </div>
+
+                <div class="accesibilidad-card">
+                    <div>
+                        <h4>Accesibilidad en 2.B</h4>
+                        <p>Ver el informe detallado y adaptaciones aplicadas en los contenidos de profundización.</p>
+                    </div>
+                    <div>
+                        <a href="2B_accesibilidad.html" class="btn">Ver 2.B Accesibilidad</a>
+                    </div>
+                </div>
+            </div>
+
+            <h3>1. Optimización Tipográfica y Textual</h3>
+            <p>En cuanto al texto, se ha aumentado el <strong>tamaño de la fuente</strong> para que los estudiantes puedan leerlo mejor. Para facilitar la lectura, se han utilizado fuentes redondeadas y sin serifa, como <strong>Arial o Verdana</strong>. Además, el margen o interlineado entre líneas se ha establecido en <strong>1,5 puntos</strong>. Para finalizar el formato del texto, los conceptos más importantes se han destacado en <strong>negrita o subrayado</strong> para hacerlos más comprensibles.</p>
+
+            <h3>2. Tratamiento Visual de Imágenes, Gráficos y Tablas</h3>
+            <p>En cuanto a los recursos visuales, las imágenes y gráficos se han diseñado utilizando <strong>colores contrastantes</strong> para que sean altamente visibles. Asimismo, se ha añadido una <strong>breve descripción informativa en la parte inferior</strong> (mediante etiquetas de leyenda) de cada elemento visual para asegurar una correcta comprensión de los conceptos técnicos expuestos.</p>
+
+            <h3>3. Lector de Texto y Audio Integrado</h3>
+            <p>Finalmente, se ha incorporado un <strong>acceso directo a un lector de texto interactivo</strong> en la parte superior de las páginas. De esta manera, si hay algún estudiante con dificultades de lectura o necesidades educativas específicas, podrá <strong>escuchar los contenidos en formato de audio</strong> en tiempo real, garantizando de forma plena la accesibilidad universal al material del aula.</p>
+        </div>
+
+        <div class="footer-nav">
+            <a href="../index.html" class="btn btn-secondary">← Volver al Menú Principal</a>
+        </div>
+
+    </div>
+
+</body>
+</html>
