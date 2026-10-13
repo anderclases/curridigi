@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Curridigi Ander</title>
     <style>
+
         :root {
             --bg-main: #ffffff;
             --orange-header: #e07a5f;
@@ -14,6 +15,14 @@
             --dark-blue: #3a86ff;
             --card-bg: #1e1e1e;
             --text-light: #ffffff;
+
+            /* Colores fijos de entregas */
+            --color-e1: #DF7F50;
+            --color-e2: #529B5B;
+            --color-e3: #1D71B8;
+            --color-e4: #00A19A;
+            --color-e5: #5B4487;
+            --color-e6: #C04765;
         }
 
         body {
@@ -34,7 +43,7 @@
 
         h1 {
             text-align: center;
-            font-size: 1.5rem;
+            font-size: 32px;
             margin-bottom: 20px;
             color: #d97757;
         }
@@ -43,17 +52,32 @@
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
-            max-width: 1200px;
+            max-width: 1050px;
             width: 100%;
             justify-content: center;
         }
 
-        /* Sidebar izquierdo (Áreas 1-6) */
+        /* Caja Ámbitos de competencia */
         .left-sidebar {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            width: 250px;
+            width: 280px;
+            background-color: #264653;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            align-self: flex-start;
+        }
+
+        .ambitos-title {
+            color: #ffffff;
+            font-weight: bold;
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 5px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
         }
 
         .sidebar-item {
@@ -61,14 +85,21 @@
             align-items: center;
             background: var(--card-bg);
             border-radius: 8px;
-            padding: 10px 12px;
-            gap: 12px;
+            padding: 8px 10px;
+            gap: 10px;
             border-left: 5px solid #e07a5f;
             color: #ffffff;
+            transition: transform 0.2s ease;
         }
 
+        .sidebar-item[data-delivery-color="1"] { border-left-color: var(--color-e1); }
+        .sidebar-item[data-delivery-color="2"] { border-left-color: var(--color-e2); }
+        .sidebar-item[data-delivery-color="3"] { border-left-color: var(--color-e3); }
+        .sidebar-item[data-delivery-color="4"] { border-left-color: var(--color-e4); }
+        .sidebar-item[data-delivery-color="5"] { border-left-color: var(--color-e5); }
+        .sidebar-item[data-delivery-color="6"] { border-left-color: var(--color-e6); }
+
         .sidebar-item .number {
-            background: #e76f51;
             color: white;
             width: 30px;
             height: 30px;
@@ -78,15 +109,37 @@
             border-radius: 50%;
             font-weight: bold;
             flex-shrink: 0;
+            cursor: pointer;
+            border: 1px solid #000000;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+            user-select: none;
         }
 
+        .sidebar-item .number:hover {
+            transform: scale(1.15);
+            filter: brightness(1.2);
+        }
+
+        .sidebar-item .number.active {
+            box-shadow: 0 0 10px #ffffff;
+            transform: scale(1.2);
+        }
+
+        /* Colores específicos fijos del número según su entrega */
+        .sidebar-item .number[data-entrega-num="1"] { background-color: var(--color-e1); }
+        .sidebar-item .number[data-entrega-num="2"] { background-color: var(--color-e2); }
+        .sidebar-item .number[data-entrega-num="3"] { background-color: var(--color-e3); }
+        .sidebar-item .number[data-entrega-num="4"] { background-color: var(--color-e4); }
+        .sidebar-item .number[data-entrega-num="5"] { background-color: var(--color-e5); }
+        .sidebar-item .number[data-entrega-num="6"] { background-color: var(--color-e6); }
+
         .sidebar-item .text {
-            font-size: 0.85rem;
+            font-size: 14px;
             flex-grow: 1;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
+            gap: 8px;
         }
 
         .play-link {
@@ -104,8 +157,8 @@
         }
 
         .play-icon {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             vertical-align: middle;
             object-fit: contain;
             flex-shrink: 0;
@@ -117,67 +170,115 @@
             border-radius: 15px;
             padding: 20px;
             flex-grow: 1;
-            max-width: 700px;
+            max-width: 680px;
             display: flex;
             flex-direction: column;
             gap: 15px;
             color: #fff;
         }
 
-        .top-header-box {
+        /* Secciones principales con anidamiento */
+        .section-1 {
             background-color: #d97757;
-            padding: 10px;
-            border-radius: 8px;
+            padding: 15px;
+            border-radius: 12px;
             text-align: center;
             font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .section-2 {
+            background-color: #264653;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .wrapper-box {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            color: #333333;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .section-3 {
+            background-color: #9b2226;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .section-4 {
+            background-color: #264653;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            color: #ffffff;
         }
 
         .top-sub-badges {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             margin-top: 5px;
             flex-wrap: wrap;
         }
 
-        /* Estilos para badges interactivos */
+        /* Estilos base para badges */
         .badge {
-            background-color: rgba(0, 0, 0, 0.2);
             padding: 5px 10px;
             border-radius: 5px;
-            font-size: 0.75rem;
+            font-size: 15px;
             color: #ffffff;
             text-decoration: none;
             display: inline-block;
+            border: 1px solid #000000;
             transition: all 0.3s ease;
         }
 
         .badge:hover {
-            background-color: rgba(0, 0, 0, 0.4);
+            filter: brightness(1.1);
             transform: translateY(-1px);
         }
 
-        .section-box {
-            background-color: #264653;
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-        }
+        /* Colores fijos permanentes por entrega */
+        .badge[data-delivery-color="1"] { background-color: var(--color-e1); }
+        .badge[data-delivery-color="2"] { background-color: var(--color-e2); }
+        .badge[data-delivery-color="3"] { background-color: var(--color-e3); }
+        .badge[data-delivery-color="4"] { background-color: var(--color-e4); }
+        .badge[data-delivery-color="5"] { background-color: var(--color-e5); }
+        .badge[data-delivery-color="6"] { background-color: var(--color-e6); }
 
         .section-title {
             font-weight: bold;
-            margin-bottom: 10px;
-            font-size: 0.95rem;
+            margin-bottom: 8px;
+            font-size: 20px;
         }
 
         .flow-box {
             background-color: #2a9d8f;
+            color: #ffffff;
             border-radius: 8px;
             padding: 10px;
-            margin: 8px 0;
             text-align: center;
             font-weight: bold;
             font-size: 0.85rem;
+            border: 1px solid #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .decision-container {
@@ -190,12 +291,14 @@
 
         .decision-node {
             background-color: #457b9d;
+            color: #ffffff;
             border-radius: 8px;
             padding: 12px;
             text-align: center;
             font-size: 0.85rem;
             flex: 1;
-            min-width: 140px;
+            min-width: 130px;
+            border: 1px solid #000000;
         }
 
         .content-nodes {
@@ -207,100 +310,35 @@
 
         .sub-content {
             background-color: #2a9d8f;
+            color: #ffffff;
             padding: 8px;
             border-radius: 6px;
-            font-size: 0.8rem;
+            font-size: 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
             gap: 5px;
+            border: 1px solid #000000;
         }
 
-        .pink-section {
-            background-color: #9b2226;
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-        }
-
-        .pink-grid {
+        .section-3-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 8px;
             margin-top: 8px;
         }
 
-        .pink-badge {
-            background-color: #ae2012;
-            padding: 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            text-align: center;
-            color: #ffffff;
-            text-decoration: none;
-            display: block;
-            transition: all 0.3s ease;
-        }
-
-        .pink-badge:hover {
-            background-color: #c92a1d;
-            transform: translateY(-1px);
-        }
-
-        /* Sidebar derecho (Indicador Entregas) */
-        .right-sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            width: 180px;
-            font-size: 0.85rem;
-        }
-
-        .sidebar-title {
-            text-align: center;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 5px;
-            font-size: 0.95rem;
-        }
-
-        .delivery-btn {
-            background: var(--card-bg);
-            color: #ffffff;
-            border: 2px solid transparent;
-            padding: 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            text-align: center;
-            font-weight: bold;
-            transition: all 0.2s ease;
-        }
-
-        .delivery-btn:hover {
-            background: #2c2c2c;
-            border-color: #e07a5f;
-        }
-
-        .delivery-btn.active {
-            background: #e07a5f;
-            color: #ffffff;
-            border-color: #ffffff;
-            box-shadow: 0 0 10px rgba(224, 122, 95, 0.5);
-        }
-
-        /* Clases de resaltado para los enlaces */
+        /* Efectos de resaltado al pulsar un número */
         .highlighted {
-            background-color: #ffb703 !important;
-            color: #000000 !important;
-            font-weight: bold;
             transform: scale(1.08);
-            box-shadow: 0 0 12px rgba(255, 183, 3, 0.9);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.9);
             z-index: 10;
+            font-weight: bold;
         }
 
         .dimmed {
-            opacity: 0.3;
+            opacity: 0.25;
         }
 
         @media (max-width: 900px) {
@@ -308,23 +346,34 @@
                 flex-direction: column;
                 align-items: center;
             }
-            .left-sidebar, .right-sidebar {
+            .left-sidebar {
                 width: 100%;
-                max-width: 700px;
+                max-width: 680px;
             }
+        }
+
+        a.badge img {
+            display: inline-flex;
+            align-items: center; /* Centra la imagen verticalmente dentro de su contenedor */
+            justify-content: center; /* Centra la imagen horizontalmente si fuera necesario */
+            height: 1em; /* Se adapta a la altura de la fuente */
+            width: auto;
+            vertical-align: middle; /* Mejora la alineación si fluye junto a texto normal */
         }
     </style>
 </head>
 <body>
 
-    <h1>Contexto Colaborativo del Equipo Docente e Itinerario de Aprendizaje</h1>
+    <h1>Curridigi B1 Ander Durán</h1>
 
     <div class="main-container">
         
-        <!-- BARRA LATERAL IZQUIERDA -->
+        <!-- CAJA ÁMBITOS DE COMPETENCIA -->
         <div class="left-sidebar">
-            <div class="sidebar-item">
-                <div class="number">1</div>
+            <div class="ambitos-title">Ámbitos de competencia</div>
+
+            <div class="sidebar-item" data-delivery-color="1">
+                <div class="number" data-entrega-num="1" onclick="highlightDelivery(1)" title="Destacar Entrega 1">1</div>
                 <div class="text">
                     <span>Compromiso profesional</span>
                     <a href="./vid/Vid1.mp4" class="play-link" title="Ir a Compromiso Profesional">
@@ -332,8 +381,9 @@
                     </a>
                 </div>
             </div>
-            <div class="sidebar-item">
-                <div class="number">2</div>
+
+            <div class="sidebar-item" data-delivery-color="2">
+                <div class="number" data-entrega-num="2" onclick="highlightDelivery(2)" title="Destacar Entrega 2">2</div>
                 <div class="text">
                     <span>Contenidos digitales</span>
                     <a href="#" class="play-link" title="Ir a Contenidos Digitales">
@@ -341,8 +391,9 @@
                     </a>
                 </div>
             </div>
-            <div class="sidebar-item">
-                <div class="number">3</div>
+
+            <div class="sidebar-item" data-delivery-color="3">
+                <div class="number" data-entrega-num="3" onclick="highlightDelivery(3)" title="Destacar Entrega 3">3</div>
                 <div class="text">
                     <span>Enseñanza y aprendizaje</span>
                     <a href="#" class="play-link" title="Ir a Enseñanza y Aprendizaje">
@@ -350,8 +401,9 @@
                     </a>
                 </div>
             </div>
-            <div class="sidebar-item">
-                <div class="number">4</div>
+
+            <div class="sidebar-item" data-delivery-color="4">
+                <div class="number" data-entrega-num="4" onclick="highlightDelivery(4)" title="Destacar Entrega 4">4</div>
                 <div class="text">
                     <span>Evaluación y retroalimentación</span>
                     <a href="#" class="play-link" title="Ir a Evaluación y Retroalimentación">
@@ -359,8 +411,9 @@
                     </a>
                 </div>
             </div>
-            <div class="sidebar-item">
-                <div class="number">5</div>
+
+            <div class="sidebar-item" data-delivery-color="5">
+                <div class="number" data-entrega-num="5" onclick="highlightDelivery(5)" title="Destacar Entrega 5">5</div>
                 <div class="text">
                     <span>Empoderamiento del alumnado</span>
                     <a href="#" class="play-link" title="Ir a Empoderamiento del Alumnado">
@@ -368,8 +421,9 @@
                     </a>
                 </div>
             </div>
-            <div class="sidebar-item">
-                <div class="number">6</div>
+
+            <div class="sidebar-item" data-delivery-color="6">
+                <div class="number" data-entrega-num="6" onclick="highlightDelivery(6)" title="Destacar Entrega 6">6</div>
                 <div class="text">
                     <span>Desarrollo de la competencia digital del alumnado</span>
                     <a href="#" class="play-link" title="Ir a Competencia Digital">
@@ -382,115 +436,104 @@
         <!-- CONTENEDOR CENTRAL / DIAGRAMA -->
         <div class="diagram-container">
             
-            <!-- Cabecera -->
-            <div class="top-header-box">
-                Contexto colaborativo del equipo docente
-                <div class="top-sub-badges">
-                    <!-- Ejemplo: 1A, 1B, 1C vinculados a la Entrega 1 -->
-                    <a href="./1_colab_docente/1A.html" class="badge" data-entrega="1">1.A Comunicación</a>
-                    <a href="./1_colab_docente/1B.html" class="badge" data-entrega="1">1.B Trabajo en equipo</a>
-                    <a href="./1_colab_docente/1C.html" class="badge" data-entrega="1">1.C Netiqueta</a>
-                </div>
-            </div>
-
-            <!-- Bloque Enseñanza y Aprendizaje -->
-            <div class="section-box">
-                <div class="section-title">Enseñanza y aprendizaje</div>
-                <div class="top-sub-badges" style="margin-bottom: 10px;">
-                    <!-- Ajusta aquí el número de entrega exacto (ej. Entrega 3) -->
-                    <a href="./4_colab_alumnado/3A.html" class="badge" data-entrega="4">3.A Contexto colab. del alumnado</a>
-                    <a href="./4_colab_alumnado/3B.html" class="badge" data-entrega="4">3.B Recursos</a>
-                </div>
-                
-                <div class="flow-box">
-                    Evaluación previa sobre un tema 
-                    <!-- 4.A está asignado explícitamente a la Entrega 2 -->
-                    <a href="./2_contenidos_digitales/4A.html" class="badge" data-entrega="2">4.A Evaluación</a>
-                </div>
-
-                <div class="decision-container" style="margin-top: 10px;">
-                    <div class="decision-node">
-                        ¿Tiene el conocimiento básico?
+            <!-- Sección 1: Contexto Colaborativo -->
+            <div class="section-1">
+                <div>
+                    <div class="section-title"> Contexto colaborativo del equipo docente </div>
+                    
+                    <div class="top-sub-badges">
+                        <a href="./1_colab_docente/1A.html" class="badge" data-entrega="1" data-delivery-color="1">1.A Comunicación <img src="./img/pant_text.png" alt="Icono documento"></a>
+                        <a href="./1_colab_docente/1B.html" class="badge" data-entrega="1" data-delivery-color="1">1.B Trabajo en equipo <img src="./img/pant_text.png" alt="Icono documento"></a>
+                        <a href="./1_colab_docente/1C.html" class="badge" data-entrega="1" data-delivery-color="1">1.C Netiqueta <img src="./img/infografia.png" alt="Icono documento"></a>
                     </div>
-                    <div class="content-nodes">
-                        <div class="sub-content">
-                            <span>Contenido de conocimiento básico</span>
-                            <div>
-                                <a href="./2_contenidos_digitales/2A.html" class="badge" data-entrega="2">2.A Básico</a>
-                                <!-- 5.A asignado a la Entrega 3 -->
-                                <a href="./3_accesibilidad/5A.html" class="badge" data-entrega="3">5.A Accesibilidad</a>
+                </div>
+
+                <!-- Sección 2: Enseñanza y Aprendizaje (Anidada en Sección 1) -->
+                <div class="section-2">
+                    <div class="section-title">Enseñanza y aprendizaje</div>
+                    <div class="top-sub-badges">
+                        <a href="./4_colab_alumnado/3A.html" class="badge" data-entrega="3" data-delivery-color="3">3.A Contexto colab. del alumnado <img src="./img/doc.png" alt="Icono documento"></a>
+                        <a href="./4_colab_alumnado/3B.html" class="badge" data-entrega="3" data-delivery-color="3">3.B Recursos <img src="./img/doc.png" alt="Icono documento"></a>
+                    </div>
+
+                    <!-- Bloque Blanco Anidado -->
+                    <div class="wrapper-box">
+                        
+                        <div class="flow-box">
+                            <span>Evaluación previa sobre un tema</span>
+                            <a href="./2_contenidos_digitales/4A.html" class="badge" data-entrega="4" data-delivery-color="4">4.A Evaluación <img src="./img/pant_text.png" alt="Icono documento"></a>
+                        </div>
+
+                        <div class="decision-container">
+                            <div class="decision-node">
+                                ¿Tiene el conocimiento básico?
+                            </div>
+                            <div class="content-nodes">
+                                <div class="sub-content">
+                                    <span>Contenido de conocimiento básico</span>
+                                    <div>
+                                        <a href="./2_contenidos_digitales/2A.html" class="badge" data-entrega="2" data-delivery-color="2">2.A Básico <img src="./img/contenido.png" alt="Icono documento"></a>
+                                        <a href="./3_accesibilidad/5A.html" class="badge" data-entrega="5" data-delivery-color="5">5.A Accesibilidad <img src="./img/pant_text.png" alt="Icono documento"></a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <div class="sub-content">
+                            <span>Contenido de profundización</span>
+                            <div>
+                                <a href="./2_contenidos_digitales/2B.html" class="badge" data-entrega="2" data-delivery-color="2">2.B Profundización <img src="./img/contenido.png" alt="Icono documento"></a>
+                                <a href="./3_accesibilidad/5A.html" class="badge" data-entrega="5" data-delivery-color="5">5.A Accesibilidad <img src="./img/pant_text.png" alt="Icono documento"></a>
+                                <a href="./3_accesibilidad/5B.html" class="badge" data-entrega="5" data-delivery-color="5">5.B Personalización <img src="./img/pant_text.png" alt="Icono documento"></a>
+                            </div>
+                        </div>
+
+                        <!-- Sección 3: Contexto Colaborativo Alumnado (Anidada en bloque blanco) -->
+                        <div class="section-3">
+                            <div class="section-title">Contexto colaborativo del alumnado</div>
+                            <div class="section-3-grid">
+                                <a href="./5_evidencia_alumnado/6A.html" class="badge" data-entrega="6" data-delivery-color="6" style="grid-column: span 1;">6.A Búsquedas                 <img src="./img/doc.png" alt="Icono documento"></a>
+                                <a href="./5_evidencia_alumnado/6B.html" class="badge" data-entrega="6" data-delivery-color="6" style="grid-column: span 1;">6.B Normas de conducta        <img src="./img/doc.png" alt="Icono documento"></a>
+                                <a href="./5_evidencia_alumnado/6C.html" class="badge" data-entrega="6" data-delivery-color="6" style="grid-column: span 1;">6.C Contenidos digitales      <img src="./img/doc.png" alt="Icono documento"></a>
+                                <a href="./5_evidencia_alumnado/6D.html" class="badge" data-entrega="6" data-delivery-color="6" style="grid-column: span 1.5;">6.D Uso responsable         <img src="./img/doc.png" alt="Icono documento"></a>
+                                <a href="./5_evidencia_alumnado/6E.html" class="badge" data-entrega="6" data-delivery-color="6" style="grid-column: span 1.5;">6.E Resolución de problemas <img src="./img/doc.png" alt="Icono documento"></a>
+                            </div>
+                        </div>
+
+                        <!-- Sección 4: Evaluación y Retroalimentación (Anidada en bloque blanco) -->
+                        <div class="section-4">
+                            <div class="section-title" style="margin-bottom: 5px;">Evaluación y retroalimentación</div>
+                            <div class="top-sub-badges">
+                                <a href="./6_evidencia_evaluacion/4B.html" class="badge" data-entrega="4" data-delivery-color="4">4.B Formativa <img src="./img/pant_text.png" alt="Icono documento"></a>
+                                <a href="./6_evidencia_evaluacion/4C.html" class="badge" data-entrega="4" data-delivery-color="4">4.C Retroalimentación <img src="./img/pant_text.png" alt="Icono documento"></a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-
-                <div class="sub-content" style="margin-top: 8px; background-color: #2a9d8f;">
-                    <span>Contenido de profundización</span>
-                    <div>
-                        <a href="./2_contenidos_digitales/2B.html" class="badge" data-entrega="2">2.B Profundización</a>
-                        <!-- 5.A y 5.B asignados a la Entrega 3 -->
-                        <a href="./3_accesibilidad/5A.html" class="badge" data-entrega="3">5.A Accesibilidad</a>
-                        <a href="./3_accesibilidad/5B.html" class="badge" data-entrega="3">5.B Personalización</a>
-                    </div>
-                </div>
             </div>
 
-            <!-- Bloque Contexto Colaborativo del Alumnado -->
-            <div class="pink-section">
-                <div class="section-title">Contexto colaborativo del alumnado</div>
-                <div class="pink-grid">
-                    <!-- Ajusta aquí según la entrega a la que pertenezcan (ej. Entrega 6) -->
-                    <a href="./5_evidencia_alumnado/6A.html" class="pink-badge" data-entrega="5">6.A Búsquedas</a>
-                    <a href="./5_evidencia_alumnado/6B.html" class="pink-badge" data-entrega="5">6.B Normas de conducta</a>
-                    <a href="./5_evidencia_alumnado/6C.html" class="pink-badge" data-entrega="5">6.C Contenidos digitales</a>
-                    <a href="./5_evidencia_alumnado/6D.html" class="pink-badge" data-entrega="5" style="grid-column: span 1.5;">6.D Uso responsable</a>
-                    <a href="./5_evidencia_alumnado/6E.html" class="pink-badge" data-entrega="5" style="grid-column: span 1.5;">6.E Resolución de problemas</a>
-                </div>
-            </div>
-
-            <!-- Bloque Inferior Evaluación y Retroalimentación -->
-            <div class="section-box" style="padding: 10px;">
-                <div class="section-title" style="margin-bottom: 5px;">Evaluación y retroalimentación</div>
-                <div class="top-sub-badges">
-                    <!-- Ajusta aquí el número de entrega exacto (ej. Entrega 4) -->
-                    <a href="./6_evidencia_evaluacion/4C.html" class="badge" data-entrega="6">4.B Formativa</a>
-                    <a href="./6_evidencia_evaluacion/4C.html" class="badge" data-entrega="6">4.C Retroalimentación</a>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- BARRA LATERAL DERECHA: Indicador entregas -->
-        <div class="right-sidebar">
-            <div class="sidebar-title">Indicador entregas</div>
-            <button class="delivery-btn" onclick="highlightDelivery(1)">Entrega 1</button>
-            <button class="delivery-btn" onclick="highlightDelivery(2)">Entrega 2</button>
-            <button class="delivery-btn" onclick="highlightDelivery(3)">Entrega 3</button>
-            <button class="delivery-btn" onclick="highlightDelivery(4)">Entrega 4</button>
-            <button class="delivery-btn" onclick="highlightDelivery(5)">Entrega 5</button>
-            <button class="delivery-btn" onclick="highlightDelivery(6)">Entrega 6</button>
         </div>
 
     </div>
 
     <script>
         function highlightDelivery(deliveryNum) {
-            const buttons = document.querySelectorAll('.delivery-btn');
+            const numberCircles = document.querySelectorAll('.number');
             const allBadges = document.querySelectorAll('[data-entrega]');
 
-            const clickedBtn = buttons[deliveryNum - 1];
-            const isAlreadyActive = clickedBtn.classList.contains('active');
+            const clickedCircle = document.querySelector(`.number[data-entrega-num="${deliveryNum}"]`);
+            const isAlreadyActive = clickedCircle.classList.contains('active');
 
-            buttons.forEach(btn => btn.classList.remove('active'));
+            numberCircles.forEach(num => num.classList.remove('active'));
             allBadges.forEach(badge => {
                 badge.classList.remove('highlighted', 'dimmed');
             });
 
             if (!isAlreadyActive) {
-                clickedBtn.classList.add('active');
+                clickedCircle.classList.add('active');
 
                 allBadges.forEach(badge => {
-                    // Soporta múltiples entregas separadas por coma si un elemento pertenece a varias (ej: data-entrega="2,3")
                     const entregas = badge.getAttribute('data-entrega').split(',').map(e => e.trim());
                     if (entregas.includes(deliveryNum.toString())) {
                         badge.classList.add('highlighted');
