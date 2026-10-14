@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio Digital Ander</title>
     <style>
-
         :root {
             --bg-main: #ffffff;
             --orange-header: #e07a5f;
@@ -28,7 +28,7 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f6f8;
-            background-image: 
+            background-image:
                 linear-gradient(to right, rgba(42, 157, 143, 0.07) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(42, 157, 143, 0.07) 1px, transparent 1px);
             background-size: 24px 24px;
@@ -66,7 +66,7 @@
             background-color: #264653;
             padding: 15px;
             border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             align-self: flex-start;
         }
 
@@ -77,7 +77,7 @@
             font-size: 18px;
             margin-bottom: 5px;
             padding-bottom: 8px;
-            border-bottom: 2px solid rgba(255,255,255,0.2);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
         }
 
         .sidebar-item {
@@ -92,12 +92,29 @@
             transition: transform 0.2s ease;
         }
 
-        .sidebar-item[data-delivery-color="1"] { border-left-color: var(--color-e1); }
-        .sidebar-item[data-delivery-color="2"] { border-left-color: var(--color-e2); }
-        .sidebar-item[data-delivery-color="3"] { border-left-color: var(--color-e3); }
-        .sidebar-item[data-delivery-color="4"] { border-left-color: var(--color-e4); }
-        .sidebar-item[data-delivery-color="5"] { border-left-color: var(--color-e5); }
-        .sidebar-item[data-delivery-color="6"] { border-left-color: var(--color-e6); }
+        .sidebar-item[data-delivery-color="1"] {
+            border-left-color: var(--color-e1);
+        }
+
+        .sidebar-item[data-delivery-color="2"] {
+            border-left-color: var(--color-e2);
+        }
+
+        .sidebar-item[data-delivery-color="3"] {
+            border-left-color: var(--color-e3);
+        }
+
+        .sidebar-item[data-delivery-color="4"] {
+            border-left-color: var(--color-e4);
+        }
+
+        .sidebar-item[data-delivery-color="5"] {
+            border-left-color: var(--color-e5);
+        }
+
+        .sidebar-item[data-delivery-color="6"] {
+            border-left-color: var(--color-e6);
+        }
 
         .sidebar-item .number {
             color: white;
@@ -126,12 +143,29 @@
         }
 
         /* Colores específicos fijos del número según su entrega */
-        .sidebar-item .number[data-entrega-num="1"] { background-color: var(--color-e1); }
-        .sidebar-item .number[data-entrega-num="2"] { background-color: var(--color-e2); }
-        .sidebar-item .number[data-entrega-num="3"] { background-color: var(--color-e3); }
-        .sidebar-item .number[data-entrega-num="4"] { background-color: var(--color-e4); }
-        .sidebar-item .number[data-entrega-num="5"] { background-color: var(--color-e5); }
-        .sidebar-item .number[data-entrega-num="6"] { background-color: var(--color-e6); }
+        .sidebar-item .number[data-entrega-num="1"] {
+            background-color: var(--color-e1);
+        }
+
+        .sidebar-item .number[data-entrega-num="2"] {
+            background-color: var(--color-e2);
+        }
+
+        .sidebar-item .number[data-entrega-num="3"] {
+            background-color: var(--color-e3);
+        }
+
+        .sidebar-item .number[data-entrega-num="4"] {
+            background-color: var(--color-e4);
+        }
+
+        .sidebar-item .number[data-entrega-num="5"] {
+            background-color: var(--color-e5);
+        }
+
+        .sidebar-item .number[data-entrega-num="6"] {
+            background-color: var(--color-e6);
+        }
 
         .sidebar-item .text {
             font-size: 14px;
@@ -252,12 +286,29 @@
         }
 
         /* Colores fijos permanentes por entrega */
-        .badge[data-delivery-color="1"] { background-color: var(--color-e1); }
-        .badge[data-delivery-color="2"] { background-color: var(--color-e2); }
-        .badge[data-delivery-color="3"] { background-color: var(--color-e3); }
-        .badge[data-delivery-color="4"] { background-color: var(--color-e4); }
-        .badge[data-delivery-color="5"] { background-color: var(--color-e5); }
-        .badge[data-delivery-color="6"] { background-color: var(--color-e6); }
+        .badge[data-delivery-color="1"] {
+            background-color: var(--color-e1);
+        }
+
+        .badge[data-delivery-color="2"] {
+            background-color: var(--color-e2);
+        }
+
+        .badge[data-delivery-color="3"] {
+            background-color: var(--color-e3);
+        }
+
+        .badge[data-delivery-color="4"] {
+            background-color: var(--color-e4);
+        }
+
+        .badge[data-delivery-color="5"] {
+            background-color: var(--color-e5);
+        }
+
+        .badge[data-delivery-color="6"] {
+            background-color: var(--color-e6);
+        }
 
         .section-title {
             font-weight: bold;
@@ -295,10 +346,41 @@
             border-radius: 8px;
             padding: 12px;
             text-align: center;
-            font-size: 0.85rem;
+            font-size: 18px;
             flex: 1;
             min-width: 130px;
             border: 1px solid #000000;
+        }
+
+        /* Indicadores de flujo de decisión */
+        .flow-arrow-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #c1121f;
+            background-color: #fdf0ed;
+            border: 1px solid #c1121f;
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            align-self: center;
+        }
+
+        .flow-arrow-down {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: #2a9d8f;
+            background-color: #e8f5e9;
+            border: 1px solid #2a9d8f;
+            border-radius: 20px;
+            padding: 4px 14px;
+            font-size: 0.85rem;
+            width: fit-content;
+            margin: -4px auto 0 auto;
         }
 
         .content-nodes {
@@ -365,6 +447,7 @@
                 flex-direction: column;
                 align-items: center;
             }
+
             .left-sidebar {
                 width: 100%;
                 max-width: 680px;
@@ -381,18 +464,20 @@
         }
     </style>
 </head>
+
 <body>
 
     <h1>Portfolio Digital B1 Ander Durán</h1>
 
     <div class="main-container">
-        
+
         <!-- CAJA ÁMBITOS DE COMPETENCIA -->
         <div class="left-sidebar">
             <div class="ambitos-title">Ámbitos de competencia</div>
 
             <div class="sidebar-item" data-delivery-color="1">
-                <div class="number" data-entrega-num="1" onclick="highlightDelivery(1)" title="Destacar Entrega 1">1</div>
+                <div class="number" data-entrega-num="1" onclick="highlightDelivery(1)" title="Destacar Entrega 1">1
+                </div>
                 <div class="text">
                     <span>Compromiso profesional</span>
                     <a href="./vid/Vid1.mp4" class="play-link" title="Ir a Compromiso Profesional">
@@ -402,7 +487,8 @@
             </div>
 
             <div class="sidebar-item" data-delivery-color="2">
-                <div class="number" data-entrega-num="2" onclick="highlightDelivery(2)" title="Destacar Entrega 2">2</div>
+                <div class="number" data-entrega-num="2" onclick="highlightDelivery(2)" title="Destacar Entrega 2">2
+                </div>
                 <div class="text">
                     <span>Contenidos digitales</span>
                     <a href="./vid/Vid2.mp4" class="play-link" title="Ir a Contenidos Digitales">
@@ -412,7 +498,8 @@
             </div>
 
             <div class="sidebar-item" data-delivery-color="3">
-                <div class="number" data-entrega-num="3" onclick="highlightDelivery(3)" title="Destacar Entrega 3">3</div>
+                <div class="number" data-entrega-num="3" onclick="highlightDelivery(3)" title="Destacar Entrega 3">3
+                </div>
                 <div class="text">
                     <span>Enseñanza y aprendizaje</span>
                     <a href="./vid/Vid4.mp4" class="play-link" title="Ir a Enseñanza y Aprendizaje">
@@ -422,7 +509,8 @@
             </div>
 
             <div class="sidebar-item" data-delivery-color="4">
-                <div class="number" data-entrega-num="4" onclick="highlightDelivery(4)" title="Destacar Entrega 4">4</div>
+                <div class="number" data-entrega-num="4" onclick="highlightDelivery(4)" title="Destacar Entrega 4">4
+                </div>
                 <div class="text">
                     <span>Evaluación y retroalimentación</span>
                     <a href="#" class="play-link" title="Ir a Evaluación y Retroalimentación">
@@ -432,7 +520,8 @@
             </div>
 
             <div class="sidebar-item" data-delivery-color="5">
-                <div class="number" data-entrega-num="5" onclick="highlightDelivery(5)" title="Destacar Entrega 5">5</div>
+                <div class="number" data-entrega-num="5" onclick="highlightDelivery(5)" title="Destacar Entrega 5">5
+                </div>
                 <div class="text">
                     <span>Empoderamiento del alumnado</span>
                     <a href="./vid/Vid3.mp4" class="play-link" title="Ir a Empoderamiento del Alumnado">
@@ -442,7 +531,8 @@
             </div>
 
             <div class="sidebar-item" data-delivery-color="6">
-                <div class="number" data-entrega-num="6" onclick="highlightDelivery(6)" title="Destacar Entrega 6">6</div>
+                <div class="number" data-entrega-num="6" onclick="highlightDelivery(6)" title="Destacar Entrega 6">6
+                </div>
                 <div class="text">
                     <span>Desarrollo de la competencia digital del alumnado</span>
                     <a href="#" class="play-link" title="Ir a Competencia Digital">
@@ -454,16 +544,19 @@
 
         <!-- CONTENEDOR CENTRAL / DIAGRAMA -->
         <div class="diagram-container">
-            
+
             <!-- Sección 1: Contexto Colaborativo -->
             <div class="section-1">
                 <div>
                     <div class="section-title"> Contexto colaborativo del equipo docente </div>
-                    
+
                     <div class="top-sub-badges">
-                        <a href="./1_colab_docente/1A.html" class="badge" data-entrega="1" data-delivery-color="1">1.A Comunicación <img src="./img/pant_text.png" alt="Recurso Icon"></a>
-                        <a href="./1_colab_docente/1B.html" class="badge" data-entrega="1" data-delivery-color="1">1.B Trabajo en equipo <img src="./img/pant_text.png" alt="Recurso Icon"></a>
-                        <a href="./1_colab_docente/1C.html" class="badge" data-entrega="1" data-delivery-color="1">1.C Netiqueta <img src="./img/infografia.png" alt="Recurso Icon"></a>
+                        <a href="./1_colab_docente/1A.html" class="badge" data-entrega="1" data-delivery-color="1">1.A
+                            Comunicación <img src="./img/pant_text.png" alt="Recurso Icon"></a>
+                        <a href="./1_colab_docente/1B.html" class="badge" data-entrega="1" data-delivery-color="1">1.B
+                            Trabajo en equipo <img src="./img/pant_text.png" alt="Recurso Icon"></a>
+                        <a href="./1_colab_docente/1C.html" class="badge" data-entrega="1" data-delivery-color="1">1.C
+                            Netiqueta <img src="./img/infografia.png" alt="Recurso Icon"></a>
                     </div>
                 </div>
 
@@ -471,16 +564,20 @@
                 <div class="section-2">
                     <div class="section-title">Enseñanza y aprendizaje</div>
                     <div class="top-sub-badges">
-                        <a href="./4_colab_alumnado/3A.html" class="badge" data-entrega="3" data-delivery-color="3">3.A Contexto colab. del alumnado <img src="./img/doc.png" alt="Recurso Icon"></a>
-                        <a href="./4_colab_alumnado/3B.html" class="badge" data-entrega="3" data-delivery-color="3">3.B Recursos <img src="./img/doc.png" alt="Recurso Icon"></a>
+                        <a href="./4_colab_alumnado/3A.html" class="badge" data-entrega="3" data-delivery-color="3">3.A
+                            Contexto colab. del alumnado <img src="./img/doc.png" alt="Recurso Icon"></a>
+                        <a href="./4_colab_alumnado/3B.html" class="badge" data-entrega="3" data-delivery-color="3">3.B
+                            Recursos <img src="./img/doc.png" alt="Recurso Icon"></a>
                     </div>
 
                     <!-- Bloque Blanco Anidado -->
                     <div class="wrapper-box">
-                        
+
                         <div class="flow-box">
                             <span>Evaluación previa sobre un tema</span>
-                            <a href="./2_contenidos_digitales/4A.html" class="badge" data-entrega="2" data-delivery-color="4">4.A Evaluación <img src="./img/pant_text.png" alt="Recurso Icon"></a>
+                            <a href="./2_contenidos_digitales/4A.html" class="badge" data-entrega="2"
+                                data-delivery-color="4">4.A Evaluación <img src="./img/pant_text.png"
+                                    alt="Recurso Icon"></a>
                         </div>
 
                         <div class="decision-container">
@@ -489,21 +586,31 @@
                             </div>
                             <div class="content-nodes">
                                 <div class="sub-content">
-                                    <span>Contenido de conocimiento básico</span>
+                                    <span><u><b>NO:</b></u> Contenido de conocimiento básico</span>
                                     <div>
-                                        <a href="./2_contenidos_digitales/2A.html" class="badge" data-entrega="2" data-delivery-color="2">2.A Básico <img src="./img/contenido.png" alt="Recurso Icon"></a>
-                                        <a href="./3_accesibilidad/5A.html" class="badge" data-entrega="5" data-delivery-color="5">5.A Accesibilidad <img src="./img/pant_text.png" alt="Recurso Icon"></a>
+                                        <a href="./2_contenidos_digitales/2A.html" class="badge" data-entrega="2"
+                                            data-delivery-color="2">2.A Básico <img src="./img/contenido.png"
+                                                alt="Recurso Icon"></a>
+                                        <a href="./3_accesibilidad/5A.html" class="badge" data-entrega="5"
+                                            data-delivery-color="5">5.A Accesibilidad <img src="./img/pant_text.png"
+                                                alt="Recurso Icon"></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="sub-content">
-                            <span>Contenido de profundización</span>
+                            <span><u><b>SI:</b></u> Contenido de profundización</span>
                             <div>
-                                <a href="./2_contenidos_digitales/2B.html" class="badge" data-entrega="2" data-delivery-color="2">2.B Profundización <img src="./img/contenido.png" alt="Recurso Icon"></a>
-                                <a href="./3_accesibilidad/5A.html" class="badge" data-entrega="5" data-delivery-color="5">5.A Accesibilidad <img src="./img/pant_text.png" alt="Recurso Icon"></a>
-                                <a href="./3_accesibilidad/5B.html" class="badge" data-entrega="5" data-delivery-color="5">5.B Personalización <img src="./img/pant_text.png" alt="Recurso Icon"></a>
+                                <a href="./2_contenidos_digitales/2B.html" class="badge" data-entrega="2"
+                                    data-delivery-color="2">2.B Profundización <img src="./img/contenido.png"
+                                        alt="Recurso Icon"></a>
+                                <a href="./3_accesibilidad/5A.html" class="badge" data-entrega="5"
+                                    data-delivery-color="5">5.A Accesibilidad <img src="./img/pant_text.png"
+                                        alt="Recurso Icon"></a>
+                                <a href="./3_accesibilidad/5B.html" class="badge" data-entrega="5"
+                                    data-delivery-color="5">5.B Personalización <img src="./img/pant_text.png"
+                                        alt="Recurso Icon"></a>
                             </div>
                         </div>
 
@@ -511,11 +618,21 @@
                         <div class="section-3">
                             <div class="section-title">Contexto colaborativo del alumnado</div>
                             <div class="section-3-grid">
-                                <a href="./5_evidencia_alumnado/6A.html" class="badge" data-entrega="6" data-delivery-color="6" style="grid-column: span 1;">6.A Búsquedas                 <img src="./img/doc.png" alt="Recurso Icon"></a>
-                                <a href="./5_evidencia_alumnado/6B.html" class="badge" data-entrega="6" data-delivery-color="6" style="grid-column: span 1;">6.B Normas de conducta        <img src="./img/doc.png" alt="Recurso Icon"></a>
-                                <a href="./5_evidencia_alumnado/6C.html" class="badge" data-entrega="6" data-delivery-color="6" style="grid-column: span 1;">6.C Contenidos digitales      <img src="./img/doc.png" alt="Recurso Icon"></a>
-                                <a href="./5_evidencia_alumnado/6D.html" class="badge" data-entrega="6" data-delivery-color="6" style="grid-column: span 1.5;">6.D Uso responsable         <img src="./img/doc.png" alt="Recurso Icon"></a>
-                                <a href="./5_evidencia_alumnado/6E.html" class="badge" data-entrega="6" data-delivery-color="6" style="grid-column: span 1.5;">6.E Resolución de problemas <img src="./img/doc.png" alt="Recurso Icon"></a>
+                                <a href="./5_evidencia_alumnado/6A.html" class="badge" data-entrega="6"
+                                    data-delivery-color="6" style="grid-column: span 1;">6.A Búsquedas <img
+                                        src="./img/doc.png" alt="Recurso Icon"></a>
+                                <a href="./5_evidencia_alumnado/6B.html" class="badge" data-entrega="6"
+                                    data-delivery-color="6" style="grid-column: span 1;">6.B Normas de conducta <img
+                                        src="./img/doc.png" alt="Recurso Icon"></a>
+                                <a href="./5_evidencia_alumnado/6C.html" class="badge" data-entrega="6"
+                                    data-delivery-color="6" style="grid-column: span 1;">6.C Contenidos digitales <img
+                                        src="./img/doc.png" alt="Recurso Icon"></a>
+                                <a href="./5_evidencia_alumnado/6D.html" class="badge" data-entrega="6"
+                                    data-delivery-color="6" style="grid-column: span 1.5;">6.D Uso responsable <img
+                                        src="./img/doc.png" alt="Recurso Icon"></a>
+                                <a href="./5_evidencia_alumnado/6E.html" class="badge" data-entrega="6"
+                                    data-delivery-color="6" style="grid-column: span 1.5;">6.E Resolución de problemas
+                                    <img src="./img/doc.png" alt="Recurso Icon"></a>
                             </div>
                         </div>
 
@@ -523,8 +640,12 @@
                         <div class="section-4">
                             <div class="section-title" style="margin-bottom: 5px;">Evaluación y retroalimentación</div>
                             <div class="top-sub-badges">
-                                <a href="./6_evidencia_evaluacion/4B.html" class="badge" data-entrega="4" data-delivery-color="4">4.B Formativa <img src="./img/pant_text.png" alt="Recurso Icon"></a>
-                                <a href="./6_evidencia_evaluacion/4C.html" class="badge" data-entrega="4" data-delivery-color="4">4.C Retroalimentación <img src="./img/pant_text.png" alt="Recurso Icon"></a>
+                                <a href="./6_evidencia_evaluacion/4B.html" class="badge" data-entrega="4"
+                                    data-delivery-color="4">4.B Formativa <img src="./img/pant_text.png"
+                                        alt="Recurso Icon"></a>
+                                <a href="./6_evidencia_evaluacion/4C.html" class="badge" data-entrega="4"
+                                    data-delivery-color="4">4.C Retroalimentación <img src="./img/pant_text.png"
+                                        alt="Recurso Icon"></a>
                             </div>
                         </div>
 
@@ -572,4 +693,5 @@
     <script src="./js/footer.js"></script>
 
 </body>
+
 </html>
