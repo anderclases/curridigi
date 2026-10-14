@@ -341,6 +341,25 @@
             opacity: 0.25;
         }
 
+        /* Estilo para el enlace inferior añadido */
+        .footer-info-link {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .footer-info-link a {
+            color: #2a9d8f;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: color 0.2s ease, text-decoration 0.2s ease;
+        }
+
+        .footer-info-link a:hover {
+            color: #d97757;
+            text-decoration: underline;
+        }
+
         @media (max-width: 900px) {
             .main-container {
                 flex-direction: column;
@@ -354,11 +373,11 @@
 
         a.badge img {
             display: inline-flex;
-            align-items: center; /* Centra la imagen verticalmente dentro de su contenedor */
-            justify-content: center; /* Centra la imagen horizontalmente si fuera necesario */
-            height: 1em; /* Se adapta a la altura de la fuente */
+            align-items: center;
+            justify-content: center;
+            height: 1em;
             width: auto;
-            vertical-align: middle; /* Mejora la alineación si fluye junto a texto normal */
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -515,6 +534,11 @@
 
         </div>
 
+    </div>
+
+    <!-- Enlace añadido en la parte inferior -->
+    <div class="footer-info-link">
+        <a href="./info.html">Sobre el contenido</a>
     </div>
 
     <script>
