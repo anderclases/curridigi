@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.B Contenidos de Profundización en Hardware</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        tech: {
+                            dark: '#0f172a',
+                            cardDark: '#1e293b',
+                            accent: '#6366f1',
+                            teal: '#14b8a6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Estilos para la caja de enunciado original */
+        .enunciado-ejercicio {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        .dark .enunciado-ejercicio {
+            background-color: #1e293b;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+        .enunciado-ejercicio h3 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #0f172a;
+        }
+        .dark .enunciado-ejercicio h3 {
+            color: #ffffff;
+        }
+        .enunciado-ejercicio p {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+        .enunciado-ejercicio ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .enunciado-ejercicio li {
+            margin-bottom: 0.35rem;
+        }
+        .nota-enunciado {
+            font-size: 0.9rem;
+            color: #666;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 4px;
+            border-left: 3px solid #6c757d;
+            margin: 15px 0;
+        }
+        .indicadores-logro {
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .dark .indicadores-logro {
+            border-top-color: #334155;
+        }
+        .indicadores-logro p {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Perspective and 3D card flip effects for Flashcards */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        /* Video container aspect ratio */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.75rem;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col">
+
+    <!-- BARRA DE PROGRESO DE LECTURA TOP -->
+    <div class="fixed top-0 left-0 w-full h-1.5 bg-slate-200 dark:bg-slate-800 z-50">
+        <div id="readingProgress" class="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 w-0 transition-all duration-150"></div>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN PRINCIPAL -->
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-4">
+            
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-indigo-600 text-white rounded-xl shadow-md">
+                    <i class="fa-solid fa-microchip text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Unidad 2.B</span>
+                    <h1 class="text-lg sm:text-xl font-bold leading-tight">Profundización en Hardware</h1>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <!-- Selector Modo Oscuro / Claro -->
+                <button id="themeToggleBtn" onclick="toggleDarkMode()" aria-label="Cambiar tema"
+                    class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-all">
+                    <i id="themeIcon" class="fa-solid fa-moon"></i>
+                </button>
+
+                <!-- Enlaces de navegación -->
+                <a href="2A.html" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-medium rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span class="hidden sm:inline">Anterior:</span> 2.A
+                </a>
+                <a href="../index.html" class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-md transition">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Menú Principal</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+        <!-- CAJA DE ENUNCIADO DE PROFUNDIZACIÓN -->
+        <div class="enunciado-ejercicio">
+            <h3>📌 Enunciado del Ejercicio de Profundización</h3>
+            <p>Cuando el alumnado tenga los conocimientos básicos sobre el tema que has propuesto, es el momento de
+                profundizar en él. Por eso, debes crear un contenido digital para poder profundizar en los
+                conocimientos sobre el tema.</p>
+
+            <p><strong>¿Cómo evidenciar?</strong></p>
+            <ul>
+                <li>Crea e integra en el portfolio un contenido digital.</li>
+            </ul>
+
+            <p class="nota-enunciado"><em>Nota: si creas un contenido digital de audio y/o vídeo, para evitar
+                    problemas de autoría, es necesario que consten tu locución y/o tu propia imagen.</em></p>
+
+            <div class="indicadores-logro">
+                <p><strong>Indicadores de logro:</strong></p>
+                <ul>
+                    <li>El contenido digital generado tiene un objetivo de aprendizaje determinado y sirve para
+                        profundizar en los conocimientos sobre el tema propuesto.</li>
+                    <li>El contenido digital generado es un contenido digital enriquecedor (multimedia, con
+                        elementos interactivos, etc.) y tiene un formato diferente del contenido creado para la
+                        adquisición de conocimientos básicos.</li>
+                    <li>El contenido digital generado ha sido debidamente licenciado, definiendo la autoría y los
+                        derechos de uso e indicando lo necesario en caso de derivarse de contenidos de terceros.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- FIN DEL ENUNCIADO -->
+
+        <!-- SECCIÓN DE ANÁLISIS TÉCNICO Y VÍDEO GENERAL -->
+        <section class="bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200/80 dark:border-slate-700/80 space-y-6">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap text-indigo-500"></i>
+                    Análisis Técnico Avanzado de Componentes
+                </h2>
+                <p class="mt-2 text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                    Esta sección amplía los conceptos básicos y proporciona documentación técnica, enlaces a Wikipedia, fuentes de información especializadas y recursos audiovisuales para seleccionar los componentes adecuados en el presupuesto.
+                </p>
+            </div>
+
+            <!-- Vídeo General Explicativo -->
+            <div class="bg-slate-50 dark:bg-slate-900/60 p-4 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-semibold text-slate-800 dark:text-slate-200 text-base sm:text-lg flex items-center gap-2">
+                        <i class="fa-brands fa-youtube text-red-500"></i>
+                        Vídeo General: Explicación de cada uno de los componentes
+                    </h3>
+                    <span class="text-xs bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300 px-2.5 py-1 rounded-md font-medium">
+                        Visión Global
+                    </span>
+                </div>
+                <div class="video-container shadow-md rounded-xl">
+                    <iframe src="https://www.youtube.com/embed/0zkX6nlpiSk" title="Vídeo explicativo de componentes" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPLORADOR INTERACTIVO DE LOS 6 COMPONENTES -->
+        <section id="componentExplorer" class="space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-cubes text-indigo-500"></i>
+                        Componentes Hardware de Profundización
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Selecciona un componente o explora todas las fichas interactivas:</p>
+                </div>
+
+                <!-- Botones selector de pestaña de componentes -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-thin">
+                    <button onclick="filterComponent('all')" id="tab-btn-all" class="comp-tab-btn active-tab px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl transition whitespace-nowrap bg-indigo-600 text-white shadow-sm">
+                        Todos
+                    </button>
+                    <button onclick="filterComponent('cpu')" id="tab-btn-cpu" class="comp-tab-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl transition whitespace-nowrap bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                        1. CPU
+                    </button>
+                    <button onclick="filterComponent('motherboard')" id="tab-btn-motherboard" class="comp-tab-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl transition whitespace-nowrap bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                        2. Placa Base
+                    </button>
+                    <button onclick="filterComponent('ram')" id="tab-btn-ram" class="comp-tab-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl transition whitespace-nowrap bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                        3. RAM
+                    </button>
+                    <button onclick="filterComponent('storage')" id="tab-btn-storage" class="comp-tab-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl transition whitespace-nowrap bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                        4. Almacenamiento
+                    </button>
+                    <button onclick="filterComponent('psu')" id="tab-btn-psu" class="comp-tab-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl transition whitespace-nowrap bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                        5. Fuente
+                    </button>
+                    <button onclick="filterComponent('gpu')" id="tab-btn-gpu" class="comp-tab-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl transition whitespace-nowrap bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                        6. GPU
+                    </button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 gap-8">
+
+                <!-- 1. PROCESADOR (CPU) -->
+                <article id="comp-cpu" class="comp-card bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200 dark:border-slate-700 transition">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-6 gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 font-extrabold flex items-center justify-center text-lg">1</span>
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Procesador (CPU) – Núcleos, Hilos y Arquitectura</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Unidad Central de Procesamiento y cálculo informático</p>
+                            </div>
+                        </div>
+                        <!-- Subtabs -->
+                        <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl self-start md:self-auto">
+                            <button onclick="switchSubTab('cpu', 'theory')" id="subbtn-cpu-theory" class="subtab-btn active-subtab px-3 py-1.5 text-xs font-medium rounded-lg text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow-sm">📖 Teoría</button>
+                            <button onclick="switchSubTab('cpu', 'resources')" id="subbtn-cpu-resources" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📚 Recursos</button>
+                        </div>
+                    </div>
+
+                    <!-- Subtab Content: Teoría -->
+                    <div id="subtab-cpu-theory" class="subtab-content space-y-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                            <div class="lg:col-span-2 space-y-4">
+                                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                                    El rendimiento de una CPU no depende únicamente de su frecuencia de reloj (GHz), sino de la cantidad de núcleos físicos, hilos de ejecución mediante multithreading (Hyper-Threading / SMT) y el tamaño y velocidad de la memoria caché (L1, L2 y L3). Al presupuestar ordenadores, es crucial evaluar la compatibilidad del zócalo (socket) con la placa base y el conjunto de instrucciones de la arquitectura x86_64.
+                                </p>
+                                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+                                    <div class="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-700">
+                                        <span class="block text-slate-400">Socket</span>
+                                        <strong class="text-slate-800 dark:text-slate-200 text-sm">LGA 1700 / AM5</strong>
+                                    </div>
+                                    <div class="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-700">
+                                        <span class="block text-slate-400">Multithreading</span>
+                                        <strong class="text-slate-800 dark:text-slate-200 text-sm">Hyper-Threading / SMT</strong>
+                                    </div>
+                                    <div class="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-700 col-span-2 sm:col-span-1">
+                                        <span class="block text-slate-400">Jerarquía Caché</span>
+                                        <strong class="text-slate-800 dark:text-slate-200 text-sm">L1, L2, L3 (3D V-Cache)</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-1 flex justify-center">
+                                <img src="./img/CPU.png" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/38bdf8?text=CPU+Arquitectura+y+Socket';" alt="Procesador CPU y arquitectura interna" class="rounded-xl shadow-md border border-slate-200 dark:border-slate-700 max-h-56 object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subtab Content: Recursos -->
+                    <div id="subtab-cpu-resources" class="subtab-content hidden space-y-4">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Fuentes de información y documentación técnica:</h4>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="https://es.wikipedia.org/wiki/Unidad_central_de_procesamiento" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-brands fa-wikipedia-w"></i> Wikipedia: Unidad Central de Procesamiento (CPU)</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.intel.es/content/www/es/es/architecture-and-technology/cpu-architecture.html" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-solid fa-microchip"></i> Intel: Arquitectura y tecnología de procesadores</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.amd.com/es/technologies/zen-architecture" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-solid fa-bolt"></i> AMD: Arquitectura de procesadores Zen</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- 2. PLACA BASE -->
+                <article id="comp-motherboard" class="comp-card bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200 dark:border-slate-700 transition">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-6 gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 font-extrabold flex items-center justify-center text-lg">2</span>
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Placa Base – Chipset, Factores de Forma y Buses</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Interconexión de periféricos, PCIe y suministro eléctrico</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl self-start md:self-auto">
+                            <button onclick="switchSubTab('motherboard', 'theory')" id="subbtn-motherboard-theory" class="subtab-btn active-subtab px-3 py-1.5 text-xs font-medium rounded-lg text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow-sm">📖 Teoría</button>
+                            <button onclick="switchSubTab('motherboard', 'video')" id="subbtn-motherboard-video" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📹 Vídeo</button>
+                            <button onclick="switchSubTab('motherboard', 'resources')" id="subbtn-motherboard-resources" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📚 Recursos</button>
+                        </div>
+                    </div>
+
+                    <!-- Teoría -->
+                    <div id="subtab-motherboard-theory" class="subtab-content space-y-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                            <div class="lg:col-span-2 space-y-4">
+                                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                                    La placa base centraliza la comunicación entre los componentes. Su chipset (por ejemplo, familias B-Series o Z-Series) determina las posibilidades de overclocking, número de carriles PCIe y puertos de expansión. Además, define el factor de forma (ATX, Micro-ATX, Mini-ITX) que condicionará el chasis o caja a elegir, así como la cantidad de conectores M.2 NVMe y puertos E/S traseros.
+                                </p>
+                            </div>
+                            <div class="lg:col-span-1 flex justify-center">
+                                <img src="./img/placa_base.png" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/a855f7?text=Placa+Base+y+Chipset';" alt="Placa base con zócalo, ranuras RAM y buses PCIe" class="rounded-xl shadow-md border border-slate-200 dark:border-slate-700 max-h-56 object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vídeo -->
+                    <div id="subtab-motherboard-video" class="subtab-content hidden space-y-3">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Vídeo explicativo: Placa Base</h4>
+                        <div class="video-container max-w-3xl mx-auto rounded-xl">
+                            <iframe src="https://www.youtube.com/embed/1RQ8OmZfk8s" title="Placa base" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <!-- Recursos -->
+                    <div id="subtab-motherboard-resources" class="subtab-content hidden space-y-4">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Fuentes de información y documentación:</h4>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="https://es.wikipedia.org/wiki/Placa_base" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-brands fa-wikipedia-w"></i> Wikipedia: Placa Base (Tarjeta Madre)</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.tomshardware.com/topics/motherboards" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-solid fa-newspaper"></i> Tom's Hardware: Guías y análisis de placas base</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- 3. MEMORIA RAM -->
+                <article id="comp-ram" class="comp-card bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200 dark:border-slate-700 transition">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-6 gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300 font-extrabold flex items-center justify-center text-lg">3</span>
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Memoria RAM – DDR4 vs DDR5, Frecuencias y Latencia (CL)</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Memoria principal de acceso aleatorio y ancho de banda</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl self-start md:self-auto">
+                            <button onclick="switchSubTab('ram', 'theory')" id="subbtn-ram-theory" class="subtab-btn active-subtab px-3 py-1.5 text-xs font-medium rounded-lg text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow-sm">📖 Teoría</button>
+                            <button onclick="switchSubTab('ram', 'video')" id="subbtn-ram-video" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📹 Vídeo</button>
+                            <button onclick="switchSubTab('ram', 'resources')" id="subbtn-ram-resources" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📚 Recursos</button>
+                        </div>
+                    </div>
+
+                    <div id="subtab-ram-theory" class="subtab-content space-y-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                            <div class="lg:col-span-2 space-y-4">
+                                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                                    La velocidad de transferencia de la memoria RAM depende de la generación tecnológica (DDR4 vs DDR5), la frecuencia de trabajo (medida en MHz o MT/s) y la latencia CAS (CL). Configurar los módulos en arquitectura <em>Dual-Channel</em> dobla el ancho de banda efectivo del bus de datos frente a un único módulo de memoria.
+                                </p>
+                            </div>
+                            <div class="lg:col-span-1 flex justify-center">
+                                <img src="./img/RAM.png" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/10b981?text=Memoria+RAM+DDR4+vs+DDR5';" alt="Módulos de memoria RAM DDR4 y DDR5" class="rounded-xl shadow-md border border-slate-200 dark:border-slate-700 max-h-56 object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="subtab-ram-video" class="subtab-content hidden space-y-3">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Vídeo explicativo: Memoria RAM</h4>
+                        <div class="video-container max-w-3xl mx-auto rounded-xl">
+                            <iframe src="https://www.youtube.com/embed/_abAWnq0Gs8" title="Memoria RAM" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div id="subtab-ram-resources" class="subtab-content hidden space-y-4">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Fuentes de información y documentación:</h4>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="https://es.wikipedia.org/wiki/Memoria_de_acceso_aleatorio" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-brands fa-wikipedia-w"></i> Wikipedia: Memoria de Acceso Aleatorio (RAM)</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.kingston.com/es/memory/ddr5" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-solid fa-memory"></i> Kingston: Información técnica sobre tecnología DDR5</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- 4. ALMACENAMIENTO -->
+                <article id="comp-storage" class="comp-card bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200 dark:border-slate-700 transition">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-6 gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300 font-extrabold flex items-center justify-center text-lg">4</span>
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Almacenamiento – SSD NVMe PCIe vs SATA y HDD</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Velocidades de lectura/escritura e interfaces de almacenamiento</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl self-start md:self-auto">
+                            <button onclick="switchSubTab('storage', 'theory')" id="subbtn-storage-theory" class="subtab-btn active-subtab px-3 py-1.5 text-xs font-medium rounded-lg text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow-sm">📖 Teoría</button>
+                            <button onclick="switchSubTab('storage', 'video')" id="subbtn-storage-video" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📹 Vídeo</button>
+                            <button onclick="switchSubTab('storage', 'resources')" id="subbtn-storage-resources" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📚 Recursos</button>
+                        </div>
+                    </div>
+
+                    <div id="subtab-storage-theory" class="subtab-content space-y-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                            <div class="lg:col-span-2 space-y-4">
+                                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                                    Mientras que los discos duros mecánicos (HDD) transfieren datos a velocidades cercanas a 150 MB/s, las unidades de estado sólido (SSD) con interfaz SATA alcanzan hasta 550 MB/s. Las unidades M.2 NVMe sobre bus PCIe 4.0/5.0 pueden superar los 7000 MB/s gracias a la eliminación del cuello de botella de los protocolos heredados de almacenamiento.
+                                </p>
+                            </div>
+                            <div class="lg:col-span-1 flex justify-center">
+                                <img src="./img/HDD-vs-SDD.png" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/f59e0b?text=SSD+M.2+NVMe+vs+HDD';" alt="Unidades de almacenamiento SSD M.2 NVMe y HDD" class="rounded-xl shadow-md border border-slate-200 dark:border-slate-700 max-h-56 object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="subtab-storage-video" class="subtab-content hidden space-y-3">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Vídeo explicativo: SSD</h4>
+                        <div class="video-container max-w-3xl mx-auto rounded-xl">
+                            <iframe src="https://www.youtube.com/embed/NyvXV45I2VI" title="SSD" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div id="subtab-storage-resources" class="subtab-content hidden space-y-4">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Fuentes de información y documentación:</h4>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="https://es.wikipedia.org/wiki/Unidad_de_estado_s%C3%B3lido" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-brands fa-wikipedia-w"></i> Wikipedia: Unidad de Estado Sólido (SSD)</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.crucial.es/articles/about-ssd" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-solid fa-hard-drive"></i> Crucial: Guías y artículos sobre tecnología SSD y NVMe</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- 5. FUENTE DE ALIMENTACIÓN -->
+                <article id="comp-psu" class="comp-card bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200 dark:border-slate-700 transition">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-6 gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 dark:bg-rose-900/50 dark:text-rose-300 font-extrabold flex items-center justify-center text-lg">5</span>
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Fuente de Alimentación – Eficiencia 80 PLUS y Raíles de +12V</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Eficiencia energética, protecciones y distribución de voltaje</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl self-start md:self-auto">
+                            <button onclick="switchSubTab('psu', 'theory')" id="subbtn-psu-theory" class="subtab-btn active-subtab px-3 py-1.5 text-xs font-medium rounded-lg text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow-sm">📖 Teoría</button>
+                            <button onclick="switchSubTab('psu', 'video')" id="subbtn-psu-video" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📹 Vídeo</button>
+                            <button onclick="switchSubTab('psu', 'resources')" id="subbtn-psu-resources" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📚 Recursos</button>
+                        </div>
+                    </div>
+
+                    <div id="subtab-psu-theory" class="subtab-content space-y-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                            <div class="lg:col-span-2 space-y-4">
+                                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                                    Para asegurar la estabilidad de 25 equipos en el aula, la fuente de alimentación debe ofrecer una eficiencia energética certificada (80 PLUS Bronze, Silver, Gold o Platinum) que minimice el desperdicio en forma de calor. Asimismo, debe incorporar sistemas de protección eléctrica (OVP, OPP, SCP) y entregar amperaje suficiente en el raíl de +12V para alimentar la CPU y la tarjeta gráfica.
+                                </p>
+                            </div>
+                            <div class="lg:col-span-1 flex justify-center">
+                                <img src="./img/PSU.png" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/f43f5e?text=Fuente+de+Alimentacion+80+PLUS';" alt="Fuente de alimentación con certificación de eficiencia" class="rounded-xl shadow-md border border-slate-200 dark:border-slate-700 max-h-56 object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="subtab-psu-video" class="subtab-content hidden space-y-3">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Vídeo explicativo: Fuente de Alimentación</h4>
+                        <div class="video-container max-w-3xl mx-auto rounded-xl">
+                            <iframe src="https://www.youtube.com/embed/mN9NKw9KkLA" title="Fuente de alimentación" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div id="subtab-psu-resources" class="subtab-content hidden space-y-4">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Fuentes de información y documentación:</h4>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="https://es.wikipedia.org/wiki/Fuente_de_alimentaci%C3%B3n" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-brands fa-wikipedia-w"></i> Wikipedia: Fuente de Alimentación</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.outervision.com/" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-solid fa-calculator"></i> Outervision: Herramienta de cálculo de potencia energética</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- 6. TARJETA GRÁFICA -->
+                <article id="comp-gpu" class="comp-card bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200 dark:border-slate-700 transition">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-6 gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-cyan-100 text-cyan-700 dark:bg-cyan-900/50 dark:text-cyan-300 font-extrabold flex items-center justify-center text-lg">6</span>
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Tarjeta Gráfica (GPU) – VRAM, CUDA Cores / Stream Processors</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Procesamiento paralelo, aceleración 3D y memoria VRAM</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl self-start md:self-auto">
+                            <button onclick="switchSubTab('gpu', 'theory')" id="subbtn-gpu-theory" class="subtab-btn active-subtab px-3 py-1.5 text-xs font-medium rounded-lg text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow-sm">📖 Teoría</button>
+                            <button onclick="switchSubTab('gpu', 'video')" id="subbtn-gpu-video" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📹 Vídeo</button>
+                            <button onclick="switchSubTab('gpu', 'resources')" id="subbtn-gpu-resources" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📚 Recursos</button>
+                        </div>
+                    </div>
+
+                    <div id="subtab-gpu-theory" class="subtab-content space-y-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                            <div class="lg:col-span-2 space-y-4">
+                                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                                    La GPU procesa gráficos en paralelo. Cuenta con su propia memoria VRAM dedicada (GDDR6/GDDR6X) de alto ancho de banda para alojar texturas y geometrías. Al elegir GPUs para un aula técnica, es indispensable evaluar la presencia de núcleos dedicados para procesamiento de IA, renderizado o aceleración gráfica 3D.
+                                </p>
+                            </div>
+                            <div class="lg:col-span-1 flex justify-center">
+                                <img src="./img/GPU.png" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/06b6d4?text=GPU+y+Memoria+VRAM';" alt="Tarjeta gráfica dedicada con VRAM y disipación" class="rounded-xl shadow-md border border-slate-200 dark:border-slate-700 max-h-56 object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="subtab-gpu-video" class="subtab-content hidden space-y-3">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Vídeo explicativo: Tarjeta Gráfica</h4>
+                        <div class="video-container max-w-3xl mx-auto rounded-xl">
+                            <iframe src="https://www.youtube.com/embed/-bAo0KcujBk" title="Tarjeta gráfica" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div id="subtab-gpu-resources" class="subtab-content hidden space-y-4">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Fuentes de información y documentación:</h4>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="https://es.wikipedia.org/wiki/Tarjeta_gr%C3%A1fica" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-brands fa-wikipedia-w"></i> Wikipedia: Tarjeta Gráfica (GPU)</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.techpowerup.com/gpu-specs/" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-solid fa-database"></i> TechPowerUp: Base de datos y especificaciones técnicas de GPUs</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- HERRAMIENTAS INTERACTIVAS -->
+        <section class="space-y-8 pt-4">
+
+            <!-- HERRAMIENTA 1: CALCULADORA DE FUENTE (PSU CALCULATOR) -->
+            <div class="bg-gradient-to-br from-slate-900 to-indigo-950 text-white rounded-2xl p-6 sm:p-8 shadow-2xl border border-indigo-500/30">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="p-2.5 bg-indigo-500/20 text-indigo-400 rounded-xl border border-indigo-500/40">
+                        <i class="fa-solid fa-bolt text-2xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xs uppercase font-bold tracking-wider text-indigo-400">Herramienta Práctica 1</span>
+                        <h3 class="text-xl sm:text-2xl font-extrabold">Calculadora de Potencia y Selección de PSU</h3>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    <!-- Formulario de Selección -->
+                    <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Procesador (CPU)</label>
+                            <select id="calcCpu" onchange="calculatePSU()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-500">
+                                <option value="65">Intel Core i5 / Ryzen 5 (Ofimática / Aula - ~65W)</option>
+                                <option value="125" selected>Intel Core i7 / Ryzen 7 (Avanzado - ~125W)</option>
+                                <option value="220">Intel Core i9 / Ryzen 9 (Alto Rendimiento - ~220W)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Tarjeta Gráfica (GPU)</label>
+                            <select id="calcGpu" onchange="calculatePSU()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-500">
+                                <option value="0">Gráficos Integrados (0W dedicados)</option>
+                                <option value="120">NVIDIA GTX 1650 / RTX 3050 (~120W)</option>
+                                <option value="220" selected>NVIDIA RTX 4070 / AMD RX 7700 (~220W)</option>
+                                <option value="350">NVIDIA RTX 4080 / 4090 (~350W+)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Módulos de Memoria RAM</label>
+                            <select id="calcRam" onchange="calculatePSU()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-500">
+                                <option value="10">2 Módulos DDR4/DDR5 (~10W)</option>
+                                <option value="20" selected>4 Módulos DDR4/DDR5 (~20W)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1.5">Unidades de Almacenamiento</label>
+                            <select id="calcStorage" onchange="calculatePSU()" class="w-full bg-slate-800 border border-slate-700 text-slate-200 rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-500">
+                                <option value="10">1x SSD M.2 NVMe (~10W)</option>
+                                <option value="25" selected>2x SSD M.2 NVMe + 1x HDD (~25W)</option>
+                                <option value="50">Múltiples Discos HDD + SSD (~50W)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Resultado de la calculadora -->
+                    <div class="lg:col-span-5 bg-slate-800/80 p-6 rounded-xl border border-slate-700 text-center space-y-4">
+                        <span class="text-xs font-semibold text-indigo-400 uppercase tracking-widest">Resultado del Cálculo</span>
+                        <div class="flex justify-center items-baseline gap-2">
+                            <span id="psuTotalWatt" class="text-4xl sm:text-5xl font-extrabold text-white">390</span>
+                            <span class="text-lg font-medium text-slate-400">Vatios (W) consumo max.</span>
+                        </div>
+
+                        <div class="pt-4 border-t border-slate-700 space-y-3">
+                            <p class="text-xs text-slate-300">Potencia mínima recomendada (Margen de seguridad del 25%):</p>
+                            <div id="psuRecommendedBadge" class="inline-block px-4 py-2 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 rounded-full font-bold text-lg">
+                                550 W - 600 W
+                            </div>
+                            <div class="text-xs text-slate-400 flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-certificate text-amber-400"></i>
+                                Certification Sugerida: <span id="psu80PlusCert" class="font-bold text-amber-300">80 PLUS Gold</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HERRAMIENTA 2: FLASHCARDS DE CONCEPTOS CLAVE -->
+            <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200 dark:border-slate-700 space-y-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <i class="fa-solid fa-clone text-indigo-500"></i>
+                            Herramienta 2: Tarjetas de Conceptos Clave (Flashcards)
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Haz clic en cada tarjeta para girarla y revisar la definición técnica:</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Flashcard 1 -->
+                    <div onclick="flipCard(this)" class="perspective-1000 h-48 cursor-pointer group">
+                        <div class="flashcard-inner relative w-full h-full duration-500 transform-style-3d shadow-md rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
+                            <!-- Front -->
+                            <div class="absolute inset-0 p-6 flex flex-col justify-between backface-hidden">
+                                <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase">Procesadores</span>
+                                <h4 class="text-lg font-bold text-slate-800 dark:text-slate-100 text-center my-auto">Hyper-Threading / SMT</h4>
+                                <span class="text-[10px] text-slate-400 text-right"><i class="fa-solid fa-rotate mr-1"></i> Toca para girar</span>
+                            </div>
+                            <!-- Back -->
+                            <div class="absolute inset-0 p-6 flex flex-col justify-center bg-indigo-600 text-white rounded-2xl backface-hidden rotate-y-180 text-xs sm:text-sm leading-relaxed">
+                                <p class="font-semibold mb-1 text-center">Multihilo Simultáneo</p>
+                                <p>Tecnología que permite a un único núcleo físico ejecutar dos hilos de procesamiento simultáneamente, optimizando los ciclos desaprovechados de la CPU.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flashcard 2 -->
+                    <div onclick="flipCard(this)" class="perspective-1000 h-48 cursor-pointer group">
+                        <div class="flashcard-inner relative w-full h-full duration-500 transform-style-3d shadow-md rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
+                            <!-- Front -->
+                            <div class="absolute inset-0 p-6 flex flex-col justify-between backface-hidden">
+                                <span class="text-xs font-bold text-purple-600 dark:text-purple-400 uppercase">Placa Base / PCIe</span>
+                                <h4 class="text-lg font-bold text-slate-800 dark:text-slate-100 text-center my-auto">PCIe Lanes (Carriles PCIe)</h4>
+                                <span class="text-[10px] text-slate-400 text-right"><i class="fa-solid fa-rotate mr-1"></i> Toca para girar</span>
+                            </div>
+                            <!-- Back -->
+                            <div class="absolute inset-0 p-6 flex flex-col justify-center bg-purple-600 text-white rounded-2xl backface-hidden rotate-y-180 text-xs sm:text-sm leading-relaxed">
+                                <p class="font-semibold mb-1 text-center">Buses de Comunicación</p>
+                                <p>Enlaces punto a punto de alta velocidad en la placa base (x1, x4, x8, x16) que comunican la CPU directamente con la GPU, SSDs NVMe y tarjetas de expansión.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flashcard 3 -->
+                    <div onclick="flipCard(this)" class="perspective-1000 h-48 cursor-pointer group">
+                        <div class="flashcard-inner relative w-full h-full duration-500 transform-style-3d shadow-md rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
+                            <!-- Front -->
+                            <div class="absolute inset-0 p-6 flex flex-col justify-between backface-hidden">
+                                <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase">Memoria RAM</span>
+                                <h4 class="text-lg font-bold text-slate-800 dark:text-slate-100 text-center my-auto">CAS Latency (CL)</h4>
+                                <span class="text-[10px] text-slate-400 text-right"><i class="fa-solid fa-rotate mr-1"></i> Toca para girar</span>
+                            </div>
+                            <!-- Back -->
+                            <div class="absolute inset-0 p-6 flex flex-col justify-center bg-emerald-600 text-white rounded-2xl backface-hidden rotate-y-180 text-xs sm:text-sm leading-relaxed">
+                                <p class="font-semibold mb-1 text-center">Retardo de Acceso</p>
+                                <p>Número de ciclos de reloj que transcurren desde que el controlador de memoria solicita un dato hasta que este comienza a entregarse. A menor CL, menor latencia.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flashcard 4 -->
+                    <div onclick="flipCard(this)" class="perspective-1000 h-48 cursor-pointer group">
+                        <div class="flashcard-inner relative w-full h-full duration-500 transform-style-3d shadow-md rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
+                            <!-- Front -->
+                            <div class="absolute inset-0 p-6 flex flex-col justify-between backface-hidden">
+                                <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase">Almacenamiento</span>
+                                <h4 class="text-lg font-bold text-slate-800 dark:text-slate-100 text-center my-auto">NVMe (Non-Volatile Memory Express)</h4>
+                                <span class="text-[10px] text-slate-400 text-right"><i class="fa-solid fa-rotate mr-1"></i> Toca para girar</span>
+                            </div>
+                            <!-- Back -->
+                            <div class="absolute inset-0 p-6 flex flex-col justify-center bg-amber-600 text-white rounded-2xl backface-hidden rotate-y-180 text-xs sm:text-sm leading-relaxed">
+                                <p class="font-semibold mb-1 text-center">Protocolo SSD</p>
+                                <p>Protocolo optimizado para memoria flash que sustituye a AHCI/SATA, aprovechando directa y masivamente el paralelismo de los carriles PCIe.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flashcard 5 -->
+                    <div onclick="flipCard(this)" class="perspective-1000 h-48 cursor-pointer group">
+                        <div class="flashcard-inner relative w-full h-full duration-500 transform-style-3d shadow-md rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
+                            <!-- Front -->
+                            <div class="absolute inset-0 p-6 flex flex-col justify-between backface-hidden">
+                                <span class="text-xs font-bold text-rose-600 dark:text-rose-400 uppercase">Fuente de Alimentación</span>
+                                <h4 class="text-lg font-bold text-slate-800 dark:text-slate-100 text-center my-auto">Protecciones OVP / OPP / SCP</h4>
+                                <span class="text-[10px] text-slate-400 text-right"><i class="fa-solid fa-rotate mr-1"></i> Toca para girar</span>
+                            </div>
+                            <!-- Back -->
+                            <div class="absolute inset-0 p-6 flex flex-col justify-center bg-rose-600 text-white rounded-2xl backface-hidden rotate-y-180 text-xs sm:text-sm leading-relaxed">
+                                <p class="font-semibold mb-1 text-center">Seguridad Eléctrica</p>
+                                <p>Sistemas integrados contra Sobretensión (OVP), Sobrecarga de potencia (OPP) y Cortocircuito (SCP) que apagan el sistema de forma segura.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flashcard 6 -->
+                    <div onclick="flipCard(this)" class="perspective-1000 h-48 cursor-pointer group">
+                        <div class="flashcard-inner relative w-full h-full duration-500 transform-style-3d shadow-md rounded-2xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900">
+                            <!-- Front -->
+                            <div class="absolute inset-0 p-6 flex flex-col justify-between backface-hidden">
+                                <span class="text-xs font-bold text-cyan-600 dark:text-cyan-400 uppercase">Gráficos / GPU</span>
+                                <h4 class="text-lg font-bold text-slate-800 dark:text-slate-100 text-center my-auto">VRAM GDDR6 / GDDR6X</h4>
+                                <span class="text-[10px] text-slate-400 text-right"><i class="fa-solid fa-rotate mr-1"></i> Toca para girar</span>
+                            </div>
+                            <!-- Back -->
+                            <div class="absolute inset-0 p-6 flex flex-col justify-center bg-cyan-600 text-white rounded-2xl backface-hidden rotate-y-180 text-xs sm:text-sm leading-relaxed">
+                                <p class="font-semibold mb-1 text-center">Memoria de Vídeo</p>
+                                <p>Memoria RAM ultra-rápida integrada directamente en la tarjeta gráfica para almacenar texturas 3D, buffers de renderizado y modelos de IA.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- HERRAMIENTA 3: QUIZ DE AUTOEVALUACIÓN DE PROFUNDIZACIÓN -->
+            <div id="quizSection" class="bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200 dark:border-slate-700 space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4">
+                    <div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <i class="fa-solid fa-clipboard-question text-indigo-500"></i>
+                            Herramienta 3: Cuestionario de Profundización
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Demuestra tus conocimientos avanzados respondiendo a estas 5 preguntas:</p>
+                    </div>
+                    <span id="quizScoreBadge" class="text-sm font-bold bg-indigo-100 text-indigo-800 dark:bg-indigo-950 dark:text-indigo-300 px-3 py-1 rounded-full">
+                        Puntuación: 0 / 5
+                    </span>
+                </div>
+
+                <!-- Lista de preguntas -->
+                <div id="quizContainer" class="space-y-6">
+                    <!-- Pregunta 1 -->
+                    <div class="quiz-question-block bg-slate-50 dark:bg-slate-900/50 p-5 rounded-xl border border-slate-200 dark:border-slate-700 space-y-3">
+                        <p class="font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200">
+                            1. ¿Qué ventaja principal ofrece la configuración de memoria RAM en arquitectura Dual-Channel?
+                        </p>
+                        <div class="grid grid-cols-1 gap-2 text-xs sm:text-sm">
+                            <button onclick="checkAnswer(1, 0, false, this)" class="quiz-opt w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">A) Aumenta la capacidad máxima del disco duro.</button>
+                            <button onclick="checkAnswer(1, 1, true, this)" class="quiz-opt w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">B) Dobla el ancho de banda del bus de memoria al acceder a dos módulos en paralelo.</button>
+                            <button onclick="checkAnswer(1, 2, false, this)" class="quiz-opt w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">C) Reduce el consumo energético de la tarjeta gráfica a la mitad.</button>
+                        </div>
+                        <div id="quizFeedback-1" class="hidden text-xs p-3 rounded-lg font-medium"></div>
+                    </div>
+
+                    <!-- Pregunta 2 -->
+                    <div class="quiz-question-block bg-slate-50 dark:bg-slate-900/50 p-5 rounded-xl border border-slate-200 dark:border-slate-700 space-y-3">
+                        <p class="font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200">
+                            2. ¿Por qué un SSD NVMe PCIe alcanza velocidades enormemente superiores a un SSD SATA tradicional?
+                        </p>
+                        <div class="grid grid-cols-1 gap-2 text-xs sm:text-sm">
+                            <button onclick="checkAnswer(2, 0, false, this)" class="quiz-opt w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">A) Porque utiliza componentes mecánicos giratorios más rápidos.</button>
+                            <button onclick="checkAnswer(2, 1, false, this)" class="quiz-opt w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">B) Porque se conecta mediante un puerto USB externo 2.0.</button>
+                            <button onclick="checkAnswer(2, 2, true, this)" class="quiz-opt w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">C) Porque utiliza directamente las líneas/carriles PCIe eliminando el cuello de botella AHCI/SATA.</button>
+                        </div>
+                        <div id="quizFeedback-2" class="hidden text-xs p-3 rounded-lg font-medium"></div>
+                    </div>
+
+                    <!-- Pregunta 3 -->
+                    <div class="quiz-question-block bg-slate-50 dark:bg-slate-900/50 p-5 rounded-xl border border-slate-200 dark:border-slate-700 space-y-3">
+                        <p class="font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200">
+                            3. ¿Qué garantiza una fuente de alimentación con certificación de eficiencia 80 PLUS?
+                        </p>
+                        <div class="grid grid-cols-1 gap-2 text-xs sm:text-sm">
+                            <button onclick="checkAnswer(3, 0, true, this)" class="quiz-opt w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">A) Que al menos el 80% de la energía consumida se convierte en electricidad útil para el equipo.</button>
+                            <button onclick="checkAnswer(3, 1, false, this)" class="quiz-opt w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">B) Que la fuente entregará como máximo 80 Vatios de potencia.</button>
+                            <button onclick="checkAnswer(3, 2, false, this)" class="quiz-opt w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">C) Que solo se puede conectar durante 80 minutos seguidos.</button>
+                        </div>
+                        <div id="quizFeedback-3" class="hidden text-xs p-3 rounded-lg font-medium"></div>
+                    </div>
+
+                    <!-- Pregunta 4 -->
+                    <div class="quiz-question-block bg-slate-50 dark:bg-slate-900/50 p-5 rounded-xl border border-slate-200 dark:border-slate-700 space-y-3">
+                        <p class="font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200">
+                            4. ¿Cuál es el factor determinante que establece las posibilidades de overclocking y el número de líneas PCIe de la placa base?
+                        </p>
+                        <div class="grid grid-cols-1 gap-2 text-xs sm:text-sm">
+                            <button onclick="checkAnswer(4, 0, false, this)" class="quiz-opt w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">A) El tamaño de la pila CMOS.</button>
+                            <button onclick="checkAnswer(4, 1, true, this)" class="quiz-opt w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">B) El conjunto de chips controlador o Chipset (por ej. B-Series o Z-Series).</button>
+                            <button onclick="checkAnswer(4, 2, false, this)" class="quiz-opt w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">C) El color de la placa de circuito impreso.</button>
+                        </div>
+                        <div id="quizFeedback-4" class="hidden text-xs p-3 rounded-lg font-medium"></div>
+                    </div>
+
+                    <!-- Pregunta 5 -->
+                    <div class="quiz-question-block bg-slate-50 dark:bg-slate-900/50 p-5 rounded-xl border border-slate-200 dark:border-slate-700 space-y-3">
+                        <p class="font-semibold text-sm sm:text-base text-slate-800 dark:text-slate-200">
+                            5. ¿Por qué es fundamental la memoria VRAM en una tarjeta gráfica (GPU) dedicada?
+                        </p>
+                        <div class="grid grid-cols-1 gap-2 text-xs sm:text-sm">
+                            <button onclick="checkAnswer(5, 0, false, this)" class="quiz-opt w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">A) Almacena el sistema operativo Windows permanentemente.</button>
+                            <button onclick="checkAnswer(5, 1, true, this)" class="quiz-opt w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">B) Permite alojar de forma ultrarrápida texturas 3D, geometrías y buffers sin saturar la RAM del sistema.</button>
+                            <button onclick="checkAnswer(5, 2, false, this)" class="quiz-opt w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">C) Sustituye completamente la necesidad de una fuente de alimentación.</button>
+                        </div>
+                        <div id="quizFeedback-5" class="hidden text-xs p-3 rounded-lg font-medium"></div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end pt-4 border-t border-slate-200 dark:border-slate-700">
+                    <button onclick="resetQuiz()" class="px-4 py-2 text-xs font-semibold rounded-xl bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition text-slate-800 dark:text-slate-200">
+                        <i class="fa-solid fa-arrows-rotate mr-1"></i> Reiniciar Test
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- FOOTER Y NAVEGACIÓN INFERIOR -->
+        <footer class="pt-8 border-t border-slate-200 dark:border-slate-800 space-y-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                <a href="2A.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 font-semibold text-sm hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                    <i class="fa-solid fa-arrow-left"></i> Volver a 2.A Contenidos Básicos
+                </a>
+                <a href="../index.html" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md transition">
+                    <i class="fa-solid fa-house"></i> Volver al Menú Principal
+                </a>
+            </div>
+
+            <div id="footer-container"></div>
+            <script src="../js/footer.js"></script>
+        </footer>
+
+    </main>
+
+    <!-- BOTÓN FLOTANTE PARA VOLVER ARRIBA -->
+    <button id="backToTopBtn" onclick="scrollToTop()" aria-label="Volver arriba" class="fixed bottom-6 right-6 p-3.5 bg-indigo-600 text-white rounded-full shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-50 hover:bg-indigo-700">
+        <i class="fa-solid fa-arrow-up text-lg"></i>
+    </button>
+
+    <!-- JAVASCRIPT LÓGICO COMPLETO -->
+    <script>
+        // --- 1. MODO OSCURO / CLARO ---
+        function initTheme() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                document.getElementById('themeIcon').className = 'fa-solid fa-sun text-amber-400';
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.getElementById('themeIcon').className = 'fa-solid fa-moon text-slate-600';
+            }
+        }
+
+        function toggleDarkMode() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                document.getElementById('themeIcon').className = 'fa-solid fa-moon text-slate-600';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                document.getElementById('themeIcon').className = 'fa-solid fa-sun text-amber-400';
+            }
+        }
+
+        // --- 2. BARRA DE PROGRESO Y BOTÓN FLOTANTE ---
+        window.onscroll = function () {
+            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            let scrolled = (winScroll / height) * 100;
+            document.getElementById("readingProgress").style.width = scrolled + "%";
+
+            // Botón flotante
+            let topBtn = document.getElementById("backToTopBtn");
+            if (winScroll > 300) {
+                topBtn.classList.remove("opacity-0", "pointer-events-none");
+                topBtn.classList.add("opacity-100", "pointer-events-auto");
+            } else {
+                topBtn.classList.add("opacity-0", "pointer-events-none");
+                topBtn.classList.remove("opacity-100", "pointer-events-auto");
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- 3. CHECKLIST DE INDICADORES DE LOGRO ---
+        function updateChecklistProgress() {
+            const checks = document.querySelectorAll('.achievement-check');
+            let checkedCount = 0;
+            checks.forEach(c => { if (c.checked) checkedCount++; });
+            const percentage = Math.round((checkedCount / checks.length) * 100);
+            
+            document.getElementById('checklistProgressBar').style.width = percentage + '%';
+            document.getElementById('checklistPercentage').innerText = percentage + '%';
+        }
+
+        // --- 4. NAVEGACIÓN Y FILTRADO DE COMPONENTES ---
+        function filterComponent(compId) {
+            const cards = document.querySelectorAll('.comp-card');
+            const buttons = document.querySelectorAll('.comp-tab-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-slate-100', 'text-slate-700', 'dark:bg-slate-800', 'dark:text-slate-300');
+            });
+
+            const activeBtn = document.getElementById('tab-btn-' + compId);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-slate-100', 'text-slate-700', 'dark:bg-slate-800', 'dark:text-slate-300');
+                activeBtn.classList.add('bg-indigo-600', 'text-white', 'shadow-sm');
+            }
+
+            cards.forEach(card => {
+                if (compId === 'all' || card.id === 'comp-' + compId) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        // --- 5. SUBTABS INTERNAS DE CADA COMPONENTE (Teoría, Vídeo, Recursos) ---
+        function switchSubTab(comp, tabType) {
+            const container = document.getElementById('comp-' + comp);
+            if (!container) return;
+
+            // Reset subtab content
+            const subContents = container.querySelectorAll('.subtab-content');
+            subContents.forEach(content => content.classList.add('hidden'));
+
+            // Show selected content
+            const targetContent = document.getElementById(`subtab-${comp}-${tabType}`);
+            if (targetContent) targetContent.classList.remove('hidden');
+
+            // Reset subtab buttons
+            const subBtns = container.querySelectorAll('.subtab-btn');
+            subBtns.forEach(btn => {
+                btn.classList.remove('active-subtab', 'text-indigo-600', 'dark:text-indigo-400', 'bg-white', 'dark:bg-slate-800', 'shadow-sm');
+                btn.classList.add('text-slate-600', 'dark:text-slate-400');
+            });
+
+            const targetBtn = document.getElementById(`subbtn-${comp}-${tabType}`);
+            if (targetBtn) {
+                targetBtn.classList.add('active-subtab', 'text-indigo-600', 'dark:text-indigo-400', 'bg-white', 'dark:bg-slate-800', 'shadow-sm');
+                targetBtn.classList.remove('text-slate-600', 'dark:text-slate-400');
+            }
+        }
+
+        // --- 6. HERRAMIENTA 1: CALCULADORA DE FUENTE (PSU CALCULATOR) ---
+        function calculatePSU() {
+            const cpuWatt = parseInt(document.getElementById('calcCpu').value) || 0;
+            const gpuWatt = parseInt(document.getElementById('calcGpu').value) || 0;
+            const ramWatt = parseInt(document.getElementById('calcRam').value) || 0;
+            const storageWatt = parseInt(document.getElementById('calcStorage').value) || 0;
+
+            const totalConsumption = cpuWatt + gpuWatt + ramWatt + storageWatt + 25; // 25W base placa base/ventiladores
+            document.getElementById('psuTotalWatt').innerText = totalConsumption;
+
+            // Margen de seguridad del +25%
+            const recommendedWatt = Math.ceil((totalConsumption * 1.25) / 50) * 50;
+            document.getElementById('psuRecommendedBadge').innerText = `${recommendedWatt} W - ${recommendedWatt + 50} W`;
+
+            // Tier de 80 Plus sugerido
+            const certElem = document.getElementById('psu80PlusCert');
+            if (recommendedWatt <= 400) {
+                certElem.innerText = "80 PLUS Bronze";
+            } else if (recommendedWatt <= 600) {
+                certElem.innerText = "80 PLUS Gold";
+            } else {
+                certElem.innerText = "80 PLUS Platinum";
+            }
+        }
+
+        // --- 7. HERRAMIENTA 2: FLASHCARDS FLIP ---
+        function flipCard(cardElem) {
+            const inner = cardElem.querySelector('.flashcard-inner');
+            if (inner.classList.contains('rotate-y-180')) {
+                inner.classList.remove('rotate-y-180');
+            } else {
+                inner.classList.add('rotate-y-180');
+            }
+        }
+
+        // --- 8. HERRAMIENTA 3: CUESTIONARIO INTERACTIVO DE 5 PREGUNTAS ---
+        let userScore = 0;
+        let answeredQuestions = {};
+
+        function checkAnswer(qNum, optIdx, isCorrect, btnElem) {
+            if (answeredQuestions[qNum]) return; // Evitar responder dos veces la misma pregunta
+            answeredQuestions[qNum] = true;
+
+            const parentBlock = btnElem.closest('.quiz-question-block');
+            const allOptions = parentBlock.querySelectorAll('.quiz-opt');
+            const feedbackElem = document.getElementById('quizFeedback-' + qNum);
+
+            allOptions.forEach(opt => opt.disabled = true);
+
+            if (isCorrect) {
+                userScore++;
+                btnElem.classList.add('bg-emerald-100', 'border-emerald-500', 'text-emerald-900', 'dark:bg-emerald-950', 'dark:text-emerald-200');
+                feedbackElem.classList.remove('hidden');
+                feedbackElem.classList.add('bg-emerald-50', 'text-emerald-800', 'dark:bg-emerald-950/50', 'dark:text-emerald-300', 'border', 'border-emerald-300');
+                feedbackElem.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-500 mr-1"></i> <strong>¡Correcto!</strong> Respuesta acertada.';
+            } else {
+                btnElem.classList.add('bg-rose-100', 'border-rose-500', 'text-rose-900', 'dark:bg-rose-950', 'dark:text-rose-200');
+                feedbackElem.classList.remove('hidden');
+                feedbackElem.classList.add('bg-rose-50', 'text-rose-800', 'dark:bg-rose-950/50', 'dark:text-rose-300', 'border', 'border-rose-300');
+                feedbackElem.innerHTML = '<i class="fa-solid fa-circle-xmark text-rose-500 mr-1"></i> <strong>Incorrecto.</strong> Revisa la teoría correspondiente en la sección superior.';
+            }
+
+            document.getElementById('quizScoreBadge').innerText = `Puntuación: ${userScore} / 5`;
+        }
+
+        function resetQuiz() {
+            userScore = 0;
+            answeredQuestions = {};
+            document.getElementById('quizScoreBadge').innerText = 'Puntuación: 0 / 5';
+
+            for (let i = 1; i <= 5; i++) {
+                const feedbackElem = document.getElementById('quizFeedback-' + i);
+                if (feedbackElem) {
+                    feedbackElem.classList.add('hidden');
+                    feedbackElem.innerHTML = '';
+                }
+            }
+
+            const allOptions = document.querySelectorAll('.quiz-opt');
+            allOptions.forEach(opt => {
+                opt.disabled = false;
+                opt.className = "quiz-opt w-full text-left p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition";
+            });
+        }
+
+        // Inicializar al cargar la página
+        window.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            calculatePSU();
+        });
+    </script>
+</body>
+
+</html>

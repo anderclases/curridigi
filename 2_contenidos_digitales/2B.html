@@ -1,24 +1,199 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2.B Contenidos de Profundización</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <title>2.B Contenidos de Profundización en Hardware</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        tech: {
+                            dark: '#0f172a',
+                            cardDark: '#1e293b',
+                            accent: '#6366f1',
+                            teal: '#14b8a6'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Estilos para la caja de enunciado original */
+        .enunciado-ejercicio {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        .dark .enunciado-ejercicio {
+            background-color: #1e293b;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+        .enunciado-ejercicio h3 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #0f172a;
+        }
+        .dark .enunciado-ejercicio h3 {
+            color: #ffffff;
+        }
+        .enunciado-ejercicio p {
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+        .enunciado-ejercicio ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .enunciado-ejercicio li {
+            margin-bottom: 0.35rem;
+        }
+        .nota-enunciado {
+            font-size: 0.9rem;
+            color: #666;
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 4px;
+            border-left: 3px solid #6c757d;
+            margin: 15px 0;
+        }
+        .indicadores-logro {
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .dark .indicadores-logro {
+            border-top-color: #334155;
+        }
+        .indicadores-logro p {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Video container aspect ratio */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.75rem;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+
+        /* Estilos e interacción sin desplazamiento para los puntos (Hotspots) de la placa base */
+        .hotspot-btn {
+            transform: translate(-50%, -50%) !important; /* Mantiene el centro fijo sin moverse de sitio */
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+        }
+        .hotspot-btn:hover {
+            filter: brightness(1.25);
+            box-shadow: 0 0 12px rgba(255, 255, 255, 0.9), 0 0 0 3px rgba(99, 102, 241, 0.6);
+        }
+        .hotspot-btn.active {
+            box-shadow: 0 0 0 3px #ffffff, 0 0 16px rgba(99, 102, 241, 0.9);
+        }
+    </style>
 </head>
 
-<body>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col">
 
-    <div class="header-container">
-        <h1>2.B Contenidos de Profundización en Hardware</h1>
-        <div class="nav-links">
-            <a href="2A.html" class="btn btn-outline">← Anterior: 2.A</a>
-            <a href="../index.html" class="btn btn-outline">Menú Principal</a>
-        </div>
+    <!-- BARRA DE PROGRESO DE LECTURA TOP -->
+    <div class="fixed top-0 left-0 w-full h-1.5 bg-slate-200 dark:bg-slate-800 z-50">
+        <div id="readingProgress" class="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 w-0 transition-all duration-150"></div>
     </div>
 
-    <div class="content-container">
+    <!-- HEADER / NAVEGACIÓN PRINCIPAL -->
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-4">
+            
+            <div class="flex items-center space-x-3">
+                <div class="p-2 bg-indigo-600 text-white rounded-xl shadow-md">
+                    <i class="fa-solid fa-microchip text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xs font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">Unidad 2.B</span>
+                    <h1 class="text-lg sm:text-xl font-bold leading-tight">Profundización en Hardware</h1>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <!-- Selector Modo Oscuro / Claro -->
+                <button id="themeToggleBtn" onclick="toggleDarkMode()" aria-label="Cambiar tema"
+                    class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-all">
+                    <i id="themeIcon" class="fa-solid fa-moon"></i>
+                </button>
+
+                <!-- Enlaces de navegación -->
+                <a href="2A.html" class="inline-flex items-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-medium rounded-xl border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    <span class="hidden sm:inline">Anterior:</span> 2.A
+                </a>
+                <a href="../index.html" class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs sm:text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-md transition">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Menú Principal</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
 
         <!-- CAJA DE ENUNCIADO DE PROFUNDIZACIÓN -->
         <div class="enunciado-ejercicio">
@@ -51,192 +226,821 @@
         </div>
         <!-- FIN DEL ENUNCIADO -->
 
-        <div class="card">
-            <h2>Análisis Técnico Avanzado de Componentes</h2>
-            <p>Esta sección amplía los conceptos básicos y proporciona documentación técnica, enlaces a Wikipedia,
-                fuentes de información especializadas y recursos audiovisuales para seleccionar los componentes
-                adecuados en el presupuesto.</p>
-
-            <!-- Video General Explicativo de Componentes -->
-            <div class="video-bloque">
-                <h3>Vídeo General: Explicación de cada uno de los componentes</h3>
-                <div class="video-contenedor">
-                    <iframe src="https://www.youtube.com/embed/0zkX6nlpiSk" title="Vídeo explicativo de componentes"
-                        allowfullscreen></iframe>
+        <!-- APARTADO INTERACTIVO: EXPLORADOR DE LA PLACA BASE -->
+        <section class="bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200 dark:border-slate-700 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-700 pb-4">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300 mb-2">
+                        <i class="fa-solid fa-bullseye"></i> Recurso Interactivo de Profundización
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-diagram-project text-indigo-500"></i>
+                        Explorador Interactivo de la Placa Base (Motherboard)
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+                        Haz clic sobre cualquiera de los puntos numerados en la placa base para conocer qué componente hay instalado o qué piezas se pueden agregar.
+                    </p>
                 </div>
             </div>
 
-            <!-- 1. PROCESADOR -->
-            <h3>1. Procesador (CPU) – Núcleos, Hilos y Arquitectura</h3>
-            <p>El rendimiento de una CPU no depende únicamente de su frecuencia de reloj (GHz), sino de la cantidad de
-                núcleos físicos, hilos de ejecución mediante multithreading (Hyper-Threading / SMT) y el tamaño y
-                velocidad de la memoria caché (L1, L2 y L3). Al presupuestar ordenadores, es crucial evaluar la
-                compatibilidad del zócalo (socket) con la placa base y el conjunto de instrucciones de la arquitectura
-                x86_64.</p>
+            <!-- CONTENEDOR PRINCIPAL DEL ESQUEMA Y PANEL DE INFORMACIÓN -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- COLUMNA IZQUIERDA: DIAGRAMA VECTORIAL DE LA PLACA BASE (7 Cols) -->
+                <div class="lg:col-span-7 bg-slate-950 rounded-2xl p-4 sm:p-6 shadow-inner border border-slate-800 relative overflow-hidden flex flex-col items-center">
+                    
+                    <div class="w-full flex justify-between items-center mb-3 px-2 text-slate-400 text-xs font-mono">
+                        <span><i class="fa-solid fa-microchip text-indigo-400"></i> FORMATO: ATX STANDARD</span>
+                        <span class="text-indigo-400"><i class="fa-solid fa-hand-pointer"></i> HAZ CLIC EN UN PUNTO</span>
+                    </div>
 
-            <div class="img-container">
-                <img src="./img/CPU.png" alt="Procesador CPU y arquitectura interna">
+                    <!-- Diagrama SVG Vectorial de Placa Base con Puntos Calientes (Hotspots) -->
+                    <div class="relative w-full max-w-lg aspect-[4/5] bg-emerald-950/40 rounded-xl border-2 border-emerald-800/60 p-3 shadow-2xl overflow-hidden">
+                        
+                        <!-- Fondo y Circuitos SVG -->
+                        <svg class="w-full h-full rounded-lg" viewBox="0 0 400 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Fondo PCB -->
+                            <rect width="400" height="500" rx="12" fill="#064e3b" />
+                            
+                            <!-- Pistas y circuitos decorativos -->
+                            <path d="M 50,50 L 150,50 L 150,150 L 350,150" stroke="#059669" stroke-width="2" stroke-dasharray="4 2" opacity="0.6"/>
+                            <path d="M 200,200 L 200,380 L 320,380" stroke="#10b981" stroke-width="2" opacity="0.5"/>
+                            <path d="M 30,220 L 120,220 L 120,450" stroke="#047857" stroke-width="2" opacity="0.7"/>
+
+                            <!-- Socket CPU (1) -->
+                            <rect x="130" y="70" width="100" height="100" rx="6" fill="#1e293b" stroke="#94a3b8" stroke-width="3"/>
+                            <rect x="145" y="85" width="70" height="70" rx="3" fill="#334155" stroke="#64748b" stroke-dasharray="2 2"/>
+                            <text x="180" y="125" text-anchor="middle" fill="#94a3b8" font-size="10" font-family="sans-serif" font-weight="bold">SOCKET CPU</text>
+
+                            <!-- Ranuras RAM DIMM (2) -->
+                            <g fill="#1e293b" stroke="#38bdf8" stroke-width="1.5">
+                                <rect x="260" y="60" width="12" height="130" rx="2"/>
+                                <rect x="280" y="60" width="12" height="130" rx="2"/>
+                                <rect x="300" y="60" width="12" height="130" rx="2"/>
+                                <rect x="320" y="60" width="12" height="130" rx="2"/>
+                            </g>
+                            <text x="295" y="52" text-anchor="middle" fill="#38bdf8" font-size="9" font-family="sans-serif" font-weight="bold">DDR5 RAM SLOTS</text>
+
+                            <!-- VRM y Disipador -->
+                            <rect x="50" y="65" width="60" height="110" rx="4" fill="#334155" stroke="#475569" stroke-width="2"/>
+                            <text x="80" y="122" text-anchor="middle" fill="#cbd5e1" font-size="9" font-family="sans-serif" transform="rotate(-90 80 122)">DISIPADOR VRM</text>
+
+                            <!-- Puerto M.2 NVMe Principal (4) -->
+                            <rect x="130" y="190" width="120" height="22" rx="3" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="190" y="205" text-anchor="middle" fill="#fbbf24" font-size="9" font-family="sans-serif" font-weight="bold">M.2 NVMe PCIe 5.0</text>
+
+                            <!-- Ranura PCIe x16 GPU (3) -->
+                            <rect x="70" y="235" width="230" height="24" rx="4" fill="#0f172a" stroke="#818cf8" stroke-width="2.5"/>
+                            <rect x="75" y="240" width="220" height="14" rx="2" fill="#312e81"/>
+                            <text x="185" y="251" text-anchor="middle" fill="#c7d2fe" font-size="10" font-family="sans-serif" font-weight="bold">PCIe 5.0 x16 (TARJETA GRÁFICA)</text>
+
+                            <!-- Chipset y Disipador (5) -->
+                            <rect x="230" y="320" width="90" height="90" rx="8" fill="#1e293b" stroke="#06b6d4" stroke-width="2"/>
+                            <circle cx="275" cy="365" r="25" fill="#0f172a" stroke="#22d3ee" stroke-width="1.5"/>
+                            <text x="275" y="369" text-anchor="middle" fill="#67e8f9" font-size="9" font-family="sans-serif" font-weight="bold">CHIPSET</text>
+
+                            <!-- Conector Alimentación ATX 24 Pines (6) -->
+                            <rect x="355" y="180" width="25" height="120" rx="3" fill="#1e293b" stroke="#e11d48" stroke-width="2"/>
+                            <text x="367" y="240" text-anchor="middle" fill="#fda4af" font-size="8" font-family="sans-serif" font-weight="bold" transform="rotate(90 367 240)">24-PIN ATX POWER</text>
+
+                            <!-- Puertos SATA III (7) -->
+                            <g fill="#1e293b" stroke="#10b981" stroke-width="1.5">
+                                <rect x="350" y="330" width="30" height="18" rx="2"/>
+                                <rect x="350" y="355" width="30" height="18" rx="2"/>
+                                <rect x="350" y="380" width="30" height="18" rx="2"/>
+                            </g>
+                            <text x="365" y="415" text-anchor="middle" fill="#34d399" font-size="8" font-family="sans-serif" font-weight="bold">SATA III</text>
+
+                            <!-- Panel Trasero I/O (8) -->
+                            <rect x="20" y="60" width="22" height="170" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+                            <text x="31" y="145" text-anchor="middle" fill="#7dd3fc" font-size="8" font-family="sans-serif" font-weight="bold" transform="rotate(-90 31 145)">PANEL TRASERO I/O</text>
+
+                            <!-- Ranura PCIe Secundaria -->
+                            <rect x="70" y="300" width="140" height="16" rx="3" fill="#0f172a" stroke="#475569" stroke-width="1.5"/>
+                            <text x="140" y="311" text-anchor="middle" fill="#94a3b8" font-size="8" font-family="sans-serif">PCIe x4 Slot</text>
+                        </svg>
+
+                        <!-- PUNTOS CALIENTES / HOTSPOTS (SIN DESPLAZAMIENTO EN HOVER) -->
+                        
+                        <!-- 1. Socket CPU -->
+                        <button onclick="selectBoardComponent('cpu_socket')" id="hotspot-cpu_socket"
+                            class="hotspot-btn absolute top-[21%] left-[45%] w-8 h-8 rounded-full bg-blue-600 text-white font-black text-xs shadow-lg flex items-center justify-center border-2 border-white active"
+                            aria-label="Socket CPU">
+                            1
+                        </button>
+
+                        <!-- 2. Ranuras RAM -->
+                        <button onclick="selectBoardComponent('ram_slots')" id="hotspot-ram_slots"
+                            class="hotspot-btn absolute top-[25%] left-[73%] w-8 h-8 rounded-full bg-cyan-500 text-white font-black text-xs shadow-lg flex items-center justify-center border-2 border-white"
+                            aria-label="Ranuras RAM">
+                            2
+                        </button>
+
+                        <!-- 3. Ranura PCIe GPU -->
+                        <button onclick="selectBoardComponent('pcie_gpu')" id="hotspot-pcie_gpu"
+                            class="hotspot-btn absolute top-[50%] left-[46%] w-8 h-8 rounded-full bg-indigo-600 text-white font-black text-xs shadow-lg flex items-center justify-center border-2 border-white"
+                            aria-label="Ranura PCIe Tarjeta Gráfica">
+                            3
+                        </button>
+
+                        <!-- 4. M.2 NVMe SSD -->
+                        <button onclick="selectBoardComponent('m2_ssd')" id="hotspot-m2_ssd"
+                            class="hotspot-btn absolute top-[40%] left-[47%] w-8 h-8 rounded-full bg-amber-500 text-white font-black text-xs shadow-lg flex items-center justify-center border-2 border-white"
+                            aria-label="Puerto M.2 SSD">
+                            4
+                        </button>
+
+                        <!-- 5. Chipset -->
+                        <button onclick="selectBoardComponent('chipset')" id="hotspot-chipset"
+                            class="hotspot-btn absolute top-[73%] left-[68%] w-8 h-8 rounded-full bg-teal-500 text-white font-black text-xs shadow-lg flex items-center justify-center border-2 border-white"
+                            aria-label="Chipset">
+                            5
+                        </button>
+
+                        <!-- 6. Conector ATX 24 Pines -->
+                        <button onclick="selectBoardComponent('power_24pin')" id="hotspot-power_24pin"
+                            class="hotspot-btn absolute top-[48%] left-[91%] w-8 h-8 rounded-full bg-rose-500 text-white font-black text-xs shadow-lg flex items-center justify-center border-2 border-white"
+                            aria-label="Conector Alimentación 24 Pines">
+                            6
+                        </button>
+
+                        <!-- 7. Puertos SATA -->
+                        <button onclick="selectBoardComponent('sata_ports')" id="hotspot-sata_ports"
+                            class="hotspot-btn absolute top-[73%] left-[91%] w-8 h-8 rounded-full bg-emerald-500 text-white font-black text-xs shadow-lg flex items-center justify-center border-2 border-white"
+                            aria-label="Puertos SATA">
+                            7
+                        </button>
+
+                        <!-- 8. Panel Trasero I/O -->
+                        <button onclick="selectBoardComponent('rear_io')" id="hotspot-rear_io"
+                            class="hotspot-btn absolute top-[28%] left-[7%] w-8 h-8 rounded-full bg-purple-600 text-white font-black text-xs shadow-lg flex items-center justify-center border-2 border-white"
+                            aria-label="Panel Trasero E/S">
+                            8
+                        </button>
+
+                    </div>
+
+                    <!-- Leyenda rápida -->
+                    <div class="mt-4 flex flex-wrap justify-center gap-1.5 text-[11px] text-slate-300 max-w-lg">
+                        <span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700">1. CPU</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700">2. RAM</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700">3. GPU (PCIe)</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700">4. M.2 SSD</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700">5. Chipset</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700">6. Power 24-Pin</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700">7. SATA</span>
+                        <span class="px-2 py-0.5 rounded bg-slate-800 border border-slate-700">8. Panel E/S</span>
+                    </div>
+
+                </div>
+
+                <!-- COLUMNA DERECHA: PANEL DE DETALLES DEL COMPONENTE SELECCIONADO (5 Cols) -->
+                <div class="lg:col-span-5 flex flex-col h-full space-y-4">
+                    
+                    <div id="boardInfoCard" class="bg-slate-50 dark:bg-slate-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-md flex-grow space-y-5 transition-all">
+                        
+                        <!-- Encabezado -->
+                        <div class="flex items-start justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+                            <div class="flex items-center gap-3">
+                                <div id="boardCompBadge" class="w-12 h-12 rounded-xl bg-blue-600 text-white flex items-center justify-center text-xl shadow-lg font-bold">
+                                    1
+                                </div>
+                                <div>
+                                    <span id="boardCompCategory" class="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Procesador Central</span>
+                                    <h3 id="boardCompTitle" class="text-xl font-extrabold text-slate-900 dark:text-white">Socket del Procesador (CPU)</h3>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Qué componente hay aquí -->
+                        <div class="space-y-2">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                                <i class="fa-solid fa-microchip text-indigo-500"></i> ¿Qué componente hay instalado aquí?
+                            </h4>
+                            <div id="boardCompInstalled" class="p-3.5 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-semibold text-slate-800 dark:text-slate-200">
+                                Zócalo de inserción de la CPU (LGA 1700 / AM5) + Disipador térmico o Bloque de Refrigeración Líquida.
+                            </div>
+                        </div>
+
+                        <!-- Qué pieza se puede agregar / ampliar -->
+                        <div class="space-y-2">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                                <i class="fa-solid fa-square-plus text-emerald-500"></i> ¿Qué pieza se puede añadir o mejorar?
+                            </h4>
+                            <div id="boardCompUpgradeable" class="p-3.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 text-sm text-emerald-900 dark:text-emerald-200">
+                                Se puede sustituir el procesador por uno de mayor gama (con más núcleos y mayor frecuencia) compatible con el mismo socket, o instalar un sistema de refrigeración líquida AIO para mayor overclocking.
+                            </div>
+                        </div>
+
+                        <!-- Descripción técnica -->
+                        <div class="space-y-2">
+                            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 flex items-center gap-1.5">
+                                <i class="fa-solid fa-circle-info text-blue-500"></i> Descripción Técnica y Función
+                            </h4>
+                            <p id="boardCompDescription" class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                El socket o zócalo es la matriz de pines mecánicos y eléctricos que conecta directamente la Unidad Central de Procesamiento (CPU) con el resto de la placa base y los buses del sistema. Define la compatibilidad exacta entre la placa base y la generación del procesador.
+                            </p>
+                        </div>
+
+                        <!-- Consejo de compatibilidad -->
+                        <div class="p-3.5 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50 flex items-start gap-3">
+                            <i class="fa-solid fa-lightbulb text-amber-500 text-lg mt-0.5"></i>
+                            <div>
+                                <span class="block text-xs font-bold text-amber-900 dark:text-amber-300">Consejo de Montaje / Compatibilidad:</span>
+                                <p id="boardCompTip" class="text-xs text-amber-800 dark:text-amber-400 mt-0.5">
+                                    Verifica siempre que el socket de la placa (p. ej. Intel LGA1700 o AMD AM5) coincide exactamente con la CPU elegida antes de comprarla.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE ANÁLISIS TÉCNICO Y VÍDEO GENERAL -->
+        <section class="bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200/80 dark:border-slate-700/80 space-y-6">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap text-indigo-500"></i>
+                    Análisis Técnico Avanzado de Componentes
+                </h2>
+                <p class="mt-2 text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                    Esta sección amplía los conceptos básicos y proporciona documentación técnica, enlaces a Wikipedia, fuentes de información especializadas y recursos audiovisuales para seleccionar los componentes adecuados en el presupuesto.
+                </p>
             </div>
 
-            <p><strong>Fuentes de información y documentación:</strong></p>
-            <ul>
-                <li><a href="https://es.wikipedia.org/wiki/Unidad_central_de_procesamiento" target="_blank">Wikipedia:
-                        Unidad Central de Procesamiento (CPU)</a></li>
-                <li><a href="https://www.intel.es/content/www/es/es/architecture-and-technology/cpu-architecture.html"
-                        target="_blank">Intel: Arquitectura y tecnología de procesadores</a></li>
-                <li><a href="https://www.amd.com/es/technologies/zen-architecture" target="_blank">AMD: Arquitectura de
-                        procesadores Zen</a></li>
-            </ul>
-
-            <!-- 2. PLACA BASE -->
-            <h3>2. Placa Base – Chipset, Factores de Forma y Buses</h3>
-            <p>La placa base centraliza la comunicación entre los componentes. Su chipset (por ejemplo, familias
-                B-Series o Z-Series) determina las posibilidades de overclocking, número de carriles PCIe y puertos de
-                expansión. Además, define el factor de forma (ATX, Micro-ATX, Mini-ITX) que condicionará el chasis o
-                caja a elegir, así como la cantidad de conectores M.2 NVMe y puertos E/S traseros.</p>
-
-            <div class="img-container">
-                <img src="./img/placa_base.png" alt="Placa base con zócalo, ranuras RAM y buses PCIe">
+            <!-- Vídeo General Explicativo -->
+            <div class="bg-slate-50 dark:bg-slate-900/60 p-4 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
+                <div class="flex items-center justify-between">
+                    <h3 class="font-semibold text-slate-800 dark:text-slate-200 text-base sm:text-lg flex items-center gap-2">
+                        <i class="fa-brands fa-youtube text-red-500"></i>
+                        Vídeo General: Explicación de cada uno de los componentes
+                    </h3>
+                    <span class="text-xs bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300 px-2.5 py-1 rounded-md font-medium">
+                        Visión Global
+                    </span>
+                </div>
+                <div class="video-container shadow-md rounded-xl">
+                    <iframe src="https://www.youtube.com/embed/0zkX6nlpiSk" title="Vídeo explicativo de componentes" allowfullscreen></iframe>
+                </div>
             </div>
+        </section>
 
-            <!-- Vídeo embebido Placa Base -->
-            <div class="video-bloque-pequeno">
-                <h4>Vídeo explicativo: Placa Base</h4>
-                <div class="video-contenedor">
-                    <iframe src="https://www.youtube.com/embed/1RQ8OmZfk8s" title="Placa base" allowfullscreen></iframe>
+        <!-- EXPLORADOR INTERACTIVO DE LOS 6 COMPONENTES -->
+        <section id="componentExplorer" class="space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-cubes text-indigo-500"></i>
+                        Componentes Hardware de Profundización
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">Selecciona un componente o explora todas las fichas interactivas:</p>
+                </div>
+
+                <!-- Botones selector de pestaña de componentes -->
+                <div class="flex items-center gap-2 overflow-x-auto pb-2 sm:pb-0 scrollbar-thin">
+                    <button onclick="filterComponent('all')" id="tab-btn-all" class="comp-tab-btn active-tab px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl transition whitespace-nowrap bg-indigo-600 text-white shadow-sm">
+                        Todos
+                    </button>
+                    <button onclick="filterComponent('cpu')" id="tab-btn-cpu" class="comp-tab-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl transition whitespace-nowrap bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                        1. CPU
+                    </button>
+                    <button onclick="filterComponent('motherboard')" id="tab-btn-motherboard" class="comp-tab-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl transition whitespace-nowrap bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                        2. Placa Base
+                    </button>
+                    <button onclick="filterComponent('ram')" id="tab-btn-ram" class="comp-tab-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl transition whitespace-nowrap bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                        3. RAM
+                    </button>
+                    <button onclick="filterComponent('storage')" id="tab-btn-storage" class="comp-tab-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl transition whitespace-nowrap bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                        4. Almacenamiento
+                    </button>
+                    <button onclick="filterComponent('psu')" id="tab-btn-psu" class="comp-tab-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl transition whitespace-nowrap bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                        5. Fuente
+                    </button>
+                    <button onclick="filterComponent('gpu')" id="tab-btn-gpu" class="comp-tab-btn px-3.5 py-2 text-xs sm:text-sm font-semibold rounded-xl transition whitespace-nowrap bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700">
+                        6. GPU
+                    </button>
                 </div>
             </div>
 
-            <p><strong>Fuentes de información y documentación:</strong></p>
-            <ul>
-                <li><a href="https://es.wikipedia.org/wiki/Placa_base" target="_blank">Wikipedia: Placa Base (Tarjeta
-                        Madre)</a></li>
-                <li><a href="https://www.tomshardware.com/topics/motherboards" target="_blank">Tom's Hardware: Guías y
-                        análisis de placas base</a></li>
-            </ul>
+            <div class="grid grid-cols-1 gap-8">
 
-            <!-- 3. MEMORIA RAM -->
-            <h3>3. Memoria RAM – DDR4 vs DDR5, Frecuencias y Latencia (CL)</h3>
-            <p>La velocidad de transferencia de la memoria RAM depende de la generación tecnológica (DDR4 vs DDR5), la
-                frecuencia de trabajo (medida en MHz o MT/s) y la latencia CAS (CL). Configurar los módulos en
-                arquitectura <em>Dual-Channel</em> dobla el ancho de banda efectivo del bus de datos frente a un único
-                módulo de memoria.</p>
+                <!-- 1. PROCESADOR (CPU) -->
+                <article id="comp-cpu" class="comp-card bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200 dark:border-slate-700 transition">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-6 gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-blue-100 text-blue-700 dark:bg-blue-900/50 dark:text-blue-300 font-extrabold flex items-center justify-center text-lg">1</span>
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Procesador (CPU) – Núcleos, Hilos y Arquitectura</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Unidad Central de Procesamiento y cálculo informático</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl self-start md:self-auto">
+                            <button onclick="switchSubTab('cpu', 'theory')" id="subbtn-cpu-theory" class="subtab-btn active-subtab px-3 py-1.5 text-xs font-medium rounded-lg text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow-sm">📖 Teoría</button>
+                            <button onclick="switchSubTab('cpu', 'resources')" id="subbtn-cpu-resources" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📚 Recursos</button>
+                        </div>
+                    </div>
 
-            <div class="img-container">
-                <img src="./img/RAM.png" alt="Módulos de memoria RAM DDR4 y DDR5">
+                    <div id="subtab-cpu-theory" class="subtab-content space-y-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                            <div class="lg:col-span-2 space-y-4">
+                                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                                    El rendimiento de una CPU no depende únicamente de su frecuencia de reloj (GHz), sino de la cantidad de núcleos físicos, hilos de ejecución mediante multithreading (Hyper-Threading / SMT) y el tamaño y velocidad de la memoria caché (L1, L2 y L3). Al presupuestar ordenadores, es crucial evaluar la compatibilidad del zócalo (socket) con la placa base y el conjunto de instrucciones de la arquitectura x86_64.
+                                </p>
+                                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+                                    <div class="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-700">
+                                        <span class="block text-slate-400">Socket</span>
+                                        <strong class="text-slate-800 dark:text-slate-200 text-sm">LGA 1700 / AM5</strong>
+                                    </div>
+                                    <div class="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-700">
+                                        <span class="block text-slate-400">Multithreading</span>
+                                        <strong class="text-slate-800 dark:text-slate-200 text-sm">Hyper-Threading / SMT</strong>
+                                    </div>
+                                    <div class="p-3 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-700 col-span-2 sm:col-span-1">
+                                        <span class="block text-slate-400">Jerarquía Caché</span>
+                                        <strong class="text-slate-800 dark:text-slate-200 text-sm">L1, L2, L3 (3D V-Cache)</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-1 flex justify-center">
+                                <img src="./img/CPU.png" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/38bdf8?text=CPU+Arquitectura+y+Socket';" alt="Procesador CPU y arquitectura interna" class="rounded-xl shadow-md border border-slate-200 dark:border-slate-700 max-h-56 object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="subtab-cpu-resources" class="subtab-content hidden space-y-4">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Fuentes de información y documentación técnica:</h4>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="https://es.wikipedia.org/wiki/Unidad_central_de_procesamiento" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-brands fa-wikipedia-w"></i> Wikipedia: Unidad Central de Procesamiento (CPU)</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.intel.es/content/www/es/es/architecture-and-technology/cpu-architecture.html" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-solid fa-microchip"></i> Intel: Arquitectura y tecnología de procesadores</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.amd.com/es/technologies/zen-architecture" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-solid fa-bolt"></i> AMD: Arquitectura de procesadores Zen</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- 2. PLACA BASE -->
+                <article id="comp-motherboard" class="comp-card bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200 dark:border-slate-700 transition">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-6 gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 font-extrabold flex items-center justify-center text-lg">2</span>
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Placa Base – Chipset, Factores de Forma y Buses</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Interconexión de periféricos, PCIe y suministro eléctrico</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl self-start md:self-auto">
+                            <button onclick="switchSubTab('motherboard', 'theory')" id="subbtn-motherboard-theory" class="subtab-btn active-subtab px-3 py-1.5 text-xs font-medium rounded-lg text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow-sm">📖 Teoría</button>
+                            <button onclick="switchSubTab('motherboard', 'video')" id="subbtn-motherboard-video" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📹 Vídeo</button>
+                            <button onclick="switchSubTab('motherboard', 'resources')" id="subbtn-motherboard-resources" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📚 Recursos</button>
+                        </div>
+                    </div>
+
+                    <div id="subtab-motherboard-theory" class="subtab-content space-y-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                            <div class="lg:col-span-2 space-y-4">
+                                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                                    La placa base centraliza la comunicación entre todos los componentes. Su chipset (por ejemplo, familias B-Series o Z-Series) determina las posibilidades de overclocking, número de carriles PCIe y puertos de expansión. Además, define el factor de forma (ATX, Micro-ATX, Mini-ITX) que condicionará el chasis o caja a elegir, así como la cantidad de conectores M.2 NVMe y puertos E/S traseros.
+                                </p>
+                            </div>
+                            <div class="lg:col-span-1 flex justify-center">
+                                <img src="./img/placa_base.png" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/a855f7?text=Placa+Base+y+Chipset';" alt="Placa base con zócalo, ranuras RAM y buses PCIe" class="rounded-xl shadow-md border border-slate-200 dark:border-slate-700 max-h-56 object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="subtab-motherboard-video" class="subtab-content hidden space-y-3">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Vídeo explicativo: Placa Base</h4>
+                        <div class="video-container max-w-3xl mx-auto rounded-xl">
+                            <iframe src="https://www.youtube.com/embed/1RQ8OmZfk8s" title="Placa base" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div id="subtab-motherboard-resources" class="subtab-content hidden space-y-4">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Fuentes de información y documentación:</h4>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="https://es.wikipedia.org/wiki/Placa_base" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-brands fa-wikipedia-w"></i> Wikipedia: Placa Base (Tarjeta Madre)</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.tomshardware.com/topics/motherboards" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-solid fa-newspaper"></i> Tom's Hardware: Guías y análisis de placas base</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- 3. MEMORIA RAM -->
+                <article id="comp-ram" class="comp-card bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200 dark:border-slate-700 transition">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-6 gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300 font-extrabold flex items-center justify-center text-lg">3</span>
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Memoria RAM – DDR4 vs DDR5, Frecuencias y Latencia (CL)</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Memoria principal de acceso aleatorio y ancho de banda</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl self-start md:self-auto">
+                            <button onclick="switchSubTab('ram', 'theory')" id="subbtn-ram-theory" class="subtab-btn active-subtab px-3 py-1.5 text-xs font-medium rounded-lg text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow-sm">📖 Teoría</button>
+                            <button onclick="switchSubTab('ram', 'video')" id="subbtn-ram-video" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📹 Vídeo</button>
+                            <button onclick="switchSubTab('ram', 'resources')" id="subbtn-ram-resources" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📚 Recursos</button>
+                        </div>
+                    </div>
+
+                    <div id="subtab-ram-theory" class="subtab-content space-y-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                            <div class="lg:col-span-2 space-y-4">
+                                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                                    La velocidad de transferencia de la memoria RAM depende de la generación tecnológica (DDR4 vs DDR5), la frecuencia de trabajo (medida en MHz o MT/s) y la latencia CAS (CL). Configurar los módulos en arquitectura <em>Dual-Channel</em> dobla el ancho de banda efectivo del bus de datos frente a un único módulo de memoria.
+                                </p>
+                            </div>
+                            <div class="lg:col-span-1 flex justify-center">
+                                <img src="./img/RAM.png" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/10b981?text=Memoria+RAM+DDR4+vs+DDR5';" alt="Módulos de memoria RAM DDR4 y DDR5" class="rounded-xl shadow-md border border-slate-200 dark:border-slate-700 max-h-56 object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="subtab-ram-video" class="subtab-content hidden space-y-3">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Vídeo explicativo: Memoria RAM</h4>
+                        <div class="video-container max-w-3xl mx-auto rounded-xl">
+                            <iframe src="https://www.youtube.com/embed/_abAWnq0Gs8" title="Memoria RAM" allowfullscreen></iframe>
+                        </div>
+                    </div>
+
+                    <div id="subtab-ram-resources" class="subtab-content hidden space-y-4">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Fuentes de información y documentación:</h4>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="https://es.wikipedia.org/wiki/Memoria_de_acceso_aleatorio" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-brands fa-wikipedia-w"></i> Wikipedia: Memoria RAM</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- 4. ALMACENAMIENTO -->
+                <article id="comp-storage" class="comp-card bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200 dark:border-slate-700 transition">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-6 gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-amber-100 text-amber-700 dark:bg-amber-900/50 dark:text-amber-300 font-extrabold flex items-center justify-center text-lg">4</span>
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Almacenamiento – SSD NVMe M.2 vs SSD SATA y HDD</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Unidades de almacenamiento masivo y velocidad de lectura/escritura</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl self-start md:self-auto">
+                            <button onclick="switchSubTab('storage', 'theory')" id="subbtn-storage-theory" class="subtab-btn active-subtab px-3 py-1.5 text-xs font-medium rounded-lg text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow-sm">📖 Teoría</button>
+                            <button onclick="switchSubTab('storage', 'resources')" id="subbtn-storage-resources" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📚 Recursos</button>
+                        </div>
+                    </div>
+
+                    <div id="subtab-storage-theory" class="subtab-content space-y-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                            <div class="lg:col-span-2 space-y-4">
+                                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                                    Las unidades SSD basadas en protocolo NVMe e interfaz PCIe ofrecen velocidades superiores a 7.000 MB/s, reduciendo los tiempos de carga del sistema operativo y aplicaciones exigentes. Frente a los discos mecánicos tradicionalmente conectados por SATA, las unidades sólidas carecen de partes móviles, garantizando mayor resistencia a impactos y latencias de lectura casi instantáneas.
+                                </p>
+                            </div>
+                            <div class="lg:col-span-1 flex justify-center">
+                                <img src="./img/SSD.png" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/f59e0b?text=SSD+M.2+NVMe';" alt="Disco de almacenamiento SSD NVMe M.2" class="rounded-xl shadow-md border border-slate-200 dark:border-slate-700 max-h-56 object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="subtab-storage-resources" class="subtab-content hidden space-y-4">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Fuentes de información y documentación:</h4>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="https://es.wikipedia.org/wiki/Unidad_de_estado_s%C3%B3lido" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-brands fa-wikipedia-w"></i> Wikipedia: Unidad de Estado Sólido (SSD)</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- 5. FUENTE DE ALIMENTACIÓN (PSU) -->
+                <article id="comp-psu" class="comp-card bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200 dark:border-slate-700 transition">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-6 gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-rose-100 text-rose-700 dark:bg-rose-900/50 dark:text-rose-300 font-extrabold flex items-center justify-center text-lg">5</span>
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Fuente de Alimentación (PSU) – Eficiencia 80 Plus y Potencia</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Transformación y entrega de energía estable a los raíles de 12V</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl self-start md:self-auto">
+                            <button onclick="switchSubTab('psu', 'theory')" id="subbtn-psu-theory" class="subtab-btn active-subtab px-3 py-1.5 text-xs font-medium rounded-lg text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow-sm">📖 Teoría</button>
+                            <button onclick="switchSubTab('psu', 'resources')" id="subbtn-psu-resources" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📚 Recursos</button>
+                        </div>
+                    </div>
+
+                    <div id="subtab-psu-theory" class="subtab-content space-y-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                            <div class="lg:col-span-2 space-y-4">
+                                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                                    La fuente de alimentación convierte la corriente alterna de la red eléctrica en corriente continua limpia para los componentes del ordenador. La certificación 80 Plus (Bronze, Gold, Platinum) asegura una eficiencia mínima del 80% en la conversión energética, minimizando el calor residual y el consumo superfluo.
+                                </p>
+                            </div>
+                            <div class="lg:col-span-1 flex justify-center">
+                                <img src="./img/PSU.png" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/f43f5e?text=Fuente+de+Alimentacion+80+Plus';" alt="Fuente de Alimentación PSU" class="rounded-xl shadow-md border border-slate-200 dark:border-slate-700 max-h-56 object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="subtab-psu-resources" class="subtab-content hidden space-y-4">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Fuentes de información y documentación:</h4>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="https://es.wikipedia.org/wiki/Fuente_de_alimentaci%C3%B3n" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-brands fa-wikipedia-w"></i> Wikipedia: Fuente de Alimentación</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <!-- 6. TARJETA GRÁFICA (GPU) -->
+                <article id="comp-gpu" class="comp-card bg-white dark:bg-slate-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-slate-200 dark:border-slate-700 transition">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-200 dark:border-slate-700 pb-4 mb-6 gap-3">
+                        <div class="flex items-center gap-3">
+                            <span class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300 font-extrabold flex items-center justify-center text-lg">6</span>
+                            <div>
+                                <h3 class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">Tarjeta Gráfica (GPU) – Memoria VRAM y Núcleos de Cómputo</h3>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">Procesamiento paralelo para renderizado gráfico, IA y cálculo masivo</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-900 p-1 rounded-xl self-start md:self-auto">
+                            <button onclick="switchSubTab('gpu', 'theory')" id="subbtn-gpu-theory" class="subtab-btn active-subtab px-3 py-1.5 text-xs font-medium rounded-lg text-indigo-600 dark:text-indigo-400 bg-white dark:bg-slate-800 shadow-sm">📖 Teoría</button>
+                            <button onclick="switchSubTab('gpu', 'resources')" id="subbtn-gpu-resources" class="subtab-btn px-3 py-1.5 text-xs font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">📚 Recursos</button>
+                        </div>
+                    </div>
+
+                    <div id="subtab-gpu-theory" class="subtab-content space-y-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center">
+                            <div class="lg:col-span-2 space-y-4">
+                                <p class="text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
+                                    La GPU está diseñada con miles de núcleos optimizados para realizar cálculos matemáticos en paralelo simultáneamente. Dispone de su propia memoria dedicada ultra rápida (VRAM GDDR6/GDDR6X) esencial para almacenar texturas complejas, modelos 3D y acelerar tareas de Renderizado e Inteligencia Artificial.
+                                </p>
+                            </div>
+                            <div class="lg:col-span-1 flex justify-center">
+                                <img src="./img/GPU.png" onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e293b/6366f1?text=Tarjeta+Grafica+GPU';" alt="Tarjeta Gráfica GPU" class="rounded-xl shadow-md border border-slate-200 dark:border-slate-700 max-h-56 object-cover">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="subtab-gpu-resources" class="subtab-content hidden space-y-4">
+                        <h4 class="font-bold text-slate-800 dark:text-slate-200 text-sm">Fuentes de información y documentación:</h4>
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="https://es.wikipedia.org/wiki/Unidad_de_procesamiento_gr%C3%A1fico" target="_blank" class="flex items-center justify-between p-3 rounded-xl bg-slate-50 dark:bg-slate-900/50 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 border border-slate-200 dark:border-slate-700 text-sm font-medium text-indigo-600 dark:text-indigo-400 transition">
+                                    <span class="flex items-center gap-2"><i class="fa-brands fa-wikipedia-w"></i> Wikipedia: Unidad de Procesamiento Gráfico (GPU)</span>
+                                    <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
             </div>
+        </section>
 
-            <!-- Vídeo embebido Memoria RAM -->
-            <div class="video-bloque-pequeno">
-                <h4>Vídeo explicativo: Memoria RAM</h4>
-                <div class="video-contenedor">
-                    <iframe src="https://www.youtube.com/embed/_abAWnq0Gs8" title="Memoria RAM"
-                        allowfullscreen></iframe>
-                </div>
+    </main>
+
+    <!-- FOOTER Y DERECHOS DE AUTOR -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 mt-12 py-8 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+            <div>
+                <p class="text-sm font-semibold text-slate-800 dark:text-slate-200">Unidad 2.B – Contenidos de Profundización en Hardware</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Licencia Creative Commons Atribución-CompartirIgual (CC BY-SA 4.0)</p>
             </div>
-
-            <p><strong>Fuentes de información y documentación:</strong></p>
-            <ul>
-                <li><a href="https://es.wikipedia.org/wiki/Memoria_de_acceso_aleatorio" target="_blank">Wikipedia:
-                        Memoria de Acceso Aleatorio (RAM)</a></li>
-                <li><a href="https://www.kingston.com/es/memory/ddr5" target="_blank">Kingston: Información técnica
-                        sobre tecnología DDR5</a></li>
-            </ul>
-
-            <!-- 4. DISCO DURO / SSD -->
-            <h3>4. Almacenamiento – SSD NVMe PCIe vs SATA y HDD</h3>
-            <p>Mientras que los discos duros mecánicos (HDD) transfieren datos a velocidades cercanas a 150 MB/s, las
-                unidades de estado sólido (SSD) con interfaz SATA alcanzan hasta 550 MB/s. Las unidades M.2 NVMe sobre
-                bus PCIe 4.0/5.0 pueden superar los 7000 MB/s gracias a la eliminación del cuello de botella de los
-                protocolos heredados de almacenamiento.</p>
-
-            <div class="img-container">
-                <img src="./img/HDD-vs-SDD.png" alt="Unidades de almacenamiento SSD M.2 NVMe y HDD">
-            </div>
-
-            <!-- Vídeo embebido SSD -->
-            <div class="video-bloque-pequeno">
-                <h4>Vídeo explicativo: SSD</h4>
-                <div class="video-contenedor">
-                    <iframe src="https://www.youtube.com/embed/NyvXV45I2VI" title="SSD" allowfullscreen></iframe>
-                </div>
-            </div>
-
-            <p><strong>Fuentes de información y documentación:</strong></p>
-            <ul>
-                <li><a href="https://es.wikipedia.org/wiki/Unidad_de_estado_s%C3%B3lido" target="_blank">Wikipedia:
-                        Unidad de Estado Sólido (SSD)</a></li>
-                <li><a href="https://www.crucial.es/articles/about-ssd" target="_blank">Crucial: Guías y artículos sobre
-                        tecnología SSD y NVMe</a></li>
-            </ul>
-
-            <!-- 5. FUENTE DE ALIMENTACIÓN -->
-            <h3>5. Fuente de Alimentación – Eficiencia 80 PLUS y Raíles de +12V</h3>
-            <p>Para asegurar la estabilidad de 25 equipos en el aula, la fuente de alimentación debe ofrecer una
-                eficiencia energética certificada (80 PLUS Bronze, Silver, Gold o Platinum) que minimice el desperdicio
-                en forma de calor. Asimismo, debe incorporar sistemas de protección eléctrica (OVP, OPP, SCP) y entregar
-                amperaje suficiente en el raíl de +12V para alimentar la CPU y la tarjeta gráfica.</p>
-
-            <div class="img-container">
-                <img src="./img/PSU.png" alt="Fuente de alimentación con certificación de eficiencia">
-            </div>
-
-            <!-- Vídeo embebido Fuente de Alimentación -->
-            <div class="video-bloque-pequeno">
-                <h4>Vídeo explicativo: Fuente de Alimentación</h4>
-                <div class="video-contenedor">
-                    <iframe src="https://www.youtube.com/embed/mN9NKw9KkLA" title="Fuente de alimentación"
-                        allowfullscreen></iframe>
-                </div>
-            </div>
-
-            <p><strong>Fuentes de información y documentación:</strong></p>
-            <ul>
-                <li><a href="https://es.wikipedia.org/wiki/Fuente_de_alimentaci%C3%B3n" target="_blank">Wikipedia:
-                        Fuente de Alimentación</a></li>
-                <li><a href="https://www.outervision.com/" target="_blank">Outervision: Herramienta de cálculo de
-                        potencia energética</a></li>
-            </ul>
-
-            <!-- 6. TARJETA GRÁFICA -->
-            <h3>6. Tarjeta Gráfica (GPU) – VRAM, CUDA Cores / Stream Processors</h3>
-            <p>La GPU procesa gráficos en paralelo. Cuenta con su propia memoria VRAM dedicada (GDDR6/GDDR6X) de alto
-                ancho de banda para alojar texturas y geometrías. Al elegir GPUs para un aula técnica, es indispensable
-                evaluar la presencia de núcleos dedicados para procesamiento de IA, renderizado o aceleración gráfica
-                3D.</p>
-
-            <div class="img-container">
-                <img src="./img/GPU.png" alt="Tarjeta gráfica dedicada con VRAM y disipación">
-            </div>
-
-            <!-- Vídeo embebido Tarjeta Gráfica -->
-            <div class="video-bloque-pequeno">
-                <h4>Vídeo explicativo: Tarjeta Gráfica</h4>
-                <div class="video-contenedor">
-                    <iframe src="https://www.youtube.com/embed/-bAo0KcujBk" title="Tarjeta gráfica"
-                        allowfullscreen></iframe>
-                </div>
-            </div>
-
-            <p><strong>Fuentes de información y documentación:</strong></p>
-            <ul>
-                <li><a href="https://es.wikipedia.org/wiki/Tarjeta_gr%C3%A1fica" target="_blank">Wikipedia: Tarjeta
-                        Gráfica (GPU)</a></li>
-                <li><a href="https://www.techpowerup.com/gpu-specs/" target="_blank">TechPowerUp: Base de datos y
-                        especificaciones técnicas de GPUs</a></li>
-            </ul>
         </div>
+    </footer>
 
-        <div class="footer-nav">
-            <a href="2A.html" class="btn btn-secondary">← Volver a 2.A Contenidos Básicos</a>
-            <a href="../index.html" class="btn">Volver al Menú Principal</a>
-        </div>
+    <!-- SCRIPT DE INTERACTIVIDAD Y MODO OSCURO -->
+    <script>
+        // 1. Gestión de Modo Oscuro / Claro
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const themeIcon = document.getElementById('themeIcon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeIcon.className = 'fa-solid fa-moon';
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.className = 'fa-solid fa-sun';
+            }
+        }
 
-    </div>
+        // Inicializar preferencia de tema guardada
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+        } else {
+            document.documentElement.classList.remove('dark');
+            document.getElementById('themeIcon').className = 'fa-solid fa-moon';
+        }
 
-    <div id="footer-container"></div>
-    <script src="../js/footer.js"></script>
+        // 2. Barra de progreso de lectura superior
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('readingProgress').style.width = scrolled + '%';
+        });
 
+        // 3. Selección de pestañas de componentes
+        function filterComponent(type) {
+            const cards = document.querySelectorAll('.comp-card');
+            const btns = document.querySelectorAll('.comp-tab-btn');
+
+            btns.forEach(btn => {
+                btn.classList.remove('bg-indigo-600', 'text-white');
+                btn.classList.add('bg-slate-100', 'text-slate-700', 'dark:bg-slate-800', 'dark:text-slate-300');
+            });
+
+            const activeBtn = document.getElementById('tab-btn-' + type);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-slate-100', 'text-slate-700', 'dark:bg-slate-800', 'dark:text-slate-300');
+                activeBtn.classList.add('bg-indigo-600', 'text-white');
+            }
+
+            cards.forEach(card => {
+                if (type === 'all') {
+                    card.classList.remove('hidden');
+                } else {
+                    if (card.id === 'comp-' + type) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                }
+            });
+        }
+
+        // 4. Subpestañas dentro de cada componente (Teoría / Vídeo / Recursos)
+        function switchSubTab(comp, tab) {
+            const parent = document.getElementById('comp-' + comp);
+            if (!parent) return;
+
+            const contents = parent.querySelectorAll('.subtab-content');
+            contents.forEach(c => c.classList.add('hidden'));
+
+            const targetContent = document.getElementById(`subtab-${comp}-${tab}`);
+            if (targetContent) targetContent.classList.remove('hidden');
+
+            const btns = parent.querySelectorAll('.subtab-btn');
+            btns.forEach(b => {
+                b.classList.remove('text-indigo-600', 'dark:text-indigo-400', 'bg-white', 'dark:bg-slate-800', 'shadow-sm');
+                b.classList.add('text-slate-600', 'dark:text-slate-400');
+            });
+
+            const activeBtn = document.getElementById(`subbtn-${comp}-${tab}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-600', 'dark:text-slate-400');
+                activeBtn.classList.add('text-indigo-600', 'dark:text-indigo-400', 'bg-white', 'dark:bg-slate-800', 'shadow-sm');
+            }
+        }
+
+        // 5. DATOS E INTERACTIVIDAD DEL MAPA DE LA PLACA BASE (HOTSPOTS)
+        const boardData = {
+            cpu_socket: {
+                num: '1',
+                category: 'Procesador Central',
+                title: 'Socket del Procesador (CPU)',
+                badgeBg: 'bg-blue-600',
+                installed: 'Zócalo de la CPU (Socket LGA 1700 para Intel o AM5 para AMD) + Sistema de Refrigeración.',
+                upgradeable: 'Se puede sustituir la CPU por un modelo superior compatible con el mismo socket o instalar una refrigeración líquida AIO para optimizar temperaturas y overclocking.',
+                description: 'El socket es el conector clave que une mecánicamente la CPU a la placa base. Ofrece cientos de contactos eléctricos finos para la transmisión de datos a altísima velocidad hacia la memoria RAM y las ranuras PCIe.',
+                tip: 'Verifica siempre que el zócalo de la placa base (ej. LGA 1700 o AM5) sea 100% compatible con la generación de tu procesador antes de la instalación.'
+            },
+            ram_slots: {
+                num: '2',
+                category: 'Memoria Principal',
+                title: 'Ranuras DIMM de Memoria RAM',
+                badgeBg: 'bg-cyan-500',
+                installed: '2 a 4 zócalos de memoria RAM DDR4 o DDR5.',
+                upgradeable: 'Puedes ampliar la memoria RAM añadiendo 2 módulos adicionales o reemplazándolos por kits de mayor capacidad (ej. pasar de 16 GB a 32 GB o 64 GB en Dual Channel).',
+                description: 'Permiten alojar la memoria de acceso aleatorio. Al colocar los módulos en pares alternos (ej. ranuras 2 y 4), se activa el Dual Channel, duplicando el ancho de banda efectivo entre la RAM y el procesador.',
+                tip: 'Para activar la máxima velocidad publicitada de los módulos RAM, recuerda habilitar el perfil XMP (Intel) o EXPO (AMD) en la BIOS/UEFI.'
+            },
+            pcie_gpu: {
+                num: '3',
+                category: 'Expansión de Vídeo',
+                title: 'Ranura PCIe 5.0 x16 (Tarjeta Gráfica)',
+                badgeBg: 'bg-indigo-600',
+                installed: 'Ranura PCI Express x16 reforzada con blindaje de acero.',
+                upgradeable: 'Permite conectar una Tarjeta Gráfica Dedicada (NVIDIA GeForce / AMD Radeon) para renderizado 3D, gaming o aceleración por Inteligencia Artificial.',
+                description: 'Es el puerto de expansión más rápido de la placa base. Comunica directamente la tarjeta gráfica con los carriles PCIe principales de la CPU sin intermediarios.',
+                tip: 'Las tarjetas gráficas modernas pesan bastante. Asegúrate de encajar el clip de retención de la ranura y fijar la gráfica al chasis con los tornillos traseros.'
+            },
+            m2_ssd: {
+                num: '4',
+                category: 'Almacenamiento Ultra Rápido',
+                title: 'Puerto M.2 NVMe PCIe 4.0 / 5.0',
+                badgeBg: 'bg-amber-500',
+                installed: 'Conector M.2 integrado con disipador de aluminio pasivo.',
+                upgradeable: 'Se puede añadir o sustituir por discos SSD NVMe M.2 de alta velocidad (lecturas de 3.500 MB/s a 7.500 MB/s o más) para el sistema operativo y software de diseño.',
+                description: 'Conexión directa sobre la placa que elimina la necesidad de cables SATA y de alimentación. Ofrece un ancho de banda masivo utilizando 4 carriles PCIe directos.',
+                tip: 'No olvides retirar el plástico protector térmico que viene debajo del disipador metálico de la placa antes de atornillar el SSD M.2.'
+            },
+            chipset: {
+                num: '5',
+                category: 'Controlador de Sistema',
+                title: 'Chipset de la Placa Base',
+                badgeBg: 'bg-teal-500',
+                installed: 'Procesador auxiliar de la placa cubierto por su disipador pasivo.',
+                upgradeable: 'Componente soldado e integrado en la placa. Determina las capacidades globales de ampliación (número de puertos SATA, USBs, PCIe secundarios y overclocking).',
+                description: 'Funciona como el centro gestor del tráfico E/S de la placa base. Distribuye los carriles de datos hacia los discos duros, puertos USB, tarjeta de red y sonido.',
+                tip: 'Elegir un chipset de gama media/alta (ej. B660/B650 o Z790/X670) garantiza disponer de más puertos M.2 y soporte para futuras ampliaciones.'
+            },
+            power_24pin: {
+                num: '6',
+                category: 'Alimentación Eléctrica',
+                title: 'Conector ATX Power de 24 Pines',
+                badgeBg: 'bg-rose-500',
+                installed: 'Toma principal de corriente de 24 pines.',
+                upgradeable: 'Conecta el cable principal proveniente de la Fuente de Alimentación (PSU). Si cambias de fuente por una de mayor potencia o modular, este conector se vuelve a reutilizar.',
+                description: 'Suministra los voltajes principales (+3.3V, +5V, +12V) necesarios para dar energía al chipset, memorias RAM, conectores M.2 y circuitos internos de la placa.',
+                tip: 'Asegúrate de presionar el conector firmemente hasta que la pestaña plástica haga un clic de bloqueo visible.'
+            },
+            sata_ports: {
+                num: '7',
+                category: 'Almacenamiento Secundario',
+                title: 'Puertos SATA III (6 Gb/s)',
+                badgeBg: 'bg-emerald-500',
+                installed: '4 a 6 conectores SATA horizontales/verticales.',
+                upgradeable: 'Permiten conectar discos duros mecánicos de gran capacidad (HDD 3.5"), SSDs SATA de 2.5" o lectores ópticos mediante cables de datos SATA.',
+                description: 'Interfaz estándar de almacenamiento masivo. Es la opción ideal para añadir terabytes de almacenamiento secundario a bajo coste para datos y copias de seguridad.',
+                tip: 'Utiliza cables SATA con pestaña metálica de seguridad para evitar desconexiones accidental al mover el equipo.'
+            },
+            rear_io: {
+                num: '8',
+                category: 'Conectividad Externa',
+                title: 'Panel Trasero de Entradas y Salidas (I/O)',
+                badgeBg: 'bg-purple-600',
+                installed: 'Puertos USB-A, USB-C, Ethernet RJ-45, Audio HD Jack, DisplayPort y HDMI.',
+                upgradeable: 'Conecta todos los periféricos externos (teclado, ratón, monitores, interfaz de audio, red de 2.5G/10G). Se pueden ampliar puertos mediante concentradores USB o tarjetas PCIe.',
+                description: 'Zona trasera accesible desde el exterior del chasis donde se conectan todos los periféricos de usuario y cables de red o vídeo.',
+                tip: 'Las placas modernas incluyen el protector de puertos (I/O Shield) preinstalado, lo que facilita enormemente el montaje en la caja.'
+            }
+        };
+
+        function selectBoardComponent(id) {
+            const data = boardData[id];
+            if (!data) return;
+
+            // Actualizar botones de hotspots sin cambiar sus posiciones
+            document.querySelectorAll('.hotspot-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const activeBtn = document.getElementById('hotspot-' + id);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            // Actualizar panel dinámico de información
+            const badge = document.getElementById('boardCompBadge');
+            badge.className = `w-12 h-12 rounded-xl ${data.badgeBg} text-white flex items-center justify-center text-xl shadow-lg font-bold`;
+            badge.innerText = data.num;
+
+            document.getElementById('boardCompCategory').innerText = data.category;
+            document.getElementById('boardCompTitle').innerText = data.title;
+            document.getElementById('boardCompInstalled').innerText = data.installed;
+            document.getElementById('boardCompUpgradeable').innerText = data.upgradeable;
+            document.getElementById('boardCompDescription').innerText = data.description;
+            document.getElementById('boardCompTip').innerText = data.tip;
+        }
+    </script>
 </body>
 
 </html>
